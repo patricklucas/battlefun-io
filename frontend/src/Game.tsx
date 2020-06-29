@@ -14,12 +14,23 @@ const connectionStatus = {
 };
 
 export function Game(props: Props) {
-  const { player_id } = useContext(User);
-  const { sendMessage, lastMessage, readyState } = useWebSocket(`/ws/${player_id}`);
+  const { player_id, token } = useContext(User);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${player_id}`);
+  const [authenticated, setAuthenticated] = useState(false);
 
   const messageHistory = useRef<MessageEvent[]>([]);
 
   messageHistory.current = useMemo(() => messageHistory.current.concat(lastMessage), [lastMessage]);
+
+  useEffect(() => {
+    if (readyState === 1 && !authenticated) {
+      // sendMessage(JSON.stringify({ type: "authentication", token }));
+    }
+  }, [readyState, token, authenticated, sendMessage]);
+
+  useEffect(() => {
+    console.log({ lastMessage });
+  }, [lastMessage]);
 
   return (
     <div className="App">
