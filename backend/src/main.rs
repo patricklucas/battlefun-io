@@ -76,7 +76,18 @@ async fn main() {
         .with(warp::cors().allow_any_origin())
         .recover(error::handle_rejection);
 
-    warp::serve(routes).run(([127, 0, 0, 1], 8000)).await;
+    let (_, server) =
+        warp::serve(routes).bind_with_graceful_shutdown(([0, 0, 0, 0], 8000), shutdown_signal());
+
+    let _ = tokio::task::spawn(server).await;
+}
+
+async fn shutdown_signal() {
+    tokio::signal::ctrl_c()
+        .await
+        .expect("Error setting Ctrl-C handler");
+
+    eprintln!("Shutting down...");
 }
 
 fn with_client_state(
