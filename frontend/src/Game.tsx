@@ -1,11 +1,9 @@
-import React, { useRef, useMemo, useState, useCallback } from "react";
+import React, { useRef, useMemo, useState, useCallback, useContext, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { GridComponent } from "./Grid";
+import { User } from "./UserProvider";
 
-interface Props {
-  user: string;
-  token: string;
-}
+interface Props {}
 
 const connectionStatus = {
   [ReadyState.CONNECTING]: "Connecting",
@@ -16,24 +14,12 @@ const connectionStatus = {
 };
 
 export function Game(props: Props) {
-  const playerId = 1;
-  const [socketUrl, setSocketUrl] = useState("wss://echo.websocket.org");
-  // const [socketUrl, setSocketUrl] = useState("/ws");
-
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
-
-  // This will actually happen when the user logs in
-  const handleClickChangeSocketUrl = useCallback(
-    () => setSocketUrl(`/ws/${playerId}`),
-    []
-  );
+  const { player_id } = useContext(User);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(`/ws/${player_id}`);
 
   const messageHistory = useRef<MessageEvent[]>([]);
 
-  messageHistory.current = useMemo(
-    () => messageHistory.current.concat(lastMessage),
-    [lastMessage]
-  );
+  messageHistory.current = useMemo(() => messageHistory.current.concat(lastMessage), [lastMessage]);
 
   return (
     <div className="App">

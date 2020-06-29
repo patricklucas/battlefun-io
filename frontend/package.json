@@ -3,22 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/styled-components": "^5.1.0",
     "range-inclusive": "^1.0.2",
-    "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
     "react-use-localstorage": "^3.4.3",
     "react-use-websocket": "^2.0.3",
-    "styled-components": "^5.1.1",
-    "typescript": "~3.7.2"
+    "react": "^16.13.1",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +29,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/http-proxy-middleware": "^0.19.3",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react": "^16.9.0",
+    "@types/styled-components": "^5.1.0",
+    "http-proxy-middleware": "^1.0.4",
+    "prettier": "^2.0.5",
+    "react-scripts": "3.4.1",
+    "typescript": "~3.7.2"
   }
 }

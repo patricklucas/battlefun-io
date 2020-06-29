@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import "./App.css";
-import useLocalStorage from "react-use-localstorage";
 import { Welcome } from "./Welcome";
 import { Game } from "./Game";
+import { User } from "./UserProvider";
 
 function App() {
-  const [name, setName] = useLocalStorage("name", "");
-  const [token, setToken] = useLocalStorage("token", "");
-  const [loading, setLoading] = useState(true);
+  const { token, player_id } = useContext(User);
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      const response = await fetch("/register", {
-        method: "POST",
-        body: JSON.stringify({ name, token }),
-      }).then((r) => r.json());
-      debugger;
-    };
-    makeRequest();
-  }, [name, token]);
-
-  if ((!name || !token) && loading) {
+  if (!token || !player_id) {
     return <Welcome />;
   }
 
-  return <Game user={name} token={token} />;
+  return <Game />;
 }
 
 export default App;

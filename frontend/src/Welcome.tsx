@@ -1,21 +1,15 @@
-import React, { useCallback, FormEvent } from "react";
+import React, { useCallback, FormEvent, useState, useContext } from "react";
+import { User } from "./UserProvider";
 
 export function Welcome() {
-  const registerUser = useCallback((event: FormEvent) => {
-    debugger;
-
-    fetch("/register", {
-      method: "POST",
-      body: "",
-    });
-  }, []);
+  const user = useContext(User);
 
   return (
     <>
       <div>Welcome</div>
-      <form onSubmit={registerUser}>
+      <form onSubmit={user.registerUser}>
         <label>username</label>
-        <input name="username" />
+        <input name="name" value={user.name} onChange={(e) => user.setName(e.target.value)} />
       </form>
     </>
   );
