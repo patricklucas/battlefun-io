@@ -5,3 +5,4 @@ services:
     image: plucas/battlefun-io
     ports:
     - 8000:8000
+    stop_signal: SIGINT
