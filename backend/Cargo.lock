@@ -31,7 +31,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
 
 [[package]]
-name = "battleship_gateway"
+name = "battlefun_io"
 version = "0.1.0"
 dependencies = [
  "futures",

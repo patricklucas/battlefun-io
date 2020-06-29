@@ -4,5 +4,5 @@ COPY . .
 RUN cargo install --path .
 
 FROM debian:buster-slim
-COPY --from=build /usr/local/cargo/bin/battleship_gateway /usr/local/bin/battleship_gateway
-CMD ["battleship_gateway"]
+COPY --from=build /usr/local/cargo/bin/battlefun_io /usr/local/bin/battlefun_io
+CMD ["battlefun_io"]
