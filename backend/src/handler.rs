@@ -12,6 +12,7 @@ pub struct RegisterRequest {
 #[derive(Serialize, Debug)]
 pub struct RegisterResponse {
     player_id: Uuid,
+    name: String,
     token: Uuid,
 }
 
@@ -43,6 +44,7 @@ pub async fn register_handler(
     let player = register_client(body, client_state).await?;
     Ok(json(&RegisterResponse {
         player_id: player.id,
+        name: player.name,
         token: player.token,
     }))
 }
@@ -63,7 +65,10 @@ async fn register_client(request: RegisterRequest, client_state: ClientState) ->
         None => PlayerToken::new_v4(),
     };
 
-    let name = request.name.unwrap_or("Anonymous coward".to_string());
+    let name = match request.name {
+        Some(n) => n,
+        None => generate_name(player_id),
+    };
 
     let player = Player {
         id: player_id,
@@ -108,4 +113,9 @@ pub async fn ws_handler(
 
 pub async fn health_handler() -> Result<impl Reply> {
     Ok(StatusCode::OK)
+}
+
+pub fn generate_name(player_id: PlayerId) -> String {
+    let (_, unique_num, _, _) = player_id.as_fields();
+    format!("Anonymous_coward#{}", unique_num)
 }
