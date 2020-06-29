@@ -2,59 +2,85 @@ use std::collections::HashMap;
 use std::convert::Infallible;
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
+use uuid::Uuid;
 use warp::{ws::Message, Filter, Rejection};
 
+mod error;
 mod handler;
 mod ws;
 
 type Result<T> = std::result::Result<T, Rejection>;
-type Clients = Arc<RwLock<HashMap<String, Client>>>;
+
+type ClientState = Arc<RwLock<ClientStateFoo>>;
+type PlayerId = Uuid;
+type PlayerToken = Uuid;
 
 #[derive(Debug, Clone)]
-pub struct Client {
-    pub user_id: usize,
-    pub topics: Vec<String>,
+pub struct Player {
+    pub id: PlayerId,
+    pub name: String,
+    pub token: PlayerToken,
     pub sender: Option<mpsc::UnboundedSender<std::result::Result<Message, warp::Error>>>,
+    pub authenticated: bool,
+}
+
+#[derive(Debug, Clone)]
+pub struct ClientStateFoo {
+    pub players: HashMap<PlayerId, Player>,
+    pub player_tokens: HashMap<PlayerToken, PlayerId>,
+}
+
+impl ClientStateFoo {
+    pub fn new() -> ClientStateFoo {
+        ClientStateFoo {
+            players: HashMap::new(),
+            player_tokens: HashMap::new(),
+        }
+    }
 }
 
 #[tokio::main]
 async fn main() {
-    let clients: Clients = Arc::new(RwLock::new(HashMap::new()));
+    let client_state: ClientState = Arc::new(RwLock::new(ClientStateFoo::new()));
 
-    let health_route = warp::path!("health").and_then(handler::health_handler);
+    let health_route = warp::path("health").and_then(handler::health_handler);
 
-    let register = warp::path("register");
-    let register_routes = register
+    let register_route = warp::path("register")
         .and(warp::post())
         .and(warp::body::json())
-        .and(with_clients(clients.clone()))
-        .and_then(handler::register_handler)
-        .or(register
-            .and(warp::delete())
-            .and(warp::path::param())
-            .and(with_clients(clients.clone()))
-            .and_then(handler::unregister_handler));
+        .and(with_client_state(client_state.clone()))
+        .and_then(handler::register_handler);
+
+    let deregister_route = warp::path("deregister")
+        .and(warp::post())
+        .and(warp::path::param())
+        .and(with_client_state(client_state.clone()))
+        .and_then(handler::deregister_handler);
 
     let publish = warp::path!("publish")
         .and(warp::body::json())
-        .and(with_clients(clients.clone()))
+        .and(with_client_state(client_state.clone()))
         .and_then(handler::publish_handler);
 
     let ws_route = warp::path("ws")
         .and(warp::ws())
         .and(warp::path::param())
-        .and(with_clients(clients.clone()))
+        .and(with_client_state(client_state.clone()))
         .and_then(handler::ws_handler);
 
     let routes = health_route
-        .or(register_routes)
+        .or(register_route)
+        .or(deregister_route)
         .or(ws_route)
         .or(publish)
-        .with(warp::cors().allow_any_origin());
+        .with(warp::cors().allow_any_origin())
+        .recover(error::handle_rejection);
 
     warp::serve(routes).run(([127, 0, 0, 1], 8000)).await;
 }
 
-fn with_clients(clients: Clients) -> impl Filter<Extract = (Clients,), Error = Infallible> + Clone {
-    warp::any().map(move || clients.clone())
+fn with_client_state(
+    client_state: ClientState,
+) -> impl Filter<Extract = (ClientState,), Error = Infallible> + Clone {
+    warp::any().map(move || client_state.clone())
 }

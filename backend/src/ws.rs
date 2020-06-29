@@ -1,4 +1,4 @@
-use crate::{Client, Clients};
+use crate::{ClientState, Player, PlayerId, PlayerToken};
 use futures::{FutureExt, StreamExt};
 use serde::Deserialize;
 use serde_json::from_str;
@@ -10,7 +10,14 @@ pub struct TopicsRequest {
     topics: Vec<String>,
 }
 
-pub async fn client_connection(ws: WebSocket, id: String, clients: Clients, mut client: Client) {
+#[derive(Deserialize, Debug)]
+pub struct AuthenticationRequest {
+    r#type: String,
+    token: PlayerToken,
+}
+
+pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: ClientState) {
+    let player_id = player.id;
     let (client_ws_sender, mut client_ws_rcv) = ws.split();
     let (client_sender, client_rcv) = mpsc::unbounded_channel();
 
@@ -20,27 +27,31 @@ pub async fn client_connection(ws: WebSocket, id: String, clients: Clients, mut 
         }
     }));
 
-    client.sender = Some(client_sender);
-    clients.write().await.insert(id.clone(), client);
+    player.sender = Some(client_sender);
+    client_state.write().await.players.insert(player.id, player);
 
-    println!("{} connected", id);
+    println!("{} connected", player_id);
 
     while let Some(result) = client_ws_rcv.next().await {
         let msg = match result {
             Ok(msg) => msg,
             Err(e) => {
-                eprintln!("error receiving ws message for id: {}): {}", id.clone(), e);
+                eprintln!(
+                    "error receiving ws message for id: {}): {}",
+                    player_id.clone(),
+                    e
+                );
                 break;
             }
         };
-        client_msg(&id, msg, &clients).await;
+        client_msg(&player_id, msg, &client_state).await;
     }
 
-    clients.write().await.remove(&id);
-    println!("{} disconnected", id);
+    client_state.write().await.players.remove(&player_id);
+    println!("{} disconnected", player_id);
 }
 
-async fn client_msg(id: &str, msg: Message, clients: &Clients) {
+async fn client_msg(id: &PlayerId, msg: Message, client_state: &ClientState) {
     println!("received message from {}: {:?}", id, msg);
     let message = match msg.to_str() {
         Ok(v) => v,
@@ -51,18 +62,25 @@ async fn client_msg(id: &str, msg: Message, clients: &Clients) {
         return;
     }
 
-    let topics_req: TopicsRequest = match from_str(&message) {
-        Ok(v) => v,
+    let auth_req: AuthenticationRequest = match from_str(&message) {
+        Ok(r) => r,
         Err(e) => {
-            eprintln!("error while parsing message to topics request: {}", e);
+            eprintln!("error while parsing authentication request: {}", e);
             return;
         }
     };
 
-    let mut locked = clients.write().await;
-    match locked.get_mut(id) {
-        Some(v) => {
-            v.topics = topics_req.topics;
+    authenticate(id, auth_req.token, client_state).await;
+}
+
+async fn authenticate(id: &PlayerId, token: PlayerToken, client_state: &ClientState) {
+    let mut state = client_state.write().await;
+
+    match state.players.get_mut(id) {
+        Some(p) => {
+            if p.token == token {
+                p.authenticated = true
+            }
         }
         None => return,
     };
