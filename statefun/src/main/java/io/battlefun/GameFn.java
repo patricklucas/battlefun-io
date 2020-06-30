@@ -41,6 +41,7 @@ public final class GameFn implements StatefulFunction {
   public static final FunctionType Type = new FunctionType("io.battlefun", "game");
 
   private final PersistedValue<GameUpdate> game = PersistedValue.of("game", GameUpdate.class);
+  private final GameLogic gameLogic = new GameLogic();
 
   @Override
   public void invoke(Context context, Object message) {
@@ -102,8 +103,13 @@ public final class GameFn implements StatefulFunction {
           Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
       return;
     }
-    
-    // TODO: main game logic goes here
+    Either<GameUpdate, Failure> either = gameLogic.apply(game, turn);
+    if (either.isLeft()) {
+      this.game.set(game);
+      builder.setGameUpdate(either.left);
+    } else {
+      builder.setFailure(either.right);
+    }
   }
 
   private void handleResign(Builder builder, Resign resign) {
@@ -120,7 +126,6 @@ public final class GameFn implements StatefulFunction {
     if (Objects.equals(game.getPlayer1Id(), who)) {
       // player 1 resigned
       game = game.toBuilder().setStatus(GameStatus.PLAYER2_WIN).build();
-
     } else {
       // player 2 resigned
       game = game.toBuilder().setStatus(GameStatus.PLAYER1_WIN).build();
