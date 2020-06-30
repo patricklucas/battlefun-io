@@ -3,7 +3,7 @@ use std::convert::Infallible;
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
 use uuid::Uuid;
-use warp::{ws::Message, Filter, Rejection};
+use warp::{http::Method, ws::Message, Filter, Rejection};
 
 mod error;
 mod handler;
@@ -68,12 +68,17 @@ async fn main() {
         .and(with_client_state(client_state.clone()))
         .and_then(handler::ws_handler);
 
+    let cors = warp::cors()
+        .allow_methods(&[Method::GET, Method::POST, Method::DELETE])
+        .allow_headers(vec!["content-type"])
+        .allow_any_origin();
+
     let routes = health_route
         .or(register_route)
         .or(deregister_route)
         .or(ws_route)
         .or(publish)
-        .with(warp::cors().allow_any_origin())
+        .with(cors)
         .recover(error::handle_rejection);
 
     let (_, server) =
