@@ -23,8 +23,6 @@ import java.util.Map;
 
 public final class Module implements StatefulFunctionModule {
 
-    @Override
-    public void configure(Map<String, String> globalConfiguration, Binder binder) {
-
-    }
+  @Override
+  public void configure(Map<String, String> globalConfiguration, Binder binder) {}
 }

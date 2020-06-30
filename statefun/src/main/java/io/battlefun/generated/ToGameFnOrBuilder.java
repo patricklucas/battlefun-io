@@ -3,60 +3,37 @@
 
 package io.battlefun.generated;
 
-public interface ToGameFnOrBuilder extends
+public interface ToGameFnOrBuilder
+    extends
     // @@protoc_insertion_point(interface_extends:io.battlefun.ToGameFn)
     com.google.protobuf.MessageOrBuilder {
 
-  /**
-   * <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code> */
   boolean hasCreateGame();
-  /**
-   * <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code> */
   io.battlefun.generated.ToGameFn.CreateGame getCreateGame();
-  /**
-   * <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.CreateGame create_game = 1;</code> */
   io.battlefun.generated.ToGameFn.CreateGameOrBuilder getCreateGameOrBuilder();
 
-  /**
-   * <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code> */
   boolean hasGetGameStatus();
-  /**
-   * <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code> */
   io.battlefun.generated.ToGameFn.GetGameStatus getGetGameStatus();
-  /**
-   * <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.GetGameStatus get_game_status = 2;</code> */
   io.battlefun.generated.ToGameFn.GetGameStatusOrBuilder getGetGameStatusOrBuilder();
 
-  /**
-   * <code>.io.battlefun.ToGameFn.Turn turn = 3;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Turn turn = 3;</code> */
   boolean hasTurn();
-  /**
-   * <code>.io.battlefun.ToGameFn.Turn turn = 3;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Turn turn = 3;</code> */
   io.battlefun.generated.ToGameFn.Turn getTurn();
-  /**
-   * <code>.io.battlefun.ToGameFn.Turn turn = 3;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Turn turn = 3;</code> */
   io.battlefun.generated.ToGameFn.TurnOrBuilder getTurnOrBuilder();
 
-  /**
-   * <code>.io.battlefun.ToGameFn.Resign resign = 4;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Resign resign = 4;</code> */
   boolean hasResign();
-  /**
-   * <code>.io.battlefun.ToGameFn.Resign resign = 4;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Resign resign = 4;</code> */
   io.battlefun.generated.ToGameFn.Resign getResign();
-  /**
-   * <code>.io.battlefun.ToGameFn.Resign resign = 4;</code>
-   */
+  /** <code>.io.battlefun.ToGameFn.Resign resign = 4;</code> */
   io.battlefun.generated.ToGameFn.ResignOrBuilder getResignOrBuilder();
 
   public io.battlefun.generated.ToGameFn.MsgCase getMsgCase();

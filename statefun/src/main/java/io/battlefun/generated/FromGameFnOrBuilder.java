@@ -3,34 +3,23 @@
 
 package io.battlefun.generated;
 
-public interface FromGameFnOrBuilder extends
+public interface FromGameFnOrBuilder
+    extends
     // @@protoc_insertion_point(interface_extends:io.battlefun.FromGameFn)
     com.google.protobuf.MessageOrBuilder {
 
-  /**
-   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code> */
   boolean hasGameUpdate();
-  /**
-   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code> */
   io.battlefun.generated.FromGameFn.GameUpdate getGameUpdate();
-  /**
-   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 1;</code> */
   io.battlefun.generated.FromGameFn.GameUpdateOrBuilder getGameUpdateOrBuilder();
 
-  /**
-   * <code>.io.battlefun.FromGameFn.Failure failure = 2;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.Failure failure = 2;</code> */
   boolean hasFailure();
-  /**
-   * <code>.io.battlefun.FromGameFn.Failure failure = 2;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.Failure failure = 2;</code> */
   io.battlefun.generated.FromGameFn.Failure getFailure();
-  /**
-   * <code>.io.battlefun.FromGameFn.Failure failure = 2;</code>
-   */
+  /** <code>.io.battlefun.FromGameFn.Failure failure = 2;</code> */
   io.battlefun.generated.FromGameFn.FailureOrBuilder getFailureOrBuilder();
 
   public io.battlefun.generated.FromGameFn.ResponseCase getResponseCase();

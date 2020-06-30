@@ -3,26 +3,40 @@
 
 package io.battlefun.generated;
 
-/**
- * Protobuf type {@code io.battlefun.ShipPlacement}
- */
-public  final class ShipPlacement extends
-    com.google.protobuf.GeneratedMessageV3 implements
+/** Protobuf type {@code io.battlefun.ShipPlacement} */
+public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
+    implements
     // @@protoc_insertion_point(message_implements:io.battlefun.ShipPlacement)
     ShipPlacementOrBuilder {
-private static final long serialVersionUID = 0L;
+  public static final int SHIPS_FIELD_NUMBER = 1;
+  private static final long serialVersionUID = 0L;
+  // @@protoc_insertion_point(class_scope:io.battlefun.ShipPlacement)
+  private static final io.battlefun.generated.ShipPlacement DEFAULT_INSTANCE;
+  private static final com.google.protobuf.Parser<ShipPlacement> PARSER =
+      new com.google.protobuf.AbstractParser<ShipPlacement>() {
+        @java.lang.Override
+        public ShipPlacement parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new ShipPlacement(input, extensionRegistry);
+        }
+      };
+
+  static {
+    DEFAULT_INSTANCE = new io.battlefun.generated.ShipPlacement();
+  }
+
+  private com.google.protobuf.MapField<java.lang.String, java.lang.Long> ships_;
+  private byte memoizedIsInitialized = -1;
+
   // Use ShipPlacement.newBuilder() to construct.
   private ShipPlacement(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private ShipPlacement() {
-  }
 
-  @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
-  }
+  private ShipPlacement() {}
+
   private ShipPlacement(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -42,82 +56,158 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-              ships_ = com.google.protobuf.MapField.newMapField(
-                  ShipsDefaultEntryHolder.defaultEntry);
-              mutable_bitField0_ |= 0x00000001;
+          case 10:
+            {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                ships_ =
+                    com.google.protobuf.MapField.newMapField(ShipsDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00000001;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Long> ships__ =
+                  input.readMessage(
+                      ShipsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              ships_.getMutableMap().put(ships__.getKey(), ships__.getValue());
+              break;
             }
-            com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
-            ships__ = input.readMessage(
-                ShipsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-            ships_.getMutableMap().put(
-                ships__.getKey(), ships__.getValue());
-            break;
-          }
-          default: {
-            if (!parseUnknownField(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
+          default:
+            {
+              if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
             }
-            break;
-          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new com.google.protobuf.InvalidProtocolBufferException(
-          e).setUnfinishedMessage(this);
+      throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
     } finally {
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
-  public static final com.google.protobuf.Descriptors.Descriptor
-      getDescriptor() {
+
+  public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
     return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      java.nio.ByteBuffer data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(com.google.protobuf.ByteString data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.ByteString data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(byte[] data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      byte[] data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
+        PARSER, input, extensionRegistry);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(
+      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(
+        PARSER, input, extensionRegistry);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.CodedInputStream input) throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
+  }
+
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
+        PARSER, input, extensionRegistry);
+  }
+
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+
+  public static Builder newBuilder(io.battlefun.generated.ShipPlacement prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
+
+  public static io.battlefun.generated.ShipPlacement getDefaultInstance() {
+    return DEFAULT_INSTANCE;
+  }
+
+  public static com.google.protobuf.Parser<ShipPlacement> parser() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
+    return this.unknownFields;
   }
 
   @SuppressWarnings({"rawtypes"})
   @java.lang.Override
-  protected com.google.protobuf.MapField internalGetMapField(
-      int number) {
+  protected com.google.protobuf.MapField internalGetMapField(int number) {
     switch (number) {
       case 1:
         return internalGetShips();
       default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
+        throw new RuntimeException("Invalid map field number: " + number);
     }
   }
+
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
+    return io.battlefun.generated.Battlefunio
+        .internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            io.battlefun.generated.ShipPlacement.class, io.battlefun.generated.ShipPlacement.Builder.class);
+            io.battlefun.generated.ShipPlacement.class,
+            io.battlefun.generated.ShipPlacement.Builder.class);
   }
 
-  public static final int SHIPS_FIELD_NUMBER = 1;
-  private static final class ShipsDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, java.lang.Long> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, java.lang.Long>newDefaultInstance(
-                io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.INT64,
-                0L);
-  }
-  private com.google.protobuf.MapField<
-      java.lang.String, java.lang.Long> ships_;
-  private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
-  internalGetShips() {
+  private com.google.protobuf.MapField<java.lang.String, java.lang.Long> internalGetShips() {
     if (ships_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          ShipsDefaultEntryHolder.defaultEntry);
+      return com.google.protobuf.MapField.emptyMapField(ShipsDefaultEntryHolder.defaultEntry);
     }
     return ships_;
   }
@@ -125,57 +215,47 @@ private static final long serialVersionUID = 0L;
   public int getShipsCount() {
     return internalGetShips().getMap().size();
   }
-  /**
-   * <code>map&lt;string, int64&gt; ships = 1;</code>
-   */
 
-  public boolean containsShips(
-      java.lang.String key) {
-    if (key == null) { throw new java.lang.NullPointerException(); }
+  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+  public boolean containsShips(java.lang.String key) {
+    if (key == null) {
+      throw new java.lang.NullPointerException();
+    }
     return internalGetShips().getMap().containsKey(key);
   }
-  /**
-   * Use {@link #getShipsMap()} instead.
-   */
+
+  /** Use {@link #getShipsMap()} instead. */
   @java.lang.Deprecated
   public java.util.Map<java.lang.String, java.lang.Long> getShips() {
     return getShipsMap();
   }
-  /**
-   * <code>map&lt;string, int64&gt; ships = 1;</code>
-   */
 
+  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
   public java.util.Map<java.lang.String, java.lang.Long> getShipsMap() {
     return internalGetShips().getMap();
   }
-  /**
-   * <code>map&lt;string, int64&gt; ships = 1;</code>
-   */
 
-  public long getShipsOrDefault(
-      java.lang.String key,
-      long defaultValue) {
-    if (key == null) { throw new java.lang.NullPointerException(); }
-    java.util.Map<java.lang.String, java.lang.Long> map =
-        internalGetShips().getMap();
+  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+  public long getShipsOrDefault(java.lang.String key, long defaultValue) {
+    if (key == null) {
+      throw new java.lang.NullPointerException();
+    }
+    java.util.Map<java.lang.String, java.lang.Long> map = internalGetShips().getMap();
     return map.containsKey(key) ? map.get(key) : defaultValue;
   }
-  /**
-   * <code>map&lt;string, int64&gt; ships = 1;</code>
-   */
 
-  public long getShipsOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new java.lang.NullPointerException(); }
-    java.util.Map<java.lang.String, java.lang.Long> map =
-        internalGetShips().getMap();
+  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+  public long getShipsOrThrow(java.lang.String key) {
+    if (key == null) {
+      throw new java.lang.NullPointerException();
+    }
+    java.util.Map<java.lang.String, java.lang.Long> map = internalGetShips().getMap();
     if (!map.containsKey(key)) {
       throw new java.lang.IllegalArgumentException();
     }
     return map.get(key);
   }
 
-  private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -187,14 +267,9 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public void writeTo(com.google.protobuf.CodedOutputStream output)
-                      throws java.io.IOException {
-    com.google.protobuf.GeneratedMessageV3
-      .serializeStringMapTo(
-        output,
-        internalGetShips(),
-        ShipsDefaultEntryHolder.defaultEntry,
-        1);
+  public void writeTo(com.google.protobuf.CodedOutputStream output) throws java.io.IOException {
+    com.google.protobuf.GeneratedMessageV3.serializeStringMapTo(
+        output, internalGetShips(), ShipsDefaultEntryHolder.defaultEntry, 1);
     unknownFields.writeTo(output);
   }
 
@@ -204,15 +279,15 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry
-         : internalGetShips().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, java.lang.Long>
-      ships__ = ShipsDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
-      size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, ships__);
+    for (java.util.Map.Entry<java.lang.String, java.lang.Long> entry :
+        internalGetShips().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.String, java.lang.Long> ships__ =
+          ShipsDefaultEntryHolder.defaultEntry
+              .newBuilderForType()
+              .setKey(entry.getKey())
+              .setValue(entry.getValue())
+              .build();
+      size += com.google.protobuf.CodedOutputStream.computeMessageSize(1, ships__);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -222,15 +297,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
-     return true;
+      return true;
     }
     if (!(obj instanceof io.battlefun.generated.ShipPlacement)) {
       return super.equals(obj);
     }
     io.battlefun.generated.ShipPlacement other = (io.battlefun.generated.ShipPlacement) obj;
 
-    if (!internalGetShips().equals(
-        other.internalGetShips())) return false;
+    if (!internalGetShips().equals(other.internalGetShips())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -251,153 +325,100 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      java.nio.ByteBuffer data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.ByteString data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      byte[] data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input);
-  }
-  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.CodedInputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
-  }
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
+  @java.lang.Override
+  public Builder newBuilderForType() {
+    return newBuilder();
   }
 
-  @java.lang.Override
-  public Builder newBuilderForType() { return newBuilder(); }
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-  public static Builder newBuilder(io.battlefun.generated.ShipPlacement prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
   @java.lang.Override
   public Builder toBuilder() {
-    return this == DEFAULT_INSTANCE
-        ? new Builder() : new Builder().mergeFrom(this);
+    return this == DEFAULT_INSTANCE ? new Builder() : new Builder().mergeFrom(this);
   }
 
   @java.lang.Override
-  protected Builder newBuilderForType(
-      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+  protected Builder newBuilderForType(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
-  /**
-   * Protobuf type {@code io.battlefun.ShipPlacement}
-   */
-  public static final class Builder extends
-      com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+
+  @java.lang.Override
+  public com.google.protobuf.Parser<ShipPlacement> getParserForType() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public io.battlefun.generated.ShipPlacement getDefaultInstanceForType() {
+    return DEFAULT_INSTANCE;
+  }
+
+  private static final class ShipsDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<java.lang.String, java.lang.Long> defaultEntry =
+        com.google.protobuf.MapEntry.<java.lang.String, java.lang.Long>newDefaultInstance(
+            io.battlefun.generated.Battlefunio
+                .internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor,
+            com.google.protobuf.WireFormat.FieldType.STRING,
+            "",
+            com.google.protobuf.WireFormat.FieldType.INT64,
+            0L);
+  }
+
+  /** Protobuf type {@code io.battlefun.ShipPlacement} */
+  public static final class Builder extends com.google.protobuf.GeneratedMessageV3.Builder<Builder>
+      implements
       // @@protoc_insertion_point(builder_implements:io.battlefun.ShipPlacement)
       io.battlefun.generated.ShipPlacementOrBuilder {
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
-    }
-
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapField internalGetMapField(
-        int number) {
-      switch (number) {
-        case 1:
-          return internalGetShips();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapField internalGetMutableMapField(
-        int number) {
-      switch (number) {
-        case 1:
-          return internalGetMutableShips();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              io.battlefun.generated.ShipPlacement.class, io.battlefun.generated.ShipPlacement.Builder.class);
-    }
+    private int bitField0_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Long> ships_;
 
     // Construct using io.battlefun.generated.ShipPlacement.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
 
-    private Builder(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+    private Builder(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
       maybeForceBuilderInitialization();
     }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
+
+    public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+      return io.battlefun.generated.Battlefunio
+          .internal_static_io_battlefun_ShipPlacement_descriptor;
+    }
+
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(int number) {
+      switch (number) {
+        case 1:
+          return internalGetShips();
+        default:
+          throw new RuntimeException("Invalid map field number: " + number);
       }
     }
+
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMutableMapField(int number) {
+      switch (number) {
+        case 1:
+          return internalGetMutableShips();
+        default:
+          throw new RuntimeException("Invalid map field number: " + number);
+      }
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.battlefun.generated.Battlefunio
+          .internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.battlefun.generated.ShipPlacement.class,
+              io.battlefun.generated.ShipPlacement.Builder.class);
+    }
+
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders) {}
+    }
+
     @java.lang.Override
     public Builder clear() {
       super.clear();
@@ -406,9 +427,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Descriptors.Descriptor
-        getDescriptorForType() {
-      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
+    public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+      return io.battlefun.generated.Battlefunio
+          .internal_static_io_battlefun_ShipPlacement_descriptor;
     }
 
     @java.lang.Override
@@ -439,38 +460,39 @@ private static final long serialVersionUID = 0L;
     public Builder clone() {
       return super.clone();
     }
+
     @java.lang.Override
     public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
+        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
       return super.setField(field, value);
     }
+
     @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
+    public Builder clearField(com.google.protobuf.Descriptors.FieldDescriptor field) {
       return super.clearField(field);
     }
+
     @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+    public Builder clearOneof(com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return super.clearOneof(oneof);
     }
+
     @java.lang.Override
     public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
+        com.google.protobuf.Descriptors.FieldDescriptor field, int index, java.lang.Object value) {
       return super.setRepeatedField(field, index, value);
     }
+
     @java.lang.Override
     public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
+        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
       return super.addRepeatedField(field, value);
     }
+
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.battlefun.generated.ShipPlacement) {
-        return mergeFrom((io.battlefun.generated.ShipPlacement)other);
+        return mergeFrom((io.battlefun.generated.ShipPlacement) other);
       } else {
         super.mergeFrom(other);
         return this;
@@ -479,8 +501,7 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(io.battlefun.generated.ShipPlacement other) {
       if (other == io.battlefun.generated.ShipPlacement.getDefaultInstance()) return this;
-      internalGetMutableShips().mergeFrom(
-          other.internalGetShips());
+      internalGetMutableShips().mergeFrom(other.internalGetShips());
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -509,24 +530,20 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
-    private int bitField0_;
 
-    private com.google.protobuf.MapField<
-        java.lang.String, java.lang.Long> ships_;
-    private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
-    internalGetShips() {
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Long> internalGetShips() {
       if (ships_ == null) {
-        return com.google.protobuf.MapField.emptyMapField(
-            ShipsDefaultEntryHolder.defaultEntry);
+        return com.google.protobuf.MapField.emptyMapField(ShipsDefaultEntryHolder.defaultEntry);
       }
       return ships_;
     }
+
     private com.google.protobuf.MapField<java.lang.String, java.lang.Long>
-    internalGetMutableShips() {
-      onChanged();;
+        internalGetMutableShips() {
+      onChanged();
+      ;
       if (ships_ == null) {
-        ships_ = com.google.protobuf.MapField.newMapField(
-            ShipsDefaultEntryHolder.defaultEntry);
+        ships_ = com.google.protobuf.MapField.newMapField(ShipsDefaultEntryHolder.defaultEntry);
       }
       if (!ships_.isMutable()) {
         ships_ = ships_.copy();
@@ -537,50 +554,36 @@ private static final long serialVersionUID = 0L;
     public int getShipsCount() {
       return internalGetShips().getMap().size();
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-
-    public boolean containsShips(
-        java.lang.String key) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public boolean containsShips(java.lang.String key) {
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
       return internalGetShips().getMap().containsKey(key);
     }
-    /**
-     * Use {@link #getShipsMap()} instead.
-     */
+    /** Use {@link #getShipsMap()} instead. */
     @java.lang.Deprecated
     public java.util.Map<java.lang.String, java.lang.Long> getShips() {
       return getShipsMap();
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
     public java.util.Map<java.lang.String, java.lang.Long> getShipsMap() {
       return internalGetShips().getMap();
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-
-    public long getShipsOrDefault(
-        java.lang.String key,
-        long defaultValue) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, java.lang.Long> map =
-          internalGetShips().getMap();
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public long getShipsOrDefault(java.lang.String key, long defaultValue) {
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
+      java.util.Map<java.lang.String, java.lang.Long> map = internalGetShips().getMap();
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-
-    public long getShipsOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
-      java.util.Map<java.lang.String, java.lang.Long> map =
-          internalGetShips().getMap();
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public long getShipsOrThrow(java.lang.String key) {
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
+      java.util.Map<java.lang.String, java.lang.Long> map = internalGetShips().getMap();
       if (!map.containsKey(key)) {
         throw new java.lang.IllegalArgumentException();
       }
@@ -588,54 +591,39 @@ private static final long serialVersionUID = 0L;
     }
 
     public Builder clearShips() {
-      internalGetMutableShips().getMutableMap()
-          .clear();
+      internalGetMutableShips().getMutableMap().clear();
       return this;
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-
-    public Builder removeShips(
-        java.lang.String key) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
-      internalGetMutableShips().getMutableMap()
-          .remove(key);
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public Builder removeShips(java.lang.String key) {
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
+      internalGetMutableShips().getMutableMap().remove(key);
       return this;
     }
-    /**
-     * Use alternate mutation accessors instead.
-     */
+    /** Use alternate mutation accessors instead. */
     @java.lang.Deprecated
-    public java.util.Map<java.lang.String, java.lang.Long>
-    getMutableShips() {
+    public java.util.Map<java.lang.String, java.lang.Long> getMutableShips() {
       return internalGetMutableShips().getMutableMap();
     }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
-    public Builder putShips(
-        java.lang.String key,
-        long value) {
-      if (key == null) { throw new java.lang.NullPointerException(); }
-      
-      internalGetMutableShips().getMutableMap()
-          .put(key, value);
-      return this;
-    }
-    /**
-     * <code>map&lt;string, int64&gt; ships = 1;</code>
-     */
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public Builder putShips(java.lang.String key, long value) {
+      if (key == null) {
+        throw new java.lang.NullPointerException();
+      }
 
-    public Builder putAllShips(
-        java.util.Map<java.lang.String, java.lang.Long> values) {
-      internalGetMutableShips().getMutableMap()
-          .putAll(values);
+      internalGetMutableShips().getMutableMap().put(key, value);
       return this;
     }
+    /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+    public Builder putAllShips(java.util.Map<java.lang.String, java.lang.Long> values) {
+      internalGetMutableShips().getMutableMap().putAll(values);
+      return this;
+    }
+
     @java.lang.Override
-    public final Builder setUnknownFields(
-        final com.google.protobuf.UnknownFieldSet unknownFields) {
+    public final Builder setUnknownFields(final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFields(unknownFields);
     }
 
@@ -645,44 +633,6 @@ private static final long serialVersionUID = 0L;
       return super.mergeUnknownFields(unknownFields);
     }
 
-
     // @@protoc_insertion_point(builder_scope:io.battlefun.ShipPlacement)
   }
-
-  // @@protoc_insertion_point(class_scope:io.battlefun.ShipPlacement)
-  private static final io.battlefun.generated.ShipPlacement DEFAULT_INSTANCE;
-  static {
-    DEFAULT_INSTANCE = new io.battlefun.generated.ShipPlacement();
-  }
-
-  public static io.battlefun.generated.ShipPlacement getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
-
-  private static final com.google.protobuf.Parser<ShipPlacement>
-      PARSER = new com.google.protobuf.AbstractParser<ShipPlacement>() {
-    @java.lang.Override
-    public ShipPlacement parsePartialFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return new ShipPlacement(input, extensionRegistry);
-    }
-  };
-
-  public static com.google.protobuf.Parser<ShipPlacement> parser() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public com.google.protobuf.Parser<ShipPlacement> getParserForType() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public io.battlefun.generated.ShipPlacement getDefaultInstanceForType() {
-    return DEFAULT_INSTANCE;
-  }
-
 }
-
