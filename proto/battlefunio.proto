@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package io.battlefun;
+option java_package = "io.battlefun.generated";
+option java_multiple_files = true;
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Common message definitions
+// -------------------------------------------------------------------------------------------------------------------
+
+message ShipPlacement {
+  map<string, int64> ships = 1;
+}
+
+enum GameStatus {
+  UNKNOWN = 0;
+  PLAYER1_TURN = 1;
+  PLAYER2_TURN = 2;
+  PLAYER1_WIN = 3;
+  PLAYER2_WIN = 4;
+}
+
+message Shot {
+  int64 cell_id = 1;
+  bool shot = 2;
+}
+
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Messages sent to a Remote Function
+// -------------------------------------------------------------------------------------------------------------------
+
+message ToGameFn {
+
+  message CreateGame {
+    string game_id = 1;
+    string player1_id = 2;
+    string player2_id = 3;
+    ShipPlacement player1_placement = 4;
+    ShipPlacement player2_placement = 5;
+  }
+
+  message GetGameStatus {
+    string game_id = 1;
+  }
+
+  message Turn {
+    string game_id = 1;
+    string player_id = 2;
+    int64 shot = 3;
+  }
+
+  message Resign {
+    string game_id = 1;
+    string player_id = 2;
+  }
+
+  oneof msg {
+    CreateGame create_game = 1;
+    GetGameStatus get_game_status = 2;
+    Turn turn = 3;
+    Resign resign = 4;
+  }
+}
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// Messages sent from a Remote Function
+// -------------------------------------------------------------------------------------------------------------------
+
+message FromGameFn {
+
+  message Failure {
+    int64 code = 1;
+    string failure_description = 2;
+  }
+
+
+  message GameUpdate {
+    // const fields, won't be modified after game creation.
+    string game_id = 1;
+    string player1_id = 2;
+    string player2_id = 3;
+    ShipPlacement player1_placement = 4;
+    ShipPlacement player2_placement = 5;
+
+    // dynamic fields
+    GameStatus status = 6;
+    repeated Shot player1_shots = 7;
+    repeated Shot player2_shots = 8;
+  }
+
+
+  oneof response {
+    GameUpdate game_update = 1;
+    Failure failure = 2;
+  }
+}
