@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Welcome } from "./Welcome";
-import { Game } from "./Game";
+import { Game } from "./game";
 import { User } from "./UserProvider";
 import { EuiHeader, EuiHeaderSection, EuiHeaderSectionItem, EuiHeaderLogo, EuiButton, EuiPanel } from "@elastic/eui";
 import { ReadyState } from "react-use-websocket";

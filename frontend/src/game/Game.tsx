@@ -1,10 +1,11 @@
 import React, { useRef, useMemo, useState, useContext, useEffect, MouseEvent } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { GridComponent, game_state } from "./Grid";
-import { User } from "./UserProvider";
-import { mergeDeep } from "./utils/mergeDeep";
+import { GridComponent } from "../Grid";
+import { User } from "../UserProvider";
+import { mergeDeep } from "../utils/mergeDeep";
 import { EuiPanel, EuiBadge, EuiCallOut, EuiButton } from "@elastic/eui";
 import styled from "styled-components";
+import { PlayerTurn } from "./";
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -29,6 +30,30 @@ const ships: {
   destroyer: "Destroyer",
   submarine: "Submarine",
   patrol_boat: "Patrol Boat",
+};
+
+export const game_state: GameState = {
+  opponent_id: "some-guid",
+  current_state: "IN_PROGRESS",
+  your_turn: true, // only if IN_PROGRESS
+  your_shots: [
+    { cell: 13, hit: false },
+    { cell: 35, hit: false },
+    { cell: 50, hit: false },
+    { cell: 67, hit: true },
+    { cell: 77, hit: true },
+    { cell: 87, hit: true },
+    { cell: 88, hit: false },
+  ],
+  opponent_shots: [12, 13, 34, 55, 62, 65, 88], // ^ same as above
+  destroyed_opponent_ships: ["destroyer"],
+  your_ships: {
+    carrier: [0, 1, 2, 3, 4],
+    battleship: [12, 13, 14, 15],
+    destroyer: [23, 33, 43],
+    submarine: [77, 78, 79],
+    patrol_boat: [55, 65],
+  },
 };
 
 export interface GameState {
@@ -56,9 +81,7 @@ export function Game(props: Props) {
   const [gameState, setGameState] = useState<GameState | null>(game_state);
   const [showYourBoard, setShowYourBoard] = useState<boolean>(false);
   const [showEnemyBoard, setShowEnemyBoard] = useState<boolean>(false);
-
   const messageHistory = useRef<MessageEvent[]>([]);
-
   messageHistory.current = useMemo(() => messageHistory.current.concat(lastMessage), [lastMessage]);
 
   useEffect(() => {
@@ -85,25 +108,16 @@ export function Game(props: Props) {
     }
   }, [lastMessage]);
 
+  const destroyed_ships = Object.entries(gameState?.your_ships ?? {}).reduce((prev, [name, ship]) => {
+    if (ship.every((cell) => gameState?.opponent_shots.includes(cell))) {
+      return prev.concat(name);
+    }
+    return prev;
+  }, [] as GameState["destroyed_opponent_ships"]);
+
   return (
     <>
-      {gameState && (
-        <EuiCallOut
-          color={gameState.your_turn ? "success" : "danger"}
-          title={
-            gameState.your_turn ? (
-              <>
-                <i className="fad fa-user"></i>&nbsp; Your Turn
-              </>
-            ) : (
-              <>
-                <i className="fad fa-user-secret"></i>&nbsp; Enemy Turn
-              </>
-            )
-          }
-        ></EuiCallOut>
-      )}
-      <br />
+      <PlayerTurn gameState={gameState} />
       <EuiPanel paddingSize="l">
         <GridComponent
           sendMessage={sendMessage}
@@ -112,21 +126,22 @@ export function Game(props: Props) {
           showEnemyBoard={showEnemyBoard}
         />
       </EuiPanel>
+      <br />
+      <div style={{ margin: "0 -4px" }}>
+        {Object.entries(ships).map(([ship, name]) => (
+          <EuiBadge
+            key={ship}
+            style={{ marginLeft: 4, marginBottom: 4 }}
+            isDisabled={destroyed_ships.includes(ship)}
+            color="primary"
+          >
+            {name}
+          </EuiBadge>
+        ))}
+      </div>
 
       {gameState && (
         <>
-          <br />
-          <div style={{ margin: "-4px 0" }}>
-            {Object.entries(ships).map(([ship, name]) => (
-              <EuiBadge
-                style={{ marginLeft: 4, marginBottom: 4 }}
-                isDisabled={gameState.destroyed_opponent_ships.includes(ship)}
-                color="danger"
-              >
-                {name}
-              </EuiBadge>
-            ))}
-          </div>
           <br />
           <ButtonGroup>
             <EuiButton

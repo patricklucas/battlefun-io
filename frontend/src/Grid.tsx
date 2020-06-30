@@ -2,28 +2,8 @@ import React, { useState, useCallback, MouseEvent } from "react";
 import rangeInclusive from "range-inclusive";
 import { SendMessage } from "react-use-websocket";
 import { YLabels, Label, Grid, Board, Cell, XLabels, GridContainer, Icon } from "./Grid.styled";
-import { GameState } from "./Game";
+import { GameState } from "./game/Game";
 import { Ships } from "./Ships";
-
-export const game_state: GameState = {
-  opponent_id: "some-guid",
-  current_state: "IN_PROGRESS",
-  your_turn: true, // only if IN_PROGRESS
-  your_shots: [
-    { cell: 13, hit: false },
-    { cell: 77, hit: true },
-    { cell: 99, hit: false },
-  ],
-  opponent_shots: [0, 12, 34], // ^ same as above
-  destroyed_opponent_ships: ["carrier"],
-  your_ships: {
-    carrier: [0, 1, 2, 3, 4],
-    battleship: [12, 13, 14, 15],
-    destroyer: [23, 33, 43],
-    submarine: [77, 78, 79],
-    patrol_boat: [55, 65],
-  },
-};
 
 const board = {
   cells: [...new Array(100)],
@@ -92,7 +72,7 @@ export function GridComponent(props: Props) {
 
             return (
               <Cell
-                highlight={highlight}
+                highlight={!!props.gameState?.your_turn && highlight}
                 key={index}
                 onMouseEnter={() => setHoveredCell(index)}
                 onMouseLeave={() => setHoveredCell(-1)}
@@ -119,7 +99,7 @@ export function GridComponent(props: Props) {
                     const iconName = hit ? "fa-crosshairs" : "fa-water";
 
                     return (
-                      <Icon {...getGridProperties([cell])} onClick={stopClick}>
+                      <Icon key={cell} {...getGridProperties([cell])} onClick={stopClick}>
                         <i className={`fad ${iconName} fa-2x`} style={style}></i>
                       </Icon>
                     );
@@ -144,12 +124,12 @@ export function GridComponent(props: Props) {
                     const iconName = hit ? "fa-crosshairs" : "fa-water";
 
                     return (
-                      <Icon {...getGridProperties([cell])} onClick={stopClick}>
+                      <Icon key={cell} {...getGridProperties([cell])} onClick={stopClick}>
                         <i className={`fad ${iconName} fa-2x`} style={style}></i>
                       </Icon>
                     );
                   })}
-                  <Ships ships={game_state.your_ships} />
+                  <Ships ships={props.gameState.your_ships} />
                 </>
               )}
             </>

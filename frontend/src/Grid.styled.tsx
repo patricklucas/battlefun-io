@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { Props as Ship } from "./Ships.styled";
 
+const appearDuration = 250;
+const transitionName = `example`;
+
 export const GridContainer = styled.section`
   position: relative;
   padding-bottom: 100%;

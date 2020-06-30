@@ -54,7 +54,7 @@ const Spaceship = styled.div<Props>`
   height: 100%;
   background-size: cover;
   pointer-events: none;
-  opacity: 0.65;
+  opacity: 0.8;
 `;
 
 export const Carrier = styled(Spaceship)`
