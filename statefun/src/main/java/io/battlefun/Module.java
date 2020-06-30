@@ -46,7 +46,7 @@ public final class Module implements StatefulFunctionModule {
 
   @Override
   public void configure(Map<String, String> globalConfiguration, Binder binder) {
-    String kafkaBrokerAddress = globalConfiguration.getOrDefault("kafka", "kafka-broker");
+    String kafkaBrokerAddress = globalConfiguration.getOrDefault("kafka", "kafka-broker:9092");
 
     // ingress ToGameFn messages from the "in" Kafka topic.
     binder.bindIngress(
