@@ -37,7 +37,8 @@ import java.util.Map;
 
 public final class Module implements StatefulFunctionModule {
 
-  private static final String KAFKA_OUT_TOPIC_NAME = "out";
+  private static final String KAFKA_OUT_TOPIC_NAME = "from-statefun";
+  
   private static final IngressIdentifier<ToGameFn> INPUT =
       new IngressIdentifier<>(ToGameFn.class, "io.battlefun", "in");
   private static final EgressIdentifier<FromGameFn> OUTPUT =
@@ -50,7 +51,7 @@ public final class Module implements StatefulFunctionModule {
     // ingress ToGameFn messages from the "in" Kafka topic.
     binder.bindIngress(
         KafkaIngressBuilder.forIdentifier(INPUT)
-            .withTopic("in")
+            .withTopic("to-statefun")
             .withKafkaAddress(kafkaBrokerAddress)
             .withDeserializer(ToGameFnDeserializer.class)
             .withProperty(ConsumerConfig.GROUP_ID_CONFIG, "statefun")
