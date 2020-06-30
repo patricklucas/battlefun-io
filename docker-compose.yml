@@ -6,3 +6,8 @@ services:
     ports:
     - 8000:8000
     stop_signal: SIGINT
+  frontend:
+    build: frontend/
+    image: plucas/battlefun-io-frontend
+    ports:
+    - 3000:3000
