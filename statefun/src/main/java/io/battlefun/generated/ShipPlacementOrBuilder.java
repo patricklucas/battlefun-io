@@ -8,17 +8,14 @@ public interface ShipPlacementOrBuilder
     // @@protoc_insertion_point(interface_extends:io.battlefun.ShipPlacement)
     com.google.protobuf.MessageOrBuilder {
 
-  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
+  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  java.util.List<io.battlefun.generated.Ship> getShipsList();
+  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  io.battlefun.generated.Ship getShips(int index);
+  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
   int getShipsCount();
-  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
-  boolean containsShips(java.lang.String key);
-  /** Use {@link #getShipsMap()} instead. */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.Long> getShips();
-  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
-  java.util.Map<java.lang.String, java.lang.Long> getShipsMap();
-  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
-  long getShipsOrDefault(java.lang.String key, long defaultValue);
-  /** <code>map&lt;string, int64&gt; ships = 1;</code> */
-  long getShipsOrThrow(java.lang.String key);
+  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  java.util.List<? extends io.battlefun.generated.ShipOrBuilder> getShipsOrBuilderList();
+  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(int index);
 }
