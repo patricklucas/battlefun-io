@@ -21,19 +21,20 @@ package io.battlefun;
 import io.battlefun.generated.FromGameFn.Failure;
 import io.battlefun.generated.FromGameFn.GameUpdate;
 import io.battlefun.generated.FromGameFn.GameUpdate.Builder;
-import io.battlefun.generated.GameStatus;
-import io.battlefun.generated.Ship;
 import io.battlefun.generated.ShipPlacement;
 import io.battlefun.generated.Shot;
 import io.battlefun.generated.ToGameFn.Turn;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
+import static io.battlefun.GameLogicUtil.isGameOver;
+import static io.battlefun.GameLogicUtil.isPlayersTurn;
+import static io.battlefun.GameLogicUtil.reamingShips;
+import static io.battlefun.GameLogicUtil.setWinner;
+import static io.battlefun.GameLogicUtil.shotsTaken;
 
 final class GameLogic {
 
@@ -72,7 +73,7 @@ final class GameLogic {
       return Either.right(
           Failure.newBuilder()
               .setCode(102)
-              .setFailureDescription("The shot was already made ")
+              .setFailureDescription("The shot was already made")
               .build());
     }
     //
@@ -86,77 +87,13 @@ final class GameLogic {
     }
     //
     // 4. check for hit/miss
-    // note: that we need to placement of the other player.
+    // NOTE: that we need the placement of the other player.
     ShipPlacement opponentPlacement =
         (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
     Map<String, Set<Integer>> remainingShips = reamingShips(opponentPlacement, shotHistory);
     if (remainingShips.isEmpty()) {
       setWinner(player, next);
-      return Either.left(next.build());
     }
     return Either.left(next.build());
-  }
-
-  private void setWinner(int player, Builder updatedGame) {
-    if (player == 0) {
-      updatedGame.setStatus(GameStatus.PLAYER1_WIN);
-    } else {
-      updatedGame.setStatus(GameStatus.PLAYER2_WIN);
-    }
-  }
-
-  private static Map<String, Set<Integer>> reamingShips(
-      ShipPlacement placement, Set<Integer> shotHistory) {
-    Map<String, Set<Integer>> remainingShips = new HashMap<>();
-    for (Ship ship : placement.getShipsList()) {
-      Set<Integer> remainingCells = new HashSet<>();
-      for (long cell : ship.getCellsList()) {
-        int cellId = (int) cell;
-        if (shotHistory.contains(cellId)) {
-          continue;
-        }
-        remainingCells.add(cellId);
-      }
-      if (!remainingCells.isEmpty()) {
-        // only add non empty ships
-        remainingShips.put(ship.getType(), remainingCells);
-      }
-    }
-    return remainingShips;
-  }
-
-  private boolean isPlayersTurn(GameUpdate game, int player) {
-    return player != playerFromStatus(game.getStatus());
-  }
-
-  private static boolean isGameOver(GameUpdate game) {
-    return game.getStatus() == GameStatus.PLAYER1_WIN || game.getStatus() == GameStatus.PLAYER2_WIN;
-  }
-
-  private static Set<Integer> shotsTaken(List<Shot> shots) {
-    if (shots == null) {
-      return Collections.emptySet();
-    }
-    Set<Integer> set = new HashSet<>(shots.size());
-    for (Shot shot : shots) {
-      set.add((int) shot.getCellId());
-    }
-    return set;
-  }
-
-  private static int playerFromStatus(GameStatus status) {
-    switch (status) {
-      case UNKNOWN:
-        throw new IllegalStateException("what a terrible failure");
-      case PLAYER1_TURN:
-        return 0;
-      case PLAYER2_TURN:
-        return 1;
-      case PLAYER1_WIN:
-      case PLAYER2_WIN:
-      case UNRECOGNIZED:
-      default:
-        throw new IllegalStateException("Finished game");
-    }
   }
 }
