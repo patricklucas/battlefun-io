@@ -10,7 +10,17 @@ pub struct NewGameRequest {
 }
 
 #[derive(Serialize, Debug)]
-pub struct NewGameResponse {}
+pub struct NewGameResponse {
+    success: bool,
+}
+
+impl NewGameResponse {
+    pub fn success() -> Self {
+        Self {
+            success: true,
+        }
+    }
+}
 
 pub async fn new_game_handler(
     request: NewGameRequest,
@@ -26,5 +36,5 @@ pub async fn new_game_handler(
 
     battlefun.matchmaker.play(player_id, request.ships).await;
 
-    Ok(json(&NewGameResponse {}))
+    Ok(json(&NewGameResponse::success()))
 }
