@@ -4,7 +4,6 @@ import { Props as Ship } from "./Ships.styled";
 export const GridContainer = styled.section`
   position: relative;
   padding-bottom: 100%;
-  margin-bottom: 20px;
 `;
 
 export const Grid = styled.div`

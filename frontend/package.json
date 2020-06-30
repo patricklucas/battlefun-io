@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@elastic/datemath": "^5.0.3",
+    "@elastic/eui": "^26.1.0",
+    "moment": "^2.27.0",
     "range-inclusive": "^1.0.2",
+    "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-use-localstorage": "^3.4.3",
     "react-use-websocket": "^2.0.3",
-    "react": "^16.13.1",
     "styled-components": "^5.1.1"
   },
   "scripts": {
@@ -37,8 +40,8 @@
     "@types/http-proxy-middleware": "^0.19.3",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react-dom": "^16.9.0",
     "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "@types/styled-components": "^5.1.0",
     "http-proxy-middleware": "^1.0.4",
     "prettier": "^2.0.5",

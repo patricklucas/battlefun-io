@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./reset.css";
 import "./index.css";
+import "../node_modules/@elastic/eui/dist/eui_theme_amsterdam_light.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { UserProvider } from "./UserProvider";
