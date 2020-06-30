@@ -62,7 +62,7 @@ async fn main() {
         .and(with_client_state(client_state.clone()))
         .and_then(handler::publish_handler);
 
-    let ws_route = warp::path!("api" / "ws")
+    let ws_route = warp::path("ws")
         .and(warp::ws())
         .and(warp::path::param())
         .and(with_client_state(client_state.clone()))
