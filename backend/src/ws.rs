@@ -28,7 +28,7 @@ pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: 
     }));
 
     player.sender = Some(client_sender);
-    client_state.write().await.players.insert(player.id, player);
+    client_state.write().await.players.insert(player_id, player.clone());
 
     println!("{} connected", player_id);
 
@@ -47,7 +47,8 @@ pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: 
         client_msg(&player_id, msg, &client_state).await;
     }
 
-    client_state.write().await.players.remove(&player_id);
+    player.sender = None;
+    client_state.write().await.players.insert(player_id, player.clone());
     println!("{} disconnected", player_id);
 }
 
