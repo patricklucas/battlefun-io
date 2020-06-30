@@ -9,8 +9,13 @@ option java_multiple_files = true;
 // Common message definitions
 // -------------------------------------------------------------------------------------------------------------------
 
+message Ship { 
+  string type = 1;
+  repeated int64 cells = 2;
+}
+
 message ShipPlacement {
-  map<string, int64> ships = 1;
+  repeated Ship ships = 1;
 }
 
 enum GameStatus {
