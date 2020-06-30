@@ -13,6 +13,14 @@ const connectionStatus = {
   [ReadyState.UNINSTANTIATED]: "Uninstantiated",
 };
 
+const myShips = {
+  freighter: [3, 4, 5, 6, 7],
+  starship: [12, 13, 14, 15],
+  heavyCruiser: [23, 33, 43],
+  lightCruiser: [77, 78, 79],
+  drydock: [55, 65],
+};
+
 export function Game(props: Props) {
   const { player_id, token } = useContext(User);
   const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${player_id}`);
@@ -35,7 +43,7 @@ export function Game(props: Props) {
   return (
     <div className="App">
       <h2>Websocket: {connectionStatus[readyState]}</h2>
-      <GridComponent sendMessage={sendMessage} />
+      <GridComponent sendMessage={sendMessage} myShips={myShips} />
     </div>
   );
 }
