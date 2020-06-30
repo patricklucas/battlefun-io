@@ -1,6 +1,6 @@
 use crate::{ClientState, Player, PlayerId, PlayerToken};
 use futures::{FutureExt, StreamExt};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::from_str;
 use tokio::sync::mpsc;
 use warp::ws::{Message, WebSocket};
@@ -16,6 +16,28 @@ pub struct AuthenticationRequest {
     token: PlayerToken,
 }
 
+#[derive(Serialize, Debug)]
+pub struct AuthenticationResponse {
+    r#type: String,
+    success: bool,
+}
+
+impl AuthenticationResponse {
+    pub fn success() -> AuthenticationResponse {
+        AuthenticationResponse {
+            r#type: "authentication_response".to_string(),
+            success: true,
+        }
+    }
+
+    pub fn failure() -> AuthenticationResponse {
+        AuthenticationResponse {
+            r#type: "authentication_response".to_string(),
+            success: false,
+        }
+    }
+}
+
 pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: ClientState) {
     let player_id = player.id;
     let (client_ws_sender, mut client_ws_rcv) = ws.split();
@@ -28,7 +50,11 @@ pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: 
     }));
 
     player.sender = Some(client_sender);
-    client_state.write().await.players.insert(player_id, player.clone());
+    client_state
+        .write()
+        .await
+        .players
+        .insert(player_id, player.clone());
 
     println!("{} connected", player_id);
 
@@ -48,7 +74,11 @@ pub async fn client_connection(ws: WebSocket, mut player: Player, client_state: 
     }
 
     player.sender = None;
-    client_state.write().await.players.insert(player_id, player.clone());
+    client_state
+        .write()
+        .await
+        .players
+        .insert(player_id, player.clone());
     println!("{} disconnected", player_id);
 }
 
@@ -80,7 +110,17 @@ async fn authenticate(id: &PlayerId, token: PlayerToken, client_state: &ClientSt
     match state.players.get_mut(id) {
         Some(p) => {
             if p.token == token {
-                p.authenticated = true
+                p.authenticated = true;
+
+                if let Some(sender) = &p.sender {
+                    let json = serde_json::to_string(&AuthenticationResponse::success()).unwrap();
+                    let _ = sender.send(Ok(Message::text(json)));
+                }
+            } else {
+                if let Some(sender) = &p.sender {
+                    let json = serde_json::to_string(&AuthenticationResponse::failure()).unwrap();
+                    let _ = sender.send(Ok(Message::text(json)));
+                }
             }
         }
         None => return,
