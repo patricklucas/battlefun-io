@@ -1,22 +1,24 @@
 use super::{gamemaster::GameMaster, PlayerId, ShipPlacement};
+use std::sync::Arc;
+use tokio::sync::RwLock;
 
 #[derive(Debug, Clone)]
 pub struct Matchmaker {
-    gamemaster: GameMaster,
+    gamemaster: Arc<RwLock<GameMaster>>,
     waiting_player: Option<WaitingPlayer>,
 }
 
 impl Matchmaker {
-    pub fn new() -> Self {
+    pub fn new(gamemaster: Arc<RwLock<GameMaster>>) -> Self {
         Self {
-            gamemaster: GameMaster {},
+            gamemaster,
             waiting_player: None,
         }
     }
 
-    pub fn play(&mut self, new_player_id: PlayerId, new_player_ships: ShipPlacement) {
+    pub async fn play(&mut self, new_player_id: PlayerId, new_player_ships: ShipPlacement) {
         if let Some(waiting_player) = self.waiting_player.take() {
-            self.gamemaster.start_game(
+            self.gamemaster.write().await.start_game(
                 waiting_player.id,
                 waiting_player.ships,
                 new_player_id,

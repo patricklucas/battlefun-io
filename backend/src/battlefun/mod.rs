@@ -9,6 +9,7 @@ pub use battlefun::BattleFun;
 pub mod gamemaster;
 pub mod matchmaking;
 
+pub type GameId = Uuid;
 pub type PlayerId = Uuid;
 pub type PlayerToken = Uuid;
 pub type ShipPlacement = HashMap<String, Vec<u8>>;

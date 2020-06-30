@@ -24,7 +24,7 @@ pub async fn new_game_handler(
         None => return Err(reject::not_found()),
     };
 
-    battlefun.matchmaker.play(player_id, request.ships);
+    battlefun.matchmaker.play(player_id, request.ships).await;
 
     Ok(json(&NewGameResponse {}))
 }
