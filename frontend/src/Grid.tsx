@@ -34,6 +34,8 @@ const board = {
 interface Props {
   sendMessage: SendMessage;
   gameState: GameState | null;
+  showYourBoard: boolean;
+  showEnemyBoard: boolean;
 }
 
 const stopClick = (e: MouseEvent) => {
@@ -42,7 +44,7 @@ const stopClick = (e: MouseEvent) => {
 };
 
 export function GridComponent(props: Props) {
-  const { your_shots = [] } = props.gameState ?? {};
+  const { your_shots = [], opponent_shots = [], your_ships = {} } = props.gameState ?? {};
 
   const [hoveredCell, setHoveredCell] = useState(-1);
 
@@ -101,28 +103,54 @@ export function GridComponent(props: Props) {
 
           {props.gameState && (
             <>
-              {props.gameState.your_turn ? (
-                your_shots.map(({ cell, hit }) => {
-                  const style = hit
-                    ? ({
-                        "--fa-primary-color": "red",
-                        "--fa-secondary-color": "red",
-                      } as React.CSSProperties)
-                    : ({
-                        "--fa-primary-color": "blue",
-                        "--fa-secondary-color": "blue",
-                      } as React.CSSProperties);
+              {(props.gameState.your_turn || props.showYourBoard) && !props.showEnemyBoard && (
+                <>
+                  {props.gameState.your_shots.map(({ cell, hit }) => {
+                    const style = hit
+                      ? ({
+                          "--fa-primary-color": "crimson",
+                          "--fa-secondary-color": "red",
+                        } as React.CSSProperties)
+                      : ({
+                          "--fa-primary-color": "dodgerblue",
+                          "--fa-secondary-color": "dodgerblue",
+                        } as React.CSSProperties);
 
-                  const iconName = hit ? "fa-crosshairs" : "fa-water";
+                    const iconName = hit ? "fa-crosshairs" : "fa-water";
 
-                  return (
-                    <Icon {...getGridProperties([cell])} onClick={stopClick}>
-                      <i className={`fad ${iconName} fa-2x`} style={style}></i>
-                    </Icon>
-                  );
-                })
-              ) : (
-                <Ships ships={game_state.your_ships} />
+                    return (
+                      <Icon {...getGridProperties([cell])} onClick={stopClick}>
+                        <i className={`fad ${iconName} fa-2x`} style={style}></i>
+                      </Icon>
+                    );
+                  })}
+                </>
+              )}
+
+              {(!props.gameState.your_turn || props.showEnemyBoard) && !props.showYourBoard && (
+                <>
+                  {opponent_shots.map((cell) => {
+                    const hit = Object.values(your_ships).flat().includes(cell);
+                    const style = hit
+                      ? ({
+                          "--fa-primary-color": "crimson",
+                          "--fa-secondary-color": "red",
+                        } as React.CSSProperties)
+                      : ({
+                          "--fa-primary-color": "dodgerblue",
+                          "--fa-secondary-color": "dodgerblue",
+                        } as React.CSSProperties);
+
+                    const iconName = hit ? "fa-crosshairs" : "fa-water";
+
+                    return (
+                      <Icon {...getGridProperties([cell])} onClick={stopClick}>
+                        <i className={`fad ${iconName} fa-2x`} style={style}></i>
+                      </Icon>
+                    );
+                  })}
+                  <Ships ships={game_state.your_ships} />
+                </>
               )}
             </>
           )}

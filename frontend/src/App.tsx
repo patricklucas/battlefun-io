@@ -44,6 +44,8 @@ const Footer = styled(EuiHeader)`
   border-top: 1px solid #cdd3df;
   border-bottom: 0;
   box-shadow: none;
+  padding: 8px 0 16px;
+  height: auto;
 `;
 
 const icons: {
