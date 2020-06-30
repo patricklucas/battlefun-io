@@ -20,7 +20,7 @@ export function GridComponent(props: Props) {
 
   const sendCellClick = useCallback(
     (index: number) => () => {
-      fetch("/api/publish", {
+      fetch("http://localhost:8000/api/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: "cell click: " + index }),

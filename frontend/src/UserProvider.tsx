@@ -14,6 +14,7 @@ const defaultState = {
   player_id: "",
   registerUser: (e: FormEvent) => {},
   setName: (name: string) => {},
+  logout: () => {},
 };
 
 const makeBody = (user: User): string => {
@@ -27,15 +28,15 @@ const makeBody = (user: User): string => {
 export const User = React.createContext(defaultState);
 
 export const UserProvider: FC = (props) => {
-  const [name, setName] = useLocalStorage("user", "");
-  const [token, setToken] = useLocalStorage("token", "");
-  const [player_id, setPlayerId] = useLocalStorage("player_id", "");
+  const [name, setName] = useLocalStorage("user", defaultState.name);
+  const [token, setToken] = useLocalStorage("token", defaultState.token);
+  const [player_id, setPlayerId] = useLocalStorage("player_id", defaultState.player_id);
 
   const registerUser = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
       const makeRequest = async () => {
-        const response = await fetch("/api/register", {
+        const response = await fetch("http://localhost:8000/api/register", {
           method: "POST",
           body: makeBody({ name, token, player_id }),
           headers: { "Content-Type": "application/json" },
@@ -59,5 +60,15 @@ export const UserProvider: FC = (props) => {
     [name, token, player_id, setName, setPlayerId, setToken]
   );
 
-  return <User.Provider value={{ name, token, player_id, registerUser, setName }}>{props.children}</User.Provider>;
+  const logout = useCallback(() => {
+    ReactDOM.unstable_batchedUpdates(() => {
+      setName(defaultState.name);
+      setToken(defaultState.token);
+      setPlayerId(defaultState.player_id);
+    });
+  }, []);
+
+  return (
+    <User.Provider value={{ name, token, player_id, registerUser, setName, logout }}>{props.children}</User.Provider>
+  );
 };

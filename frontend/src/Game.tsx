@@ -22,7 +22,7 @@ const myShips = {
 };
 
 export function Game(props: Props) {
-  const { player_id, token } = useContext(User);
+  const { player_id, token, logout } = useContext(User);
   const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${player_id}`);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -44,6 +44,7 @@ export function Game(props: Props) {
     <div className="App">
       <h2>Websocket: {connectionStatus[readyState]}</h2>
       <GridComponent sendMessage={sendMessage} myShips={myShips} />
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
