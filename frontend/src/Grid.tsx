@@ -33,7 +33,6 @@ const board = {
 
 interface Props {
   sendMessage: SendMessage;
-  myShips: { [key: string]: number[] };
   gameState: GameState | null;
 }
 

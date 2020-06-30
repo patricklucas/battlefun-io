@@ -1,8 +1,9 @@
-import React, { useRef, useMemo, useState, useCallback, useContext, useEffect } from "react";
+import React, { useRef, useMemo, useState, useContext, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { GridComponent, game_state } from "./Grid";
 import { User } from "./UserProvider";
 import { mergeDeep } from "./utils/mergeDeep";
+import { EuiPanel } from "@elastic/eui";
 
 export interface GameState {
   current_state: "IN_PROGRESS" | "WIN" | "LOSS";
@@ -17,15 +18,9 @@ export interface GameState {
   your_turn: boolean;
 }
 
-interface Props {}
-
-const connectionStatus = {
-  [ReadyState.CONNECTING]: "Connecting",
-  [ReadyState.OPEN]: "Open",
-  [ReadyState.CLOSING]: "Closing",
-  [ReadyState.CLOSED]: "Closed",
-  [ReadyState.UNINSTANTIATED]: "Uninstantiated",
-};
+interface Props {
+  setConnection: React.Dispatch<React.SetStateAction<ReadyState>>;
+}
 
 const myShips = {
   freighter: [3, 4, 5, 6, 7],
@@ -36,7 +31,8 @@ const myShips = {
 };
 
 export function Game(props: Props) {
-  const { player_id, token, logout } = useContext(User);
+  const { setConnection } = props;
+  const { player_id, token } = useContext(User);
   const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${player_id}`);
   const [authenticated, setAuthenticated] = useState(false);
   const [gameState, setGameState] = useState<GameState | null>(game_state);
@@ -49,7 +45,9 @@ export function Game(props: Props) {
     if (readyState === 1 && !authenticated) {
       sendMessage(JSON.stringify({ type: "authentication", token }));
     }
-  }, [readyState, token, authenticated, sendMessage]);
+
+    setConnection(readyState);
+  }, [readyState, token, authenticated, sendMessage, setConnection]);
 
   useEffect(() => {
     const data = JSON.parse(lastMessage?.data || "{}");
@@ -68,10 +66,10 @@ export function Game(props: Props) {
   }, [lastMessage]);
 
   return (
-    <div className="App">
-      <h2>Websocket: {connectionStatus[readyState]}</h2>
-      <GridComponent sendMessage={sendMessage} myShips={myShips} gameState={gameState} />
-      <button onClick={logout}>Logout</button>
-    </div>
+    <>
+      <EuiPanel paddingSize="l">
+        <GridComponent sendMessage={sendMessage} gameState={gameState} />
+      </EuiPanel>
+    </>
   );
 }
