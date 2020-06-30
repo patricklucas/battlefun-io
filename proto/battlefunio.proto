@@ -57,11 +57,13 @@ message ToGameFn {
     string player_id = 2;
   }
 
+  string game_id = 1;
+
   oneof msg {
-    CreateGame create_game = 1;
-    GetGameStatus get_game_status = 2;
-    Turn turn = 3;
-    Resign resign = 4;
+    CreateGame create_game = 2;
+    GetGameStatus get_game_status = 3;
+    Turn turn = 4;
+    Resign resign = 5;
   }
 }
 
@@ -92,9 +94,10 @@ message FromGameFn {
     repeated Shot player2_shots = 8;
   }
 
+  string game_id = 1;
 
   oneof response {
-    GameUpdate game_update = 1;
-    Failure failure = 2;
+    GameUpdate game_update = 2;
+    Failure failure = 3;
   }
 }
