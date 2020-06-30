@@ -9,7 +9,7 @@ mod handler;
 mod ws;
 
 mod battlefun;
-use battlefun::{BattleFun, PlayerId, PlayerToken};
+use battlefun::{BattleFun, PlayerToken};
 
 mod proto {
     include!(concat!(env!("OUT_DIR"), "/io.battlefun.rs"));
@@ -94,7 +94,5 @@ fn with_token() -> impl Filter<Extract = (PlayerToken,), Error = Rejection> + Co
             let (_, rest) = value.split_at("Bearer ".len());
             rest.to_string()
         })
-        .map(|token: String| -> PlayerToken {
-            PlayerToken::parse_str(&token).unwrap()
-        })
+        .map(|token: String| -> PlayerToken { PlayerToken::parse_str(&token).unwrap() })
 }

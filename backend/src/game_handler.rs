@@ -11,10 +11,19 @@ pub struct NewGameRequest {
 
 #[derive(Serialize, Debug)]
 pub struct NewGameResponse {
+    success: bool,
+}
+
+impl NewGameResponse {
+    pub fn success() -> Self {
+        Self {
+            success: true,
+        }
+    }
 }
 
 pub async fn new_game_handler(
-    _body: NewGameRequest, // TODO: use
+    request: NewGameRequest,
     token: PlayerId,
     battlefun_instance: BattleFunInstance,
 ) -> Result<impl Reply> {
@@ -25,7 +34,7 @@ pub async fn new_game_handler(
         None => return Err(reject::not_found()),
     };
 
-    battlefun.matchmaker.play(player_id);
+    battlefun.matchmaker.play(player_id, request.ships).await;
 
-    Ok(json(&NewGameResponse{}))
+    Ok(json(&NewGameResponse::success()))
 }
