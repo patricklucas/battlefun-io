@@ -4,195 +4,204 @@
 package io.battlefun.generated;
 
 public final class Battlefunio {
-  private Battlefunio() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ShipPlacement_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ShipPlacement_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ShipPlacement_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ShipPlacement_ShipsEntry_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_Shot_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_Shot_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_Shot_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ToGameFn_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ToGameFn_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ToGameFn_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ToGameFn_CreateGame_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ToGameFn_CreateGame_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ToGameFn_CreateGame_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ToGameFn_GetGameStatus_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ToGameFn_GetGameStatus_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ToGameFn_GetGameStatus_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ToGameFn_Turn_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ToGameFn_Turn_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ToGameFn_Turn_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_ToGameFn_Resign_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_ToGameFn_Resign_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_ToGameFn_Resign_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_FromGameFn_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_FromGameFn_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_FromGameFn_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_FromGameFn_Failure_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_FromGameFn_Failure_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_FromGameFn_Failure_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_io_battlefun_FromGameFn_GameUpdate_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_io_battlefun_FromGameFn_GameUpdate_descriptor;
+  static final com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_io_battlefun_FromGameFn_GameUpdate_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.FileDescriptor descriptor;
 
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021battlefunio.proto\022\014io.battlefun\"t\n\rShi" +
-      "pPlacement\0225\n\005ships\030\001 \003(\0132&.io.battlefun" +
-      ".ShipPlacement.ShipsEntry\032,\n\nShipsEntry\022" +
-      "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\003:\0028\001\"%\n\004Shot\022" +
-      "\017\n\007cell_id\030\001 \001(\003\022\014\n\004shot\030\002 \001(\010\"\275\004\n\010ToGam" +
-      "eFn\022\017\n\007game_id\030\001 \001(\t\0228\n\013create_game\030\002 \001(" +
-      "\0132!.io.battlefun.ToGameFn.CreateGameH\000\022?" +
-      "\n\017get_game_status\030\003 \001(\0132$.io.battlefun.T" +
-      "oGameFn.GetGameStatusH\000\022+\n\004turn\030\004 \001(\0132\033." +
-      "io.battlefun.ToGameFn.TurnH\000\022/\n\006resign\030\005" +
-      " \001(\0132\035.io.battlefun.ToGameFn.ResignH\000\032\265\001" +
-      "\n\nCreateGame\022\017\n\007game_id\030\001 \001(\t\022\022\n\nplayer1" +
-      "_id\030\002 \001(\t\022\022\n\nplayer2_id\030\003 \001(\t\0226\n\021player1" +
-      "_placement\030\004 \001(\0132\033.io.battlefun.ShipPlac" +
-      "ement\0226\n\021player2_placement\030\005 \001(\0132\033.io.ba" +
-      "ttlefun.ShipPlacement\032 \n\rGetGameStatus\022\017" +
-      "\n\007game_id\030\001 \001(\t\0328\n\004Turn\022\017\n\007game_id\030\001 \001(\t" +
-      "\022\021\n\tplayer_id\030\002 \001(\t\022\014\n\004shot\030\003 \001(\003\032,\n\006Res" +
-      "ign\022\017\n\007game_id\030\001 \001(\t\022\021\n\tplayer_id\030\002 \001(\tB" +
-      "\005\n\003msg\"\210\004\n\nFromGameFn\022\017\n\007game_id\030\001 \001(\t\022:" +
-      "\n\013game_update\030\002 \001(\0132#.io.battlefun.FromG" +
-      "ameFn.GameUpdateH\000\0223\n\007failure\030\003 \001(\0132 .io" +
-      ".battlefun.FromGameFn.FailureH\000\0324\n\007Failu" +
-      "re\022\014\n\004code\030\001 \001(\003\022\033\n\023failure_description\030" +
-      "\002 \001(\t\032\265\002\n\nGameUpdate\022\017\n\007game_id\030\001 \001(\t\022\022\n" +
-      "\nplayer1_id\030\002 \001(\t\022\022\n\nplayer2_id\030\003 \001(\t\0226\n" +
-      "\021player1_placement\030\004 \001(\0132\033.io.battlefun." +
-      "ShipPlacement\0226\n\021player2_placement\030\005 \001(\013" +
-      "2\033.io.battlefun.ShipPlacement\022(\n\006status\030" +
-      "\006 \001(\0162\030.io.battlefun.GameStatus\022)\n\rplaye" +
-      "r1_shots\030\007 \003(\0132\022.io.battlefun.Shot\022)\n\rpl" +
-      "ayer2_shots\030\010 \003(\0132\022.io.battlefun.ShotB\n\n" +
-      "\010response*_\n\nGameStatus\022\013\n\007UNKNOWN\020\000\022\020\n\014" +
-      "PLAYER1_TURN\020\001\022\020\n\014PLAYER2_TURN\020\002\022\017\n\013PLAY" +
-      "ER1_WIN\020\003\022\017\n\013PLAYER2_WIN\020\004B\032\n\026io.battlef" +
-      "un.generatedP\001b\006proto3"
+      "\n\021battlefunio.proto\022\014io.battlefun\"t\n\rShi"
+          + "pPlacement\0225\n\005ships\030\001 \003(\0132&.io.battlefun"
+          + ".ShipPlacement.ShipsEntry\032,\n\nShipsEntry\022"
+          + "\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\003:\0028\001\"%\n\004Shot\022"
+          + "\017\n\007cell_id\030\001 \001(\003\022\014\n\004shot\030\002 \001(\010\"\275\004\n\010ToGam"
+          + "eFn\022\017\n\007game_id\030\001 \001(\t\0228\n\013create_game\030\002 \001("
+          + "\0132!.io.battlefun.ToGameFn.CreateGameH\000\022?"
+          + "\n\017get_game_status\030\003 \001(\0132$.io.battlefun.T"
+          + "oGameFn.GetGameStatusH\000\022+\n\004turn\030\004 \001(\0132\033."
+          + "io.battlefun.ToGameFn.TurnH\000\022/\n\006resign\030\005"
+          + " \001(\0132\035.io.battlefun.ToGameFn.ResignH\000\032\265\001"
+          + "\n\nCreateGame\022\017\n\007game_id\030\001 \001(\t\022\022\n\nplayer1"
+          + "_id\030\002 \001(\t\022\022\n\nplayer2_id\030\003 \001(\t\0226\n\021player1"
+          + "_placement\030\004 \001(\0132\033.io.battlefun.ShipPlac"
+          + "ement\0226\n\021player2_placement\030\005 \001(\0132\033.io.ba"
+          + "ttlefun.ShipPlacement\032 \n\rGetGameStatus\022\017"
+          + "\n\007game_id\030\001 \001(\t\0328\n\004Turn\022\017\n\007game_id\030\001 \001(\t"
+          + "\022\021\n\tplayer_id\030\002 \001(\t\022\014\n\004shot\030\003 \001(\003\032,\n\006Res"
+          + "ign\022\017\n\007game_id\030\001 \001(\t\022\021\n\tplayer_id\030\002 \001(\tB"
+          + "\005\n\003msg\"\210\004\n\nFromGameFn\022\017\n\007game_id\030\001 \001(\t\022:"
+          + "\n\013game_update\030\002 \001(\0132#.io.battlefun.FromG"
+          + "ameFn.GameUpdateH\000\0223\n\007failure\030\003 \001(\0132 .io"
+          + ".battlefun.FromGameFn.FailureH\000\0324\n\007Failu"
+          + "re\022\014\n\004code\030\001 \001(\003\022\033\n\023failure_description\030"
+          + "\002 \001(\t\032\265\002\n\nGameUpdate\022\017\n\007game_id\030\001 \001(\t\022\022\n"
+          + "\nplayer1_id\030\002 \001(\t\022\022\n\nplayer2_id\030\003 \001(\t\0226\n"
+          + "\021player1_placement\030\004 \001(\0132\033.io.battlefun."
+          + "ShipPlacement\0226\n\021player2_placement\030\005 \001(\013"
+          + "2\033.io.battlefun.ShipPlacement\022(\n\006status\030"
+          + "\006 \001(\0162\030.io.battlefun.GameStatus\022)\n\rplaye"
+          + "r1_shots\030\007 \003(\0132\022.io.battlefun.Shot\022)\n\rpl"
+          + "ayer2_shots\030\010 \003(\0132\022.io.battlefun.ShotB\n\n"
+          + "\010response*_\n\nGameStatus\022\013\n\007UNKNOWN\020\000\022\020\n\014"
+          + "PLAYER1_TURN\020\001\022\020\n\014PLAYER2_TURN\020\002\022\017\n\013PLAY"
+          + "ER1_WIN\020\003\022\017\n\013PLAYER2_WIN\020\004B\032\n\026io.battlef"
+          + "un.generatedP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+        new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
           public com.google.protobuf.ExtensionRegistry assignDescriptors(
               com.google.protobuf.Descriptors.FileDescriptor root) {
             descriptor = root;
             return null;
           }
         };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+    com.google.protobuf.Descriptors.FileDescriptor.internalBuildGeneratedFileFrom(
+        descriptorData, new com.google.protobuf.Descriptors.FileDescriptor[] {}, assigner);
     internal_static_io_battlefun_ShipPlacement_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_io_battlefun_ShipPlacement_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ShipPlacement_descriptor,
-        new java.lang.String[] { "Ships", });
+        getDescriptor().getMessageTypes().get(0);
+    internal_static_io_battlefun_ShipPlacement_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ShipPlacement_descriptor,
+            new java.lang.String[] {
+              "Ships",
+            });
     internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor =
-      internal_static_io_battlefun_ShipPlacement_descriptor.getNestedTypes().get(0);
-    internal_static_io_battlefun_ShipPlacement_ShipsEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
-    internal_static_io_battlefun_Shot_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_io_battlefun_Shot_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_Shot_descriptor,
-        new java.lang.String[] { "CellId", "Shot", });
-    internal_static_io_battlefun_ToGameFn_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_io_battlefun_ToGameFn_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ToGameFn_descriptor,
-        new java.lang.String[] { "GameId", "CreateGame", "GetGameStatus", "Turn", "Resign", "Msg", });
+        internal_static_io_battlefun_ShipPlacement_descriptor.getNestedTypes().get(0);
+    internal_static_io_battlefun_ShipPlacement_ShipsEntry_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ShipPlacement_ShipsEntry_descriptor,
+            new java.lang.String[] {
+              "Key", "Value",
+            });
+    internal_static_io_battlefun_Shot_descriptor = getDescriptor().getMessageTypes().get(1);
+    internal_static_io_battlefun_Shot_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_Shot_descriptor,
+            new java.lang.String[] {
+              "CellId", "Shot",
+            });
+    internal_static_io_battlefun_ToGameFn_descriptor = getDescriptor().getMessageTypes().get(2);
+    internal_static_io_battlefun_ToGameFn_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ToGameFn_descriptor,
+            new java.lang.String[] {
+              "GameId", "CreateGame", "GetGameStatus", "Turn", "Resign", "Msg",
+            });
     internal_static_io_battlefun_ToGameFn_CreateGame_descriptor =
-      internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(0);
-    internal_static_io_battlefun_ToGameFn_CreateGame_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ToGameFn_CreateGame_descriptor,
-        new java.lang.String[] { "GameId", "Player1Id", "Player2Id", "Player1Placement", "Player2Placement", });
+        internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(0);
+    internal_static_io_battlefun_ToGameFn_CreateGame_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ToGameFn_CreateGame_descriptor,
+            new java.lang.String[] {
+              "GameId", "Player1Id", "Player2Id", "Player1Placement", "Player2Placement",
+            });
     internal_static_io_battlefun_ToGameFn_GetGameStatus_descriptor =
-      internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(1);
-    internal_static_io_battlefun_ToGameFn_GetGameStatus_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ToGameFn_GetGameStatus_descriptor,
-        new java.lang.String[] { "GameId", });
+        internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(1);
+    internal_static_io_battlefun_ToGameFn_GetGameStatus_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ToGameFn_GetGameStatus_descriptor,
+            new java.lang.String[] {
+              "GameId",
+            });
     internal_static_io_battlefun_ToGameFn_Turn_descriptor =
-      internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(2);
-    internal_static_io_battlefun_ToGameFn_Turn_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ToGameFn_Turn_descriptor,
-        new java.lang.String[] { "GameId", "PlayerId", "Shot", });
+        internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(2);
+    internal_static_io_battlefun_ToGameFn_Turn_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ToGameFn_Turn_descriptor,
+            new java.lang.String[] {
+              "GameId", "PlayerId", "Shot",
+            });
     internal_static_io_battlefun_ToGameFn_Resign_descriptor =
-      internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(3);
-    internal_static_io_battlefun_ToGameFn_Resign_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_ToGameFn_Resign_descriptor,
-        new java.lang.String[] { "GameId", "PlayerId", });
-    internal_static_io_battlefun_FromGameFn_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_io_battlefun_FromGameFn_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_FromGameFn_descriptor,
-        new java.lang.String[] { "GameId", "GameUpdate", "Failure", "Response", });
+        internal_static_io_battlefun_ToGameFn_descriptor.getNestedTypes().get(3);
+    internal_static_io_battlefun_ToGameFn_Resign_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_ToGameFn_Resign_descriptor,
+            new java.lang.String[] {
+              "GameId", "PlayerId",
+            });
+    internal_static_io_battlefun_FromGameFn_descriptor = getDescriptor().getMessageTypes().get(3);
+    internal_static_io_battlefun_FromGameFn_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_FromGameFn_descriptor,
+            new java.lang.String[] {
+              "GameId", "GameUpdate", "Failure", "Response",
+            });
     internal_static_io_battlefun_FromGameFn_Failure_descriptor =
-      internal_static_io_battlefun_FromGameFn_descriptor.getNestedTypes().get(0);
-    internal_static_io_battlefun_FromGameFn_Failure_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_FromGameFn_Failure_descriptor,
-        new java.lang.String[] { "Code", "FailureDescription", });
+        internal_static_io_battlefun_FromGameFn_descriptor.getNestedTypes().get(0);
+    internal_static_io_battlefun_FromGameFn_Failure_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_FromGameFn_Failure_descriptor,
+            new java.lang.String[] {
+              "Code", "FailureDescription",
+            });
     internal_static_io_battlefun_FromGameFn_GameUpdate_descriptor =
-      internal_static_io_battlefun_FromGameFn_descriptor.getNestedTypes().get(1);
-    internal_static_io_battlefun_FromGameFn_GameUpdate_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_io_battlefun_FromGameFn_GameUpdate_descriptor,
-        new java.lang.String[] { "GameId", "Player1Id", "Player2Id", "Player1Placement", "Player2Placement", "Status", "Player1Shots", "Player2Shots", });
+        internal_static_io_battlefun_FromGameFn_descriptor.getNestedTypes().get(1);
+    internal_static_io_battlefun_FromGameFn_GameUpdate_fieldAccessorTable =
+        new com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+            internal_static_io_battlefun_FromGameFn_GameUpdate_descriptor,
+            new java.lang.String[] {
+              "GameId",
+              "Player1Id",
+              "Player2Id",
+              "Player1Placement",
+              "Player2Placement",
+              "Status",
+              "Player1Shots",
+              "Player2Shots",
+            });
+  }
+  private Battlefunio() {}
+
+  public static void registerAllExtensions(com.google.protobuf.ExtensionRegistryLite registry) {}
+
+  public static void registerAllExtensions(com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions((com.google.protobuf.ExtensionRegistryLite) registry);
+  }
+
+  public static com.google.protobuf.Descriptors.FileDescriptor getDescriptor() {
+    return descriptor;
   }
 
   // @@protoc_insertion_point(outer_class_scope)
