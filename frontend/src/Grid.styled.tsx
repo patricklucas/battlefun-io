@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { Props as Ship } from "./Ships.styled";
 
 export const GridContainer = styled.section`
   position: relative;
   padding-bottom: 100%;
+  margin-bottom: 20px;
 `;
 
 export const Grid = styled.div`
@@ -34,7 +36,7 @@ export const Board = styled.div`
 
 export const Cell = styled.div<{ highlight: boolean }>`
   overflow: hidden;
-  background-color: ${({ highlight }) => (highlight ? "whitesmoke" : "white")};
+  background-color: ${({ highlight }) => (highlight ? "lightsteelblue" : "lightblue")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,7 +48,7 @@ export const Label = styled.div`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  background-color: white;
+  background-color: antiquewhite;
 `;
 
 export const YLabels = styled.div`
@@ -67,4 +69,22 @@ export const XLabels = styled.div`
   border: 1px solid black;
   border-bottom: 0;
   background-color: gray;
+`;
+
+export const Icon = styled.div<Ship>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  grid-row-start: ${(p) => p.rowStart};
+  grid-column-start: ${(p) => p.columnStart};
+  grid-row-end: span 1;
+  grid-column-end: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .fad {
+    font-size: clamp(16px, 4vw, 32px);
+  }
 `;

@@ -33,7 +33,7 @@ const images: {
   },
 };
 
-interface Props {
+export interface Props {
   rowStart: number;
   columnStart: number;
   vertical: boolean;
@@ -56,31 +56,31 @@ const Spaceship = styled.div<Props>`
   pointer-events: none;
 `;
 
-export const Freighter = styled(Spaceship)`
+export const Carrier = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 5 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 5)};
   background-image: url(${backgroundUrl("freighter")});
 `;
 
-export const Starship = styled(Spaceship)`
+export const Battleship = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 4 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 4)};
   background-image: url(${backgroundUrl("starship")});
 `;
 
-export const HeavyCruiser = styled(Spaceship)`
+export const Destroyer = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 3 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 3)};
   background-image: url(${backgroundUrl("heavyCruiser")});
 `;
 
-export const LightCruiser = styled(Spaceship)`
+export const Submarine = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 3 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 3)};
   background-image: url(${backgroundUrl("lightCruiser")});
 `;
 
-export const Drydock = styled(Spaceship)`
+export const PatrolBoat = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 2 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 2)};
   background-image: url(${backgroundUrl("drydock")});
