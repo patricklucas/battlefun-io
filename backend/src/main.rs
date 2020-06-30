@@ -9,6 +9,10 @@ mod error;
 mod handler;
 mod ws;
 
+mod proto {
+    include!(concat!(env!("OUT_DIR"), "/battlefun_io.proto.rs"));
+}
+
 type Result<T> = std::result::Result<T, Rejection>;
 
 type ClientState = Arc<RwLock<ClientStateFoo>>;
