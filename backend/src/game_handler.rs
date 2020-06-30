@@ -1,0 +1,31 @@
+use crate::{battlefun, BattleFunInstance, Result};
+use serde::{Deserialize, Serialize};
+use warp::{reject, reply::json, Reply};
+
+use battlefun::{PlayerId, ShipPlacement};
+
+#[derive(Deserialize, Debug)]
+pub struct NewGameRequest {
+    ships: ShipPlacement,
+}
+
+#[derive(Serialize, Debug)]
+pub struct NewGameResponse {
+}
+
+pub async fn new_game_handler(
+    _body: NewGameRequest, // TODO: use
+    token: PlayerId,
+    battlefun_instance: BattleFunInstance,
+) -> Result<impl Reply> {
+    let mut battlefun = battlefun_instance.write().await;
+
+    let player_id = match battlefun.player_tokens.get(&token) {
+        Some(id) => *id,
+        None => return Err(reject::not_found()),
+    };
+
+    battlefun.matchmaker.play(player_id);
+
+    Ok(json(&NewGameResponse{}))
+}

@@ -1,4 +1,3 @@
 fn main() {
-    prost_build::compile_protos(&["../proto/test.proto"],
-                                &["../proto/"]).unwrap();
+    prost_build::compile_protos(&["../proto/battlefunio.proto"], &["../proto/"]).unwrap();
 }

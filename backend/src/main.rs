@@ -1,75 +1,57 @@
-use std::collections::HashMap;
 use std::convert::Infallible;
 use std::sync::Arc;
-use tokio::sync::{mpsc, RwLock};
-use uuid::Uuid;
-use warp::{http::Method, ws::Message, Filter, Rejection};
+use tokio::sync::RwLock;
+use warp::{http::Method, Filter, Rejection};
 
 mod error;
+mod game_handler;
 mod handler;
 mod ws;
 
+mod battlefun;
+use battlefun::{BattleFun, PlayerId, PlayerToken};
+
 mod proto {
-    include!(concat!(env!("OUT_DIR"), "/battlefun_io.proto.rs"));
+    include!(concat!(env!("OUT_DIR"), "/io.battlefun.rs"));
 }
 
 type Result<T> = std::result::Result<T, Rejection>;
-
-type ClientState = Arc<RwLock<ClientStateFoo>>;
-type PlayerId = Uuid;
-type PlayerToken = Uuid;
-
-#[derive(Debug, Clone)]
-pub struct Player {
-    pub id: PlayerId,
-    pub name: String,
-    pub token: PlayerToken,
-    pub sender: Option<mpsc::UnboundedSender<std::result::Result<Message, warp::Error>>>,
-    pub authenticated: bool,
-}
-
-#[derive(Debug, Clone)]
-pub struct ClientStateFoo {
-    pub players: HashMap<PlayerId, Player>,
-    pub player_tokens: HashMap<PlayerToken, PlayerId>,
-}
-
-impl ClientStateFoo {
-    pub fn new() -> ClientStateFoo {
-        ClientStateFoo {
-            players: HashMap::new(),
-            player_tokens: HashMap::new(),
-        }
-    }
-}
+type BattleFunInstance = Arc<RwLock<BattleFun>>;
 
 #[tokio::main]
 async fn main() {
-    let client_state: ClientState = Arc::new(RwLock::new(ClientStateFoo::new()));
+    let battlefun_instance: BattleFunInstance = Arc::new(RwLock::new(BattleFun::new()));
 
     let health_route = warp::path!("api" / "health").and_then(handler::health_handler);
 
     let register_route = warp::path!("api" / "register")
         .and(warp::post())
         .and(warp::body::json())
-        .and(with_client_state(client_state.clone()))
+        .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(handler::register_handler);
 
     let deregister_route = warp::path!("api" / "deregister")
         .and(warp::post())
         .and(warp::path::param())
-        .and(with_client_state(client_state.clone()))
+        .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(handler::deregister_handler);
+
+    let new_game_route = warp::path!("api" / "game")
+        .and(warp::post())
+        .and(warp::body::json())
+        .and(with_token())
+        .and(with_battlefun_instance(battlefun_instance.clone()))
+        .and_then(game_handler::new_game_handler);
 
     let publish = warp::path!("api" / "publish")
         .and(warp::body::json())
-        .and(with_client_state(client_state.clone()))
+        .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(handler::publish_handler);
 
     let ws_route = warp::path("ws")
         .and(warp::ws())
         .and(warp::path::param())
-        .and(with_client_state(client_state.clone()))
+        .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(handler::ws_handler);
 
     let cors = warp::cors()
@@ -80,6 +62,7 @@ async fn main() {
     let routes = health_route
         .or(register_route)
         .or(deregister_route)
+        .or(new_game_route)
         .or(ws_route)
         .or(publish)
         .with(cors)
@@ -99,8 +82,19 @@ async fn shutdown_signal() {
     eprintln!("Shutting down...");
 }
 
-fn with_client_state(
-    client_state: ClientState,
-) -> impl Filter<Extract = (ClientState,), Error = Infallible> + Clone {
-    warp::any().map(move || client_state.clone())
+fn with_battlefun_instance(
+    battlefun_instance: BattleFunInstance,
+) -> impl Filter<Extract = (BattleFunInstance,), Error = Infallible> + Clone {
+    warp::any().map(move || battlefun_instance.clone())
+}
+
+fn with_token() -> impl Filter<Extract = (PlayerToken,), Error = Rejection> + Copy {
+    warp::header::<String>("authorization")
+        .map(|value: String| -> String {
+            let (_, rest) = value.split_at("Bearer ".len());
+            rest.to_string()
+        })
+        .map(|token: String| -> PlayerToken {
+            PlayerToken::parse_str(&token).unwrap()
+        })
 }
