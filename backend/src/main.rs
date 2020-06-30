@@ -12,7 +12,7 @@ mod battlefun;
 use battlefun::{PlayerId, PlayerToken};
 
 mod proto {
-    include!(concat!(env!("OUT_DIR"), "/battlefun_io.proto.rs"));
+    include!(concat!(env!("OUT_DIR"), "/io.battlefun.rs"));
 }
 
 type Result<T> = std::result::Result<T, Rejection>;
