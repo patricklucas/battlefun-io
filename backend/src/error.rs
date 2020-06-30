@@ -1,10 +1,21 @@
+use crate::battlefun::GameId;
 use serde::Serialize;
 use std::convert::Infallible;
 use thiserror::Error;
 use warp::{http::StatusCode, Rejection, Reply};
 
 #[derive(Error, Debug)]
-pub enum Error {}
+pub enum Error {
+    #[error("unknown game: {0}")]
+    NoSuchGame(GameId),
+
+    #[error("invalid argument: {0}")]
+    InvalidArgument(String),
+
+    #[error("unknown error")]
+    #[allow(dead_code)]
+    Other,
+}
 
 impl warp::reject::Reject for Error {}
 
@@ -15,34 +26,40 @@ struct ErrorResponse {
 
 pub async fn handle_rejection(err: Rejection) -> std::result::Result<impl Reply, Infallible> {
     let code;
-    let message;
+    let message: String;
 
     if err.is_not_found() {
         code = StatusCode::NOT_FOUND;
-        message = "Not Found";
+        message = "Not Found".to_owned();
     } else if let Some(_) = err.find::<warp::filters::body::BodyDeserializeError>() {
         code = StatusCode::BAD_REQUEST;
-        message = "Invalid Body";
+        message = "Invalid Body".to_owned();
     } else if let Some(e) = err.find::<Error>() {
         match e {
+            Error::NoSuchGame(_) => {
+                code = StatusCode::NOT_FOUND;
+                message = format!("{}", e);
+            }
+            Error::InvalidArgument(_) => {
+                code = StatusCode::BAD_REQUEST;
+                message = format!("{}", e);
+            }
             _ => {
                 eprintln!("unhandled application error: {:?}", err);
                 code = StatusCode::INTERNAL_SERVER_ERROR;
-                message = "Internal Server Error";
+                message = "Internal Server Error".to_owned();
             }
         }
     } else if let Some(_) = err.find::<warp::reject::MethodNotAllowed>() {
         code = StatusCode::METHOD_NOT_ALLOWED;
-        message = "Method Not Allowed";
+        message = "Method Not Allowed".to_owned();
     } else {
         eprintln!("unhandled error: {:?}", err);
         code = StatusCode::INTERNAL_SERVER_ERROR;
-        message = "Internal Server Error";
+        message = "Internal Server Error".to_owned();
     }
 
-    let json = warp::reply::json(&ErrorResponse {
-        message: message.into(),
-    });
+    let json = warp::reply::json(&ErrorResponse { message });
 
     Ok(warp::reply::with_status(json, code))
 }
