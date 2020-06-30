@@ -23,7 +23,7 @@ export function GridComponent(props: Props) {
       fetch("http://localhost:8000/api/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: "cell click: " + index }),
+        body: JSON.stringify({ message: JSON.stringify({ attack: index }) }),
       });
     },
     []

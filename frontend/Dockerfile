@@ -5,6 +5,7 @@ WORKDIR /home/node/app
 COPY package.json yarn.lock tsconfig.json ./
 RUN yarn
 COPY src src
+COPY public public
 RUN yarn build
 
 

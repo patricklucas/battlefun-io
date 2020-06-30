@@ -32,12 +32,20 @@ export function Game(props: Props) {
 
   useEffect(() => {
     if (readyState === 1 && !authenticated) {
-      // sendMessage(JSON.stringify({ type: "authentication", token }));
+      sendMessage(JSON.stringify({ type: "authentication", token }));
     }
   }, [readyState, token, authenticated, sendMessage]);
 
   useEffect(() => {
-    console.log({ lastMessage });
+    const data = JSON.parse(lastMessage?.data || "{}");
+    switch (data.type) {
+      case "authentication_response":
+        setAuthenticated(data.success);
+        break;
+      default:
+        console.log({ data });
+        break;
+    }
   }, [lastMessage]);
 
   return (
