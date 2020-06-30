@@ -53,6 +53,7 @@ const Spaceship = styled.div<Props>`
   width: 100%;
   height: 100%;
   background-size: cover;
+  pointer-events: none;
 `;
 
 export const Freighter = styled(Spaceship)`
