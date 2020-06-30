@@ -2,12 +2,14 @@ use std::collections::HashMap;
 use std::convert::Infallible;
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
-use uuid::Uuid;
 use warp::{http::Method, ws::Message, Filter, Rejection};
 
 mod error;
 mod handler;
 mod ws;
+
+mod battlefun;
+use battlefun::{PlayerId, PlayerToken};
 
 mod proto {
     include!(concat!(env!("OUT_DIR"), "/battlefun_io.proto.rs"));
@@ -16,8 +18,6 @@ mod proto {
 type Result<T> = std::result::Result<T, Rejection>;
 
 type ClientState = Arc<RwLock<ClientStateFoo>>;
-type PlayerId = Uuid;
-type PlayerToken = Uuid;
 
 #[derive(Debug, Clone)]
 pub struct Player {
