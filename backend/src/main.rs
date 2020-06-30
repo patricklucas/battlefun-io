@@ -43,26 +43,26 @@ impl ClientStateFoo {
 async fn main() {
     let client_state: ClientState = Arc::new(RwLock::new(ClientStateFoo::new()));
 
-    let health_route = warp::path("health").and_then(handler::health_handler);
+    let health_route = warp::path!("api" / "health").and_then(handler::health_handler);
 
-    let register_route = warp::path("register")
+    let register_route = warp::path!("api" / "register")
         .and(warp::post())
         .and(warp::body::json())
         .and(with_client_state(client_state.clone()))
         .and_then(handler::register_handler);
 
-    let deregister_route = warp::path("deregister")
+    let deregister_route = warp::path!("api" / "deregister")
         .and(warp::post())
         .and(warp::path::param())
         .and(with_client_state(client_state.clone()))
         .and_then(handler::deregister_handler);
 
-    let publish = warp::path!("publish")
+    let publish = warp::path!("api" / "publish")
         .and(warp::body::json())
         .and(with_client_state(client_state.clone()))
         .and_then(handler::publish_handler);
 
-    let ws_route = warp::path("ws")
+    let ws_route = warp::path!("api" / "ws")
         .and(warp::ws())
         .and(warp::path::param())
         .and(with_client_state(client_state.clone()))
