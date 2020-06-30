@@ -13,7 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM flink-statefun:2.1.0
+FROM maven:3.6.3-jdk-8 AS builder
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+FROM ververica/flink-statefun:2.1.0
 
 RUN mkdir -p /opt/statefun/modules/battlefun
-COPY target/battlefun*jar /opt/statefun/modules/battlefun/
+COPY --from=builder /usr/src/app/target/battlefun*jar /opt/statefun/modules/battlefun/
