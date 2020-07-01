@@ -64,7 +64,7 @@ public final class GameFn implements StatefulFunction {
 
   private void handleCreateGame(Builder builder, CreateGame createGame) {
     GameUpdate newGame = GameLogic.create(createGame);
-    
+
     // remember the game
     game.set(newGame);
 
@@ -80,7 +80,10 @@ public final class GameFn implements StatefulFunction {
       builder.setGameUpdate(game);
     } else {
       builder.setFailure(
-          Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
+          Failure.newBuilder()
+              .setCode(FailureCodes.UNKNOWN_GAME)
+              .setFailureDescription("Unknown game")
+              .build());
     }
   }
 
@@ -90,7 +93,7 @@ public final class GameFn implements StatefulFunction {
 
     if (game == null) {
       builder.setFailure(
-          Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
+          Failure.newBuilder().setCode(FailureCodes.UNKNOWN_GAME).setFailureDescription("Unknown game").build());
       return;
     }
     Either<GameUpdate, Failure> either = GameLogic.apply(game, turn);
@@ -108,7 +111,7 @@ public final class GameFn implements StatefulFunction {
 
     if (game == null) {
       builder.setFailure(
-          Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
+          Failure.newBuilder().setCode(FailureCodes.UNKNOWN_GAME).setFailureDescription("Unknown game").build());
       return;
     }
     String who = resign.getPlayerId();

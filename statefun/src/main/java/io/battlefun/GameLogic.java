@@ -63,7 +63,7 @@ final class GameLogic {
     if (isGameOver(current)) {
       return Either.right(
           Failure.newBuilder()
-              .setCode(100)
+              .setCode(FailureCodes.GAME_ALREADY_FINISHED)
               .setFailureDescription("The game is already finished")
               .build());
     }
@@ -73,7 +73,7 @@ final class GameLogic {
     if (!isPlayersTurn(current, player)) {
       return Either.right(
           Failure.newBuilder()
-              .setCode(101)
+              .setCode(FailureCodes.NOT_PLAYERS_TURN)
               .setFailureDescription("It is not the turn of player " + turn.getPlayerId())
               .build());
     }
@@ -87,7 +87,7 @@ final class GameLogic {
     if (shotHistory.contains(guessCell)) {
       return Either.right(
           Failure.newBuilder()
-              .setCode(102)
+              .setCode(FailureCodes.SHOT_WAS_ALREADY_MADE)
               .setFailureDescription("The shot was already made")
               .build());
     }
