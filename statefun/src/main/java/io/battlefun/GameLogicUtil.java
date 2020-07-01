@@ -41,11 +41,22 @@ final class GameLogicUtil {
     }
   }
 
-  static boolean hasReamingShips(ShipPlacement placement, BitSet shotHistory) {
+  static boolean hasRemainingShips(ShipPlacement placement, BitSet shotHistory) {
     for (Ship ship : placement.getShipsList()) {
       for (long cell : ship.getCellsList()) {
         int cellId = (int) cell;
         if (!shotHistory.get(cellId)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static boolean didShotHit(ShipPlacement placement, int guessCell) {
+    for (Ship ship : placement.getShipsList()) {
+      for (long shipCell : ship.getCellsList()) {
+        if (shipCell == guessCell) {
           return true;
         }
       }

@@ -31,11 +31,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Objects;
 
-import static io.battlefun.GameLogicUtil.hasReamingShips;
-import static io.battlefun.GameLogicUtil.isGameOver;
-import static io.battlefun.GameLogicUtil.isPlayersTurn;
-import static io.battlefun.GameLogicUtil.setWinner;
-import static io.battlefun.GameLogicUtil.shotsTaken;
+import static io.battlefun.GameLogicUtil.*;
 
 final class GameLogic {
 
@@ -82,9 +78,10 @@ final class GameLogic {
 
     // compute the next state of the game
     final Builder next = current.toBuilder();
-    addGuessToShotHistory(next, player, guessCell);
     ShipPlacement opponentPlacement = getOpponentShipPlacement(current, player);
-    if (!hasReamingShips(opponentPlacement, shotHistory)) {
+    boolean isHit = didShotHit(opponentPlacement, guessCell);
+    addGuessToShotHistory(next, player, guessCell, isHit);
+    if (!hasRemainingShips(opponentPlacement, shotHistory)) {
       setWinner(player, next);
     } else {
       alternateTurns(player, next);
@@ -108,11 +105,11 @@ final class GameLogic {
     return (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
   }
 
-  private static void addGuessToShotHistory(Builder next, int player, int guessCell) {
+  private static void addGuessToShotHistory(Builder next, int player, int guessCell, boolean isHit) {
     if (player == 0) {
-      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).build());
+      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).setShot(isHit).build());
     } else {
-      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).build());
+      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).setShot(isHit).build());
     }
   }
 
