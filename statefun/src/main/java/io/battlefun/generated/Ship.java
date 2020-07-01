@@ -42,6 +42,7 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
     type_ = "";
     cells_ = emptyLongList();
   }
+
   private Ship(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)

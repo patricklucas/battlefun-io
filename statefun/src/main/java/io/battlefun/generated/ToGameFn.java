@@ -40,6 +40,7 @@ public final class ToGameFn extends com.google.protobuf.GeneratedMessageV3
   private ToGameFn(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
+
   private ToGameFn() {
     gameId_ = "";
   }
@@ -157,7 +158,7 @@ public final class ToGameFn extends com.google.protobuf.GeneratedMessageV3
     return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ToGameFn_descriptor;
   }
 
-    public static io.battlefun.generated.ToGameFn parseFrom(java.nio.ByteBuffer data)
+  public static io.battlefun.generated.ToGameFn parseFrom(java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   };
@@ -528,7 +529,7 @@ public final class ToGameFn extends com.google.protobuf.GeneratedMessageV3
     return DEFAULT_INSTANCE;
   }
 
-public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
+  public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     CREATE_GAME(2),
     GET_GAME_STATUS(3),
     TURN(4),
@@ -601,6 +602,7 @@ public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     /** <code>.io.battlefun.ShipPlacement player2_placement = 5;</code> */
     io.battlefun.generated.ShipPlacementOrBuilder getPlayer2PlacementOrBuilder();
   }
+
   public interface GetGameStatusOrBuilder
       extends
       // @@protoc_insertion_point(interface_extends:io.battlefun.ToGameFn.GetGameStatus)
@@ -686,11 +688,13 @@ public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     private CreateGame(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private CreateGame() {
       gameId_ = "";
       player1Id_ = "";
       player2Id_ = "";
     }
+
     private CreateGame(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1781,9 +1785,11 @@ public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     private GetGameStatus(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private GetGameStatus() {
       gameId_ = "";
     }
+
     private GetGameStatus(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2315,10 +2321,12 @@ public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     private Turn(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private Turn() {
       gameId_ = "";
       playerId_ = "";
     }
+
     private Turn(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2997,6 +3005,7 @@ public enum MsgCase implements com.google.protobuf.Internal.EnumLite {
     private Resign(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private Resign() {
       gameId_ = "";
       playerId_ = "";

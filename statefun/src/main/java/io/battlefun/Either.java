@@ -20,20 +20,20 @@ package io.battlefun;
 
 final class Either<L, R> {
 
-  public static <L, R> Either<L, R> left(L left) {
-    return new Either<>(left, null);
-  }
-
-  public static <L, R> Either<L, R> right(R right) {
-    return new Either<>(null, right);
-  }
-
   public final L left;
   public final R right;
 
   public Either(L left, R right) {
     this.left = left;
     this.right = right;
+  }
+
+  public static <L, R> Either<L, R> left(L left) {
+    return new Either<>(left, null);
+  }
+
+  public static <L, R> Either<L, R> right(R right) {
+    return new Either<>(null, right);
   }
 
   public boolean isLeft() {

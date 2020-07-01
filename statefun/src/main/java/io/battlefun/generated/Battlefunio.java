@@ -190,6 +190,7 @@ public final class Battlefunio {
               "Player2Shots",
             });
   }
+
   private Battlefunio() {}
 
   public static void registerAllExtensions(com.google.protobuf.ExtensionRegistryLite registry) {}

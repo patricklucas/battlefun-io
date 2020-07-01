@@ -28,6 +28,7 @@ public enum GameStatus implements com.google.protobuf.ProtocolMessageEnum {
   public static final int PLAYER1_WIN_VALUE = 3;
   /** <code>PLAYER2_WIN = 4;</code> */
   public static final int PLAYER2_WIN_VALUE = 4;
+
   private static final com.google.protobuf.Internal.EnumLiteMap<GameStatus> internalValueMap =
       new com.google.protobuf.Internal.EnumLiteMap<GameStatus>() {
         public GameStatus findValueByNumber(int number) {

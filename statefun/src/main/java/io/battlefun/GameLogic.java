@@ -27,14 +27,13 @@ import io.battlefun.generated.Shot;
 import io.battlefun.generated.ToGameFn.CreateGame;
 import io.battlefun.generated.ToGameFn.Turn;
 
+import java.util.BitSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
+import static io.battlefun.GameLogicUtil.hasReamingShips;
 import static io.battlefun.GameLogicUtil.isGameOver;
 import static io.battlefun.GameLogicUtil.isPlayersTurn;
-import static io.battlefun.GameLogicUtil.reamingShips;
 import static io.battlefun.GameLogicUtil.setWinner;
 import static io.battlefun.GameLogicUtil.shotsTaken;
 
@@ -82,9 +81,9 @@ final class GameLogic {
     //
     List<Shot> shots =
         (player == 0) ? current.getPlayer1ShotsList() : current.getPlayer2ShotsList();
-    Set<Integer> shotHistory = shotsTaken(shots);
+    BitSet shotHistory = shotsTaken(shots);
 
-    if (shotHistory.contains(guessCell)) {
+    if (shotHistory.get(guessCell)) {
       return Either.right(
           Failure.newBuilder()
               .setCode(FailureCodes.SHOT_WAS_ALREADY_MADE)
@@ -94,7 +93,7 @@ final class GameLogic {
     //
     // 4. remember that shot
     //
-    shotHistory.add(guessCell);
+    shotHistory.set(guessCell);
     if (player == 0) {
       next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).build());
     } else {
@@ -105,8 +104,7 @@ final class GameLogic {
     // NOTE: that we need the placement of the other player.
     ShipPlacement opponentPlacement =
         (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
-    Map<String, Set<Integer>> remainingShips = reamingShips(opponentPlacement, shotHistory);
-    if (remainingShips.isEmpty()) {
+    if (!hasReamingShips(opponentPlacement, shotHistory)) {
       // TODO: clear the state at some point.
       setWinner(player, next);
       return Either.left(next.build());

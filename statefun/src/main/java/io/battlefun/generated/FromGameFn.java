@@ -38,11 +38,12 @@ public final class FromGameFn extends com.google.protobuf.GeneratedMessageV3
   private FromGameFn(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
+
   private FromGameFn() {
     gameId_ = "";
   }
 
-    private FromGameFn(
+  private FromGameFn(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -423,7 +424,7 @@ public final class FromGameFn extends com.google.protobuf.GeneratedMessageV3
     return DEFAULT_INSTANCE;
   }
 
-public enum ResponseCase implements com.google.protobuf.Internal.EnumLite {
+  public enum ResponseCase implements com.google.protobuf.Internal.EnumLite {
     GAME_UPDATE(2),
     FAILURE(3),
     RESPONSE_NOT_SET(0);
@@ -600,6 +601,7 @@ public enum ResponseCase implements com.google.protobuf.Internal.EnumLite {
     private Failure() {
       failureDescription_ = "";
     }
+
     private Failure(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1187,6 +1189,7 @@ public enum ResponseCase implements com.google.protobuf.Internal.EnumLite {
     private GameUpdate(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
+
     private GameUpdate() {
       gameId_ = "";
       player1Id_ = "";
@@ -1195,6 +1198,7 @@ public enum ResponseCase implements com.google.protobuf.Internal.EnumLite {
       player1Shots_ = java.util.Collections.emptyList();
       player2Shots_ = java.util.Collections.emptyList();
     }
+
     private GameUpdate(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)

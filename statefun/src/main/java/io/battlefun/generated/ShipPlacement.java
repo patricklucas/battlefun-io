@@ -34,9 +34,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
   private ShipPlacement(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
+
   private ShipPlacement() {
     ships_ = java.util.Collections.emptyList();
   }
+
   private ShipPlacement(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)

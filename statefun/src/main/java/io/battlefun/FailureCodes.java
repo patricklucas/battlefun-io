@@ -19,8 +19,8 @@
 package io.battlefun;
 
 public class FailureCodes {
-    public static final long GAME_ALREADY_FINISHED = 1;
-    public static final long NOT_PLAYERS_TURN = 2;
-    public static final long SHOT_WAS_ALREADY_MADE = 3;
-    public static final long UNKNOWN_GAME = 5;
+  public static final long GAME_ALREADY_FINISHED = 1;
+  public static final long NOT_PLAYERS_TURN = 2;
+  public static final long SHOT_WAS_ALREADY_MADE = 3;
+  public static final long UNKNOWN_GAME = 5;
 }

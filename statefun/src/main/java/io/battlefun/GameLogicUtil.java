@@ -25,15 +25,13 @@ import io.battlefun.generated.Ship;
 import io.battlefun.generated.ShipPlacement;
 import io.battlefun.generated.Shot;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.BitSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 final class GameLogicUtil {
   private GameLogicUtil() {}
+  
+  public static final int BOARD_SIZE = 100;
 
   static void setWinner(int player, Builder updatedGame) {
     if (player == 0) {
@@ -43,23 +41,16 @@ final class GameLogicUtil {
     }
   }
 
-  static Map<String, Set<Integer>> reamingShips(ShipPlacement placement, Set<Integer> shotHistory) {
-    Map<String, Set<Integer>> remainingShips = new HashMap<>();
+  static boolean hasReamingShips(ShipPlacement placement, BitSet shotHistory) {
     for (Ship ship : placement.getShipsList()) {
-      Set<Integer> remainingCells = new HashSet<>();
       for (long cell : ship.getCellsList()) {
         int cellId = (int) cell;
-        if (shotHistory.contains(cellId)) {
-          continue;
+        if (!shotHistory.get(cellId)) {
+          return true;
         }
-        remainingCells.add(cellId);
-      }
-      if (!remainingCells.isEmpty()) {
-        // only add non empty ships
-        remainingShips.put(ship.getType(), remainingCells);
       }
     }
-    return remainingShips;
+    return false;
   }
 
   static boolean isPlayersTurn(GameUpdate game, int player) {
@@ -82,13 +73,13 @@ final class GameLogicUtil {
     return game.getStatus() == GameStatus.PLAYER1_WIN || game.getStatus() == GameStatus.PLAYER2_WIN;
   }
 
-  static Set<Integer> shotsTaken(List<Shot> shots) {
+  static BitSet shotsTaken(List<Shot> shots) {
+    BitSet set = new BitSet(BOARD_SIZE + 1);
     if (shots == null) {
-      return Collections.emptySet();
+      return set;
     }
-    Set<Integer> set = new HashSet<>(shots.size());
     for (Shot shot : shots) {
-      set.add((int) shot.getCellId());
+      set.set((int) shot.getCellId());
     }
     return set;
   }

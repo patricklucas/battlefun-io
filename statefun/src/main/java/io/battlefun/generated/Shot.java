@@ -37,6 +37,7 @@ public final class Shot extends com.google.protobuf.GeneratedMessageV3
   }
 
   private Shot() {}
+
   private Shot(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)

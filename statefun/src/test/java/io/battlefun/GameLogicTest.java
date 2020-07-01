@@ -70,10 +70,10 @@ public class GameLogicTest {
     GameUpdate game =
         game(ships("1 2 3", "5 6 7", "8 9 10 11"), ships("1 2 3", "5 6 7", "8 9 10 11"));
 
-    for (int i = 0; i < 100; i++) {
-      game = applyTurn(game, "player-1", 999999 + i);
+    for (int i = 0; i < 10; i++) {
+      game = applyTurn(game, "player-1", 13 + i);
       assertThat(game.getStatus(), is(GameStatus.PLAYER2_TURN));
-      game = applyTurn(game, "player-2", 999999 + i);
+      game = applyTurn(game, "player-2", 13 + i);
       assertThat(game.getStatus(), is(GameStatus.PLAYER1_TURN));
     }
   }
@@ -98,7 +98,7 @@ public class GameLogicTest {
     //
     for (int i = 1; i <= 10; i++) {
       game = applyTurn(game, "player-1", i); // hits
-      game = applyTurn(game, "player-2", 1_000_00 + i); // misses
+      game = applyTurn(game, "player-2", 13 + i); // misses
     }
     //
     // 2. kill player's 2 last remaining cell
