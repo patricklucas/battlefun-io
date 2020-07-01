@@ -49,7 +49,8 @@ public final class Module implements StatefulFunctionModule {
             .build());
 
     // route ToGameFn message to the GameFn function
-    binder.bindIngressRouter(Constants.INPUT, (msg, downstream) -> msg.getGameId());
+    binder.bindIngressRouter(Constants.INPUT, (msg, downstream) ->
+        downstream.forward(GameFn.Type, msg.getGameId(), msg));
 
     // bind the GameFn stateful function
     binder.bindFunctionProvider(GameFn.Type, unsued -> new GameFn());

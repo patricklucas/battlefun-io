@@ -2,17 +2,20 @@ use prost::Message;
 use rdkafka::config::ClientConfig;
 use rdkafka::producer::{DeliveryFuture, FutureProducer, FutureRecord};
 
-use super::proto::to_game_fn::{CreateGame, Turn};
+use super::proto::{
+    to_game_fn::{CreateGame, Msg, Turn},
+    ToGameFn,
+};
 use super::{CellIndex, GameId, PlayerId, ShipPlacement, ToBattleFunProto};
 use crate::error::Error;
 
 pub struct StatefunKafkaClient {
     producer: FutureProducer,
-    topic_name: String,
+    to_statefun_topic: String,
 }
 
 impl StatefunKafkaClient {
-    pub fn new(brokers: &str, topic_name: &str) -> Self {
+    pub fn new(brokers: &str, to_statefun_topic: String) -> Self {
         let producer: FutureProducer = ClientConfig::new()
             .set("bootstrap.servers", brokers)
             .create()
@@ -20,7 +23,7 @@ impl StatefunKafkaClient {
 
         Self {
             producer,
-            topic_name: topic_name.to_owned(),
+            to_statefun_topic: to_statefun_topic.to_owned(),
         }
     }
 
@@ -40,15 +43,22 @@ impl StatefunKafkaClient {
             player2_placement: Some(player2_ships.to_proto()),
         };
 
+        let message = ToGameFn {
+            game_id: game_id.to_string(),
+            msg: Some(Msg::CreateGame(create_game_msg)),
+        };
+
         let mut buf = vec![];
-        if let Err(error) = create_game_msg.encode(&mut buf) {
-            return Err(Error::ProtobufError(error.into()));
+        if let Err(error) = message.encode(&mut buf) {
+            return Err(Error::ProtobufEncodeError(error.into()));
         }
 
         let key = game_id.to_string();
-        let delivery_state = self
-            .producer
-            .send_result(FutureRecord::to(&self.topic_name).payload(&buf).key(&key));
+        let delivery_state = self.producer.send_result(
+            FutureRecord::to(&self.to_statefun_topic)
+                .payload(&buf)
+                .key(&key),
+        );
         match delivery_state {
             Ok(f) => Ok(f),
             Err((error, _)) => Err(Error::KafkaError(error.into())),
@@ -67,15 +77,22 @@ impl StatefunKafkaClient {
             shot: cell as i64,
         };
 
+        let message = ToGameFn {
+            game_id: game_id.to_string(),
+            msg: Some(Msg::Turn(turn_msg)),
+        };
+
         let mut buf = vec![];
-        if let Err(error) = turn_msg.encode(&mut buf) {
-            return Err(Error::ProtobufError(error.into()));
+        if let Err(error) = message.encode(&mut buf) {
+            return Err(Error::ProtobufEncodeError(error.into()));
         }
 
         let key = game_id.to_string();
-        let delivery_state = self
-            .producer
-            .send_result(FutureRecord::to(&self.topic_name).payload(&buf).key(&key));
+        let delivery_state = self.producer.send_result(
+            FutureRecord::to(&self.to_statefun_topic)
+                .payload(&buf)
+                .key(&key),
+        );
         match delivery_state {
             Ok(f) => Ok(f),
             Err((error, _)) => Err(Error::KafkaError(error.into())),

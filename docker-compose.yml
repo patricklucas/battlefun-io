@@ -8,6 +8,10 @@ services:
     ports:
     - 8000:8000
     stop_signal: SIGINT
+    depends_on:
+    - kafka-broker
+    links:
+    - kafka-broker:kafka-broker
 
   frontend:
     build: frontend/
@@ -31,6 +35,8 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     depends_on:
     - zookeeper
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 
   master:
     build: statefun/
@@ -60,8 +66,9 @@ services:
   hack:
     build: hack/
     depends_on:
-      - kafka-broker
-      - backend
+    - kafka-broker
+    - backend
     links:
-      - kafka-broker:kafka-broker
-      - backend:backend
+    - kafka-broker:kafka-broker
+    - backend:backend
+    restart: unless-stopped

@@ -1,11 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { Welcome } from "./Welcome";
 import { Game } from "./game";
 import { User } from "./UserProvider";
 import { EuiHeader, EuiHeaderSection, EuiHeaderSectionItem, EuiHeaderLogo, EuiButton, EuiPanel } from "@elastic/eui";
-import { ReadyState } from "react-use-websocket";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 import { MaxWidthSection } from "./utils/breakpoints";
 import styled from "styled-components";
+import { getApiHost } from "./utils/getApiHost";
+import { GameState } from "./game/Game";
+import { mergeDeep } from "./utils/mergeDeep";
+import { fakeGameState } from "./utils/fakeGameState";
 
 const HeaderMaxWidth = styled(MaxWidthSection)`
   display: flex;
@@ -68,20 +72,59 @@ const status: {
   [ReadyState.UNINSTANTIATED]: "disconnected",
 };
 
-function App() {
+const useApp = () => {
   const { token, player_id, logout, name } = useContext(User);
-  const [connection, setConnection] = useState<ReadyState>(ReadyState.UNINSTANTIATED);
-  useEffect(() => {
-    if (!!connection && !player_id) {
-      setConnection(ReadyState.UNINSTANTIATED);
-    }
-  }, [player_id, connection]);
+  const [connect, setConnect] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [gameState, setGameState] = useState<GameState | null>(fakeGameState);
+  const { lastJsonMessage, readyState, sendJsonMessage } = useWebSocket(
+    `${getApiHost("ws")}/ws/${player_id}`,
+    {},
+    connect
+  );
 
   useEffect(() => {
-    if (connection === ReadyState.CLOSED) {
+    if (player_id) {
+      setConnect(true);
+    }
+  }, [player_id, setConnect]);
+
+  useEffect(() => {
+    if (readyState === ReadyState.CLOSED) {
       logout();
     }
-  }, [connection]);
+  }, [readyState]);
+
+  useEffect(() => {
+    if (readyState === 1 && !authenticated) {
+      sendJsonMessage({ type: "authentication", token });
+    }
+  }, [readyState, token, authenticated, sendJsonMessage]);
+
+  useEffect(() => {
+    const data = lastJsonMessage?.data || {};
+    switch (data.type) {
+      case "authentication_response":
+        setAuthenticated(data.success);
+        if (!data.success) {
+          logout();
+        }
+        break;
+      case "game_state":
+        const newState = mergeDeep<GameState>({}, gameState, data.game_state);
+        setGameState(newState);
+        break;
+      default:
+        console.log({ data });
+        break;
+    }
+  }, [lastJsonMessage]);
+
+  return { readyState, gameState, name, logout, token, player_id, setGameState };
+};
+
+function App() {
+  const { readyState, gameState, name, logout, token, player_id, setGameState } = useApp();
 
   return (
     <Container>
@@ -99,15 +142,17 @@ function App() {
           <EuiHeaderSection side="right">
             <EuiHeaderSectionItem>
               <small style={{ marginRight: ".5em" }}>
-                {status[connection]}
+                {status[readyState]}
                 {name && <span> as {name} </span>}
               </small>
-              <i className={`fad ${icons[connection]}`}></i>
+              <i className={`fad ${icons[readyState]}`}></i>
             </EuiHeaderSectionItem>
           </EuiHeaderSection>
         </HeaderMaxWidth>
       </Header>
-      <Content>{!token || !player_id ? <Welcome /> : <Game setConnection={setConnection} />}</Content>
+      <Content>
+        {!token || !player_id ? <Welcome /> : <Game gameState={gameState} token={token} setGameState={setGameState} />}
+      </Content>
       <Footer>
         <HeaderMaxWidth>
           <EuiHeaderSection>

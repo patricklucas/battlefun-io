@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-import freighterHorizontal from "./images/freighter-horizontal.png";
-import starshipHorizontal from "./images/starship-horizontal.png";
-import heavyCruiserHorizontal from "./images/heavy-cruiser-horizontal.png";
-import lightCruiserHorizontal from "./images/light-cruiser-horizontal.png";
-import drydockHorizontal from "./images/drydock-horizontal.png";
+import carrierHorizontal from "./images/carrier-horizontal.png";
+import battleshipHorizontal from "./images/battleship-horizontal.png";
+import destroyerHorizontal from "./images/destroyer-horizontal.png";
+import submarineHorizontal from "./images/submarine-horizontal.png";
+import patrolBoatHorizontal from "./images/patrol-boat-horizontal.png";
 
-import freighterVertical from "./images/freighter-vertical.png";
-import starshipVertical from "./images/starship-vertical.png";
-import heavyCruiserVertical from "./images/heavy-cruiser-vertical.png";
-import lightCruiserVertical from "./images/light-cruiser-vertical.png";
-import drydockVertical from "./images/drydock-vertical.png";
+import carrierVertical from "./images/carrier-vertical.png";
+import battleshipVertical from "./images/battleship-vertical.png";
+import destroyerVertical from "./images/destroyer-vertical.png";
+import submarineVertical from "./images/submarine-vertical.png";
+import patrolBoatVertical from "./images/patrol-boat-vertical.png";
 
 const images: {
   [key: string]: {
@@ -18,18 +18,18 @@ const images: {
   };
 } = {
   vertical: {
-    freighter: freighterVertical,
-    starship: starshipVertical,
-    heavyCruiser: heavyCruiserVertical,
-    lightCruiser: lightCruiserVertical,
-    drydock: drydockVertical,
+    carrier: carrierVertical,
+    battleship: battleshipVertical,
+    destroyer: destroyerVertical,
+    submarine: submarineVertical,
+    patrolBoat: patrolBoatVertical,
   },
   horizontal: {
-    freighter: freighterHorizontal,
-    starship: starshipHorizontal,
-    heavyCruiser: heavyCruiserHorizontal,
-    lightCruiser: lightCruiserHorizontal,
-    drydock: drydockHorizontal,
+    carrier: carrierHorizontal,
+    battleship: battleshipHorizontal,
+    destroyer: destroyerHorizontal,
+    submarine: submarineHorizontal,
+    patrolBoat: patrolBoatHorizontal,
   },
 };
 
@@ -60,29 +60,29 @@ const Spaceship = styled.div<Props>`
 export const Carrier = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 5 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 5)};
-  background-image: url(${backgroundUrl("freighter")});
+  background-image: url(${backgroundUrl("carrier")});
 `;
 
 export const Battleship = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 4 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 4)};
-  background-image: url(${backgroundUrl("starship")});
+  background-image: url(${backgroundUrl("battleship")});
 `;
 
 export const Destroyer = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 3 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 3)};
-  background-image: url(${backgroundUrl("heavyCruiser")});
+  background-image: url(${backgroundUrl("destroyer")});
 `;
 
 export const Submarine = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 3 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 3)};
-  background-image: url(${backgroundUrl("lightCruiser")});
+  background-image: url(${backgroundUrl("submarine")});
 `;
 
 export const PatrolBoat = styled(Spaceship)`
   grid-row-end: span ${(p) => (p.vertical ? 2 : 1)};
   grid-column-end: span ${(p) => (p.vertical ? 1 : 2)};
-  background-image: url(${backgroundUrl("drydock")});
+  background-image: url(${backgroundUrl("patrolBoat")});
 `;
