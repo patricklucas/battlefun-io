@@ -41,7 +41,6 @@ public final class GameFn implements StatefulFunction {
   public static final FunctionType Type = new FunctionType("io.battlefun", "game");
 
   private final PersistedValue<GameUpdate> game = PersistedValue.of("game", GameUpdate.class);
-  private final GameLogic gameLogic = new GameLogic();
 
   @Override
   public void invoke(Context context, Object message) {
@@ -64,21 +63,12 @@ public final class GameFn implements StatefulFunction {
   }
 
   private void handleCreateGame(Builder builder, CreateGame createGame) {
-    GameUpdate.Builder gameUpdate = GameUpdate.newBuilder();
-
-    // populate the game update structure
-    gameUpdate.setGameId(gameUpdate.getGameId());
-    gameUpdate.setPlayer1Id(createGame.getPlayer1Id());
-    gameUpdate.setPlayer2Id(createGame.getPlayer2Id());
-    gameUpdate.setPlayer1Placement(createGame.getPlayer1Placement());
-    gameUpdate.setPlayer2Placement(createGame.getPlayer2Placement());
-
-    gameUpdate.setStatus(GameStatus.PLAYER1_TURN);
-
+    GameUpdate newGame = GameLogic.create(createGame);
+    
     // remember the game
-    game.set(gameUpdate.build());
+    game.set(newGame);
 
-    builder.setGameUpdate(gameUpdate);
+    builder.setGameUpdate(newGame);
     builder.setGameId(createGame.getGameId());
   }
 
@@ -103,7 +93,7 @@ public final class GameFn implements StatefulFunction {
           Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
       return;
     }
-    Either<GameUpdate, Failure> either = gameLogic.apply(game, turn);
+    Either<GameUpdate, Failure> either = GameLogic.apply(game, turn);
     if (either.isLeft()) {
       this.game.set(game);
       builder.setGameUpdate(either.left);
@@ -121,7 +111,6 @@ public final class GameFn implements StatefulFunction {
           Failure.newBuilder().setCode(1).setFailureDescription("Unknown game").build());
       return;
     }
-
     String who = resign.getPlayerId();
     if (Objects.equals(game.getPlayer1Id(), who)) {
       // player 1 resigned
@@ -130,7 +119,6 @@ public final class GameFn implements StatefulFunction {
       // player 2 resigned
       game = game.toBuilder().setStatus(GameStatus.PLAYER1_WIN).build();
     }
-
     this.game.set(game);
     builder.setGameUpdate(game);
   }
