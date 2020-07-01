@@ -107,9 +107,9 @@ final class GameLogic {
 
   private static void addGuessToShotHistory(Builder next, int player, int guessCell, boolean isHit) {
     if (player == 0) {
-      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).setShot(isHit).build());
+      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).setHit(isHit).build());
     } else {
-      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).setShot(isHit).build());
+      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).setHit(isHit).build());
     }
   }
 

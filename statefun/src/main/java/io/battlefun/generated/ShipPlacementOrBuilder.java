@@ -3,19 +3,31 @@
 
 package io.battlefun.generated;
 
-public interface ShipPlacementOrBuilder
-    extends
+public interface ShipPlacementOrBuilder extends
     // @@protoc_insertion_point(interface_extends:io.battlefun.ShipPlacement)
     com.google.protobuf.MessageOrBuilder {
 
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-  java.util.List<io.battlefun.generated.Ship> getShipsList();
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
+  java.util.List<io.battlefun.generated.Ship> 
+      getShipsList();
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
   io.battlefun.generated.Ship getShips(int index);
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
   int getShipsCount();
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-  java.util.List<? extends io.battlefun.generated.ShipOrBuilder> getShipsOrBuilderList();
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-  io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(int index);
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
+  java.util.List<? extends io.battlefun.generated.ShipOrBuilder> 
+      getShipsOrBuilderList();
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
+  io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(
+      int index);
 }

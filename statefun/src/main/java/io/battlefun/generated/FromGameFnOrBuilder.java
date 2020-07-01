@@ -3,28 +3,44 @@
 
 package io.battlefun.generated;
 
-public interface FromGameFnOrBuilder
-    extends
+public interface FromGameFnOrBuilder extends
     // @@protoc_insertion_point(interface_extends:io.battlefun.FromGameFn)
     com.google.protobuf.MessageOrBuilder {
 
-  /** <code>string game_id = 1;</code> */
+  /**
+   * <code>string game_id = 1;</code>
+   */
   java.lang.String getGameId();
-  /** <code>string game_id = 1;</code> */
-  com.google.protobuf.ByteString getGameIdBytes();
+  /**
+   * <code>string game_id = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getGameIdBytes();
 
-  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code>
+   */
   boolean hasGameUpdate();
-  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code>
+   */
   io.battlefun.generated.FromGameFn.GameUpdate getGameUpdate();
-  /** <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.GameUpdate game_update = 2;</code>
+   */
   io.battlefun.generated.FromGameFn.GameUpdateOrBuilder getGameUpdateOrBuilder();
 
-  /** <code>.io.battlefun.FromGameFn.Failure failure = 3;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.Failure failure = 3;</code>
+   */
   boolean hasFailure();
-  /** <code>.io.battlefun.FromGameFn.Failure failure = 3;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.Failure failure = 3;</code>
+   */
   io.battlefun.generated.FromGameFn.Failure getFailure();
-  /** <code>.io.battlefun.FromGameFn.Failure failure = 3;</code> */
+  /**
+   * <code>.io.battlefun.FromGameFn.Failure failure = 3;</code>
+   */
   io.battlefun.generated.FromGameFn.FailureOrBuilder getFailureOrBuilder();
 
   public io.battlefun.generated.FromGameFn.ResponseCase getResponseCase();

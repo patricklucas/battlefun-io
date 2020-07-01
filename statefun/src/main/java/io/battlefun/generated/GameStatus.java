@@ -3,85 +3,55 @@
 
 package io.battlefun.generated;
 
-/** Protobuf enum {@code io.battlefun.GameStatus} */
-public enum GameStatus implements com.google.protobuf.ProtocolMessageEnum {
-  /** <code>UNKNOWN = 0;</code> */
+/**
+ * Protobuf enum {@code io.battlefun.GameStatus}
+ */
+public enum GameStatus
+    implements com.google.protobuf.ProtocolMessageEnum {
+  /**
+   * <code>UNKNOWN = 0;</code>
+   */
   UNKNOWN(0),
-  /** <code>PLAYER1_TURN = 1;</code> */
+  /**
+   * <code>PLAYER1_TURN = 1;</code>
+   */
   PLAYER1_TURN(1),
-  /** <code>PLAYER2_TURN = 2;</code> */
+  /**
+   * <code>PLAYER2_TURN = 2;</code>
+   */
   PLAYER2_TURN(2),
-  /** <code>PLAYER1_WIN = 3;</code> */
+  /**
+   * <code>PLAYER1_WIN = 3;</code>
+   */
   PLAYER1_WIN(3),
-  /** <code>PLAYER2_WIN = 4;</code> */
+  /**
+   * <code>PLAYER2_WIN = 4;</code>
+   */
   PLAYER2_WIN(4),
   UNRECOGNIZED(-1),
   ;
 
-  /** <code>UNKNOWN = 0;</code> */
+  /**
+   * <code>UNKNOWN = 0;</code>
+   */
   public static final int UNKNOWN_VALUE = 0;
-  /** <code>PLAYER1_TURN = 1;</code> */
+  /**
+   * <code>PLAYER1_TURN = 1;</code>
+   */
   public static final int PLAYER1_TURN_VALUE = 1;
-  /** <code>PLAYER2_TURN = 2;</code> */
+  /**
+   * <code>PLAYER2_TURN = 2;</code>
+   */
   public static final int PLAYER2_TURN_VALUE = 2;
-  /** <code>PLAYER1_WIN = 3;</code> */
+  /**
+   * <code>PLAYER1_WIN = 3;</code>
+   */
   public static final int PLAYER1_WIN_VALUE = 3;
-  /** <code>PLAYER2_WIN = 4;</code> */
+  /**
+   * <code>PLAYER2_WIN = 4;</code>
+   */
   public static final int PLAYER2_WIN_VALUE = 4;
 
-  private static final com.google.protobuf.Internal.EnumLiteMap<GameStatus> internalValueMap =
-      new com.google.protobuf.Internal.EnumLiteMap<GameStatus>() {
-        public GameStatus findValueByNumber(int number) {
-          return GameStatus.forNumber(number);
-        }
-      };
-  private static final GameStatus[] VALUES = values();
-  private final int value;
-
-  private GameStatus(int value) {
-    this.value = value;
-  }
-
-  /** @deprecated Use {@link #forNumber(int)} instead. */
-  @java.lang.Deprecated
-  public static GameStatus valueOf(int value) {
-    return forNumber(value);
-  }
-
-  public static GameStatus forNumber(int value) {
-    switch (value) {
-      case 0:
-        return UNKNOWN;
-      case 1:
-        return PLAYER1_TURN;
-      case 2:
-        return PLAYER2_TURN;
-      case 3:
-        return PLAYER1_WIN;
-      case 4:
-        return PLAYER2_WIN;
-      default:
-        return null;
-    }
-  }
-
-  public static com.google.protobuf.Internal.EnumLiteMap<GameStatus> internalGetValueMap() {
-    return internalValueMap;
-  }
-
-  public static final com.google.protobuf.Descriptors.EnumDescriptor getDescriptor() {
-    return io.battlefun.generated.Battlefunio.getDescriptor().getEnumTypes().get(0);
-  }
-
-  public static GameStatus valueOf(com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-    if (desc.getType() != getDescriptor()) {
-      throw new java.lang.IllegalArgumentException("EnumValueDescriptor is not for this type.");
-    }
-    if (desc.getIndex() == -1) {
-      return UNRECOGNIZED;
-    }
-    return VALUES[desc.getIndex()];
-  }
 
   public final int getNumber() {
     if (this == UNRECOGNIZED) {
@@ -91,13 +61,70 @@ public enum GameStatus implements com.google.protobuf.ProtocolMessageEnum {
     return value;
   }
 
-  public final com.google.protobuf.Descriptors.EnumValueDescriptor getValueDescriptor() {
-    return getDescriptor().getValues().get(ordinal());
+  /**
+   * @deprecated Use {@link #forNumber(int)} instead.
+   */
+  @java.lang.Deprecated
+  public static GameStatus valueOf(int value) {
+    return forNumber(value);
   }
 
-  public final com.google.protobuf.Descriptors.EnumDescriptor getDescriptorForType() {
+  public static GameStatus forNumber(int value) {
+    switch (value) {
+      case 0: return UNKNOWN;
+      case 1: return PLAYER1_TURN;
+      case 2: return PLAYER2_TURN;
+      case 3: return PLAYER1_WIN;
+      case 4: return PLAYER2_WIN;
+      default: return null;
+    }
+  }
+
+  public static com.google.protobuf.Internal.EnumLiteMap<GameStatus>
+      internalGetValueMap() {
+    return internalValueMap;
+  }
+  private static final com.google.protobuf.Internal.EnumLiteMap<
+      GameStatus> internalValueMap =
+        new com.google.protobuf.Internal.EnumLiteMap<GameStatus>() {
+          public GameStatus findValueByNumber(int number) {
+            return GameStatus.forNumber(number);
+          }
+        };
+
+  public final com.google.protobuf.Descriptors.EnumValueDescriptor
+      getValueDescriptor() {
+    return getDescriptor().getValues().get(ordinal());
+  }
+  public final com.google.protobuf.Descriptors.EnumDescriptor
+      getDescriptorForType() {
     return getDescriptor();
+  }
+  public static final com.google.protobuf.Descriptors.EnumDescriptor
+      getDescriptor() {
+    return io.battlefun.generated.Battlefunio.getDescriptor().getEnumTypes().get(0);
+  }
+
+  private static final GameStatus[] VALUES = values();
+
+  public static GameStatus valueOf(
+      com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+    if (desc.getType() != getDescriptor()) {
+      throw new java.lang.IllegalArgumentException(
+        "EnumValueDescriptor is not for this type.");
+    }
+    if (desc.getIndex() == -1) {
+      return UNRECOGNIZED;
+    }
+    return VALUES[desc.getIndex()];
+  }
+
+  private final int value;
+
+  private GameStatus(int value) {
+    this.value = value;
   }
 
   // @@protoc_insertion_point(enum_scope:io.battlefun.GameStatus)
 }
+

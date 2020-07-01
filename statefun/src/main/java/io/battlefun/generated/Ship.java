@@ -3,46 +3,28 @@
 
 package io.battlefun.generated;
 
-/** Protobuf type {@code io.battlefun.Ship} */
-public final class Ship extends com.google.protobuf.GeneratedMessageV3
-    implements
+/**
+ * Protobuf type {@code io.battlefun.Ship}
+ */
+public  final class Ship extends
+    com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:io.battlefun.Ship)
     ShipOrBuilder {
-  public static final int TYPE_FIELD_NUMBER = 1;
-  public static final int CELLS_FIELD_NUMBER = 2;
-  private static final long serialVersionUID = 0L;
-  // @@protoc_insertion_point(class_scope:io.battlefun.Ship)
-  private static final io.battlefun.generated.Ship DEFAULT_INSTANCE;
-  private static final com.google.protobuf.Parser<Ship> PARSER =
-      new com.google.protobuf.AbstractParser<Ship>() {
-        @java.lang.Override
-        public Ship parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Ship(input, extensionRegistry);
-        }
-      };
-
-  static {
-    DEFAULT_INSTANCE = new io.battlefun.generated.Ship();
-  }
-
-  private int bitField0_;
-  private volatile java.lang.Object type_;
-  private com.google.protobuf.Internal.LongList cells_;
-  private int cellsMemoizedSerializedSize = -1;
-  private byte memoizedIsInitialized = -1;
+private static final long serialVersionUID = 0L;
   // Use Ship.newBuilder() to construct.
   private Ship(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-
   private Ship() {
     type_ = "";
-    cells_ = emptyLongList();
+    cells_ = java.util.Collections.emptyList();
   }
 
+  @java.lang.Override
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
+  }
   private Ship(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -62,152 +44,58 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
           case 0:
             done = true;
             break;
-          case 10:
-            {
-              java.lang.String s = input.readStringRequireUtf8();
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-              type_ = s;
-              break;
+            type_ = s;
+            break;
+          }
+          case 16: {
+            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              cells_ = new java.util.ArrayList<java.lang.Long>();
+              mutable_bitField0_ |= 0x00000002;
             }
-          case 16:
-            {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                cells_ = newLongList();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              cells_.addLong(input.readInt64());
-              break;
+            cells_.add(input.readInt64());
+            break;
+          }
+          case 18: {
+            int length = input.readRawVarint32();
+            int limit = input.pushLimit(length);
+            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+              cells_ = new java.util.ArrayList<java.lang.Long>();
+              mutable_bitField0_ |= 0x00000002;
             }
-          case 18:
-            {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
-                cells_ = newLongList();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                cells_.addLong(input.readInt64());
-              }
-              input.popLimit(limit);
-              break;
+            while (input.getBytesUntilLimit() > 0) {
+              cells_.add(input.readInt64());
             }
-          default:
-            {
-              if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
+            input.popLimit(limit);
+            break;
+          }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
             }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
+      throw new com.google.protobuf.InvalidProtocolBufferException(
+          e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) != 0)) {
-        cells_.makeImmutable(); // C
+      if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        cells_ = java.util.Collections.unmodifiableList(cells_);
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
-
-  public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+  public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
     return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_Ship_descriptor;
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(
-      java.nio.ByteBuffer data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(
-      com.google.protobuf.ByteString data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(
-      byte[] data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(
-      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.Ship parseDelimitedFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.Ship parseDelimitedFrom(
-      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(com.google.protobuf.CodedInputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.Ship parseFrom(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-  public static Builder newBuilder(io.battlefun.generated.Ship prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
-
-  public static io.battlefun.generated.Ship getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
-
-  public static com.google.protobuf.Parser<Ship> parser() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-    return this.unknownFields;
   }
 
   @java.lang.Override
@@ -218,25 +106,34 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
             io.battlefun.generated.Ship.class, io.battlefun.generated.Ship.Builder.class);
   }
 
-  /** <code>string type = 1;</code> */
+  private int bitField0_;
+  public static final int TYPE_FIELD_NUMBER = 1;
+  private volatile java.lang.Object type_;
+  /**
+   * <code>string type = 1;</code>
+   */
   public java.lang.String getType() {
     java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
-      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
       type_ = s;
       return s;
     }
   }
-
-  /** <code>string type = 1;</code> */
-  public com.google.protobuf.ByteString getTypeBytes() {
+  /**
+   * <code>string type = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getTypeBytes() {
     java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
       type_ = b;
       return b;
     } else {
@@ -244,21 +141,30 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
     }
   }
 
-  /** <code>repeated int64 cells = 2;</code> */
-  public java.util.List<java.lang.Long> getCellsList() {
+  public static final int CELLS_FIELD_NUMBER = 2;
+  private java.util.List<java.lang.Long> cells_;
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
+  public java.util.List<java.lang.Long>
+      getCellsList() {
     return cells_;
   }
-
-  /** <code>repeated int64 cells = 2;</code> */
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
   public int getCellsCount() {
     return cells_.size();
   }
-
-  /** <code>repeated int64 cells = 2;</code> */
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
   public long getCells(int index) {
-    return cells_.getLong(index);
+    return cells_.get(index);
   }
+  private int cellsMemoizedSerializedSize = -1;
 
+  private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -270,7 +176,8 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
   }
 
   @java.lang.Override
-  public void writeTo(com.google.protobuf.CodedOutputStream output) throws java.io.IOException {
+  public void writeTo(com.google.protobuf.CodedOutputStream output)
+                      throws java.io.IOException {
     getSerializedSize();
     if (!getTypeBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
@@ -280,7 +187,7 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
       output.writeUInt32NoTag(cellsMemoizedSerializedSize);
     }
     for (int i = 0; i < cells_.size(); i++) {
-      output.writeInt64NoTag(cells_.getLong(i));
+      output.writeInt64NoTag(cells_.get(i));
     }
     unknownFields.writeTo(output);
   }
@@ -297,12 +204,14 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
     {
       int dataSize = 0;
       for (int i = 0; i < cells_.size(); i++) {
-        dataSize += com.google.protobuf.CodedOutputStream.computeInt64SizeNoTag(cells_.getLong(i));
+        dataSize += com.google.protobuf.CodedOutputStream
+          .computeInt64SizeNoTag(cells_.get(i));
       }
       size += dataSize;
       if (!getCellsList().isEmpty()) {
         size += 1;
-        size += com.google.protobuf.CodedOutputStream.computeInt32SizeNoTag(dataSize);
+        size += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(dataSize);
       }
       cellsMemoizedSerializedSize = dataSize;
     }
@@ -314,17 +223,20 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
   @java.lang.Override
   public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
-      return true;
+     return true;
     }
     if (!(obj instanceof io.battlefun.generated.Ship)) {
       return super.equals(obj);
     }
     io.battlefun.generated.Ship other = (io.battlefun.generated.Ship) obj;
 
-    if (!getType().equals(other.getType())) return false;
-    if (!getCellsList().equals(other.getCellsList())) return false;
-    if (!unknownFields.equals(other.unknownFields)) return false;
-    return true;
+    boolean result = true;
+    result = result && getType()
+        .equals(other.getType());
+    result = result && getCellsList()
+        .equals(other.getCellsList());
+    result = result && unknownFields.equals(other.unknownFields);
+    return result;
   }
 
   @java.lang.Override
@@ -345,52 +257,105 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
     return hash;
   }
 
-  @java.lang.Override
-  public Builder newBuilderForType() {
-    return newBuilder();
+  public static io.battlefun.generated.Ship parseFrom(
+      java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      java.nio.ByteBuffer data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      com.google.protobuf.ByteString data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      com.google.protobuf.ByteString data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.Ship parseFrom(byte[] data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      byte[] data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.Ship parseFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static io.battlefun.generated.Ship parseDelimitedFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.Ship parseDelimitedFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      com.google.protobuf.CodedInputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.Ship parseFrom(
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
+  public Builder newBuilderForType() { return newBuilder(); }
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+  public static Builder newBuilder(io.battlefun.generated.Ship prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
   @java.lang.Override
   public Builder toBuilder() {
-    return this == DEFAULT_INSTANCE ? new Builder() : new Builder().mergeFrom(this);
+    return this == DEFAULT_INSTANCE
+        ? new Builder() : new Builder().mergeFrom(this);
   }
 
   @java.lang.Override
-  protected Builder newBuilderForType(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+  protected Builder newBuilderForType(
+      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
-
-  @java.lang.Override
-  public com.google.protobuf.Parser<Ship> getParserForType() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public io.battlefun.generated.Ship getDefaultInstanceForType() {
-    return DEFAULT_INSTANCE;
-  }
-
-  /** Protobuf type {@code io.battlefun.Ship} */
-  public static final class Builder extends com.google.protobuf.GeneratedMessageV3.Builder<Builder>
-      implements
+  /**
+   * Protobuf type {@code io.battlefun.Ship}
+   */
+  public static final class Builder extends
+      com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:io.battlefun.Ship)
       io.battlefun.generated.ShipOrBuilder {
-    private int bitField0_;
-    private java.lang.Object type_ = "";
-    private com.google.protobuf.Internal.LongList cells_ = emptyLongList();
-
-    // Construct using io.battlefun.generated.Ship.newBuilder()
-    private Builder() {
-      maybeForceBuilderInitialization();
-    }
-
-    private Builder(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      super(parent);
-      maybeForceBuilderInitialization();
-    }
-
-    public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
       return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_Ship_descriptor;
     }
 
@@ -402,22 +367,34 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
               io.battlefun.generated.Ship.class, io.battlefun.generated.Ship.Builder.class);
     }
 
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders) {}
+    // Construct using io.battlefun.generated.Ship.newBuilder()
+    private Builder() {
+      maybeForceBuilderInitialization();
     }
 
+    private Builder(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      super(parent);
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
+    }
     @java.lang.Override
     public Builder clear() {
       super.clear();
       type_ = "";
 
-      cells_ = emptyLongList();
+      cells_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
+    public com.google.protobuf.Descriptors.Descriptor
+        getDescriptorForType() {
       return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_Ship_descriptor;
     }
 
@@ -441,8 +418,8 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
       int from_bitField0_ = bitField0_;
       int to_bitField0_ = 0;
       result.type_ = type_;
-      if (((bitField0_ & 0x00000002) != 0)) {
-        cells_.makeImmutable();
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        cells_ = java.util.Collections.unmodifiableList(cells_);
         bitField0_ = (bitField0_ & ~0x00000002);
       }
       result.cells_ = cells_;
@@ -453,41 +430,40 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
 
     @java.lang.Override
     public Builder clone() {
-      return super.clone();
+      return (Builder) super.clone();
     }
-
     @java.lang.Override
     public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
-      return super.setField(field, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
     }
-
     @java.lang.Override
-    public Builder clearField(com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return super.clearField(field);
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
     }
-
     @java.lang.Override
-    public Builder clearOneof(com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return super.clearOneof(oneof);
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
     }
-
     @java.lang.Override
     public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
     }
-
     @java.lang.Override
     public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
     }
-
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.battlefun.generated.Ship) {
-        return mergeFrom((io.battlefun.generated.Ship) other);
+        return mergeFrom((io.battlefun.generated.Ship)other);
       } else {
         super.mergeFrom(other);
         return this;
@@ -538,12 +514,17 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
+    private int bitField0_;
 
-    /** <code>string type = 1;</code> */
+    private java.lang.Object type_ = "";
+    /**
+     * <code>string type = 1;</code>
+     */
     public java.lang.String getType() {
       java.lang.Object ref = type_;
       if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         type_ = s;
         return s;
@@ -551,103 +532,128 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
         return (java.lang.String) ref;
       }
     }
-
-    /** <code>string type = 1;</code> */
-    public Builder setType(java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-
-      type_ = value;
-      onChanged();
-      return this;
-    }
-
-    /** <code>string type = 1;</code> */
-    public com.google.protobuf.ByteString getTypeBytes() {
+    /**
+     * <code>string type = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
       java.lang.Object ref = type_;
       if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         type_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-
-    /** <code>string type = 1;</code> */
-    public Builder setTypeBytes(com.google.protobuf.ByteString value) {
+    /**
+     * <code>string type = 1;</code>
+     */
+    public Builder setType(
+        java.lang.String value) {
       if (value == null) {
-        throw new NullPointerException();
-      }
-      checkByteStringIsUtf8(value);
-
+    throw new NullPointerException();
+  }
+  
+      type_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string type = 1;</code>
+     */
+    public Builder clearType() {
+      
+      type_ = getDefaultInstance().getType();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string type = 1;</code>
+     */
+    public Builder setTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
       type_ = value;
       onChanged();
       return this;
     }
 
-    /** <code>string type = 1;</code> */
-    public Builder clearType() {
-
-      type_ = getDefaultInstance().getType();
-      onChanged();
-      return this;
-    }
-
+    private java.util.List<java.lang.Long> cells_ = java.util.Collections.emptyList();
     private void ensureCellsIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
-        cells_ = mutableCopy(cells_);
+      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        cells_ = new java.util.ArrayList<java.lang.Long>(cells_);
         bitField0_ |= 0x00000002;
-      }
+       }
     }
-    /** <code>repeated int64 cells = 2;</code> */
-    public java.util.List<java.lang.Long> getCellsList() {
-      return ((bitField0_ & 0x00000002) != 0)
-          ? java.util.Collections.unmodifiableList(cells_)
-          : cells_;
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
+    public java.util.List<java.lang.Long>
+        getCellsList() {
+      return java.util.Collections.unmodifiableList(cells_);
     }
-    /** <code>repeated int64 cells = 2;</code> */
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
     public int getCellsCount() {
       return cells_.size();
     }
-    /** <code>repeated int64 cells = 2;</code> */
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
     public long getCells(int index) {
-      return cells_.getLong(index);
+      return cells_.get(index);
     }
-    /** <code>repeated int64 cells = 2;</code> */
-    public Builder setCells(int index, long value) {
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
+    public Builder setCells(
+        int index, long value) {
       ensureCellsIsMutable();
-      cells_.setLong(index, value);
+      cells_.set(index, value);
       onChanged();
       return this;
     }
-    /** <code>repeated int64 cells = 2;</code> */
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
     public Builder addCells(long value) {
       ensureCellsIsMutable();
-      cells_.addLong(value);
+      cells_.add(value);
       onChanged();
       return this;
     }
-    /** <code>repeated int64 cells = 2;</code> */
-    public Builder addAllCells(java.lang.Iterable<? extends java.lang.Long> values) {
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
+    public Builder addAllCells(
+        java.lang.Iterable<? extends java.lang.Long> values) {
       ensureCellsIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(values, cells_);
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, cells_);
       onChanged();
       return this;
     }
-    /** <code>repeated int64 cells = 2;</code> */
+    /**
+     * <code>repeated int64 cells = 2;</code>
+     */
     public Builder clearCells() {
-      cells_ = emptyLongList();
+      cells_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
-
     @java.lang.Override
-    public final Builder setUnknownFields(final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFields(unknownFields);
+    public final Builder setUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.setUnknownFieldsProto3(unknownFields);
     }
 
     @java.lang.Override
@@ -656,6 +662,44 @@ public final class Ship extends com.google.protobuf.GeneratedMessageV3
       return super.mergeUnknownFields(unknownFields);
     }
 
+
     // @@protoc_insertion_point(builder_scope:io.battlefun.Ship)
   }
+
+  // @@protoc_insertion_point(class_scope:io.battlefun.Ship)
+  private static final io.battlefun.generated.Ship DEFAULT_INSTANCE;
+  static {
+    DEFAULT_INSTANCE = new io.battlefun.generated.Ship();
+  }
+
+  public static io.battlefun.generated.Ship getDefaultInstance() {
+    return DEFAULT_INSTANCE;
+  }
+
+  private static final com.google.protobuf.Parser<Ship>
+      PARSER = new com.google.protobuf.AbstractParser<Ship>() {
+    @java.lang.Override
+    public Ship parsePartialFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return new Ship(input, extensionRegistry);
+    }
+  };
+
+  public static com.google.protobuf.Parser<Ship> parser() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public com.google.protobuf.Parser<Ship> getParserForType() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public io.battlefun.generated.Ship getDefaultInstanceForType() {
+    return DEFAULT_INSTANCE;
+  }
+
 }
+

@@ -3,20 +3,30 @@
 
 package io.battlefun.generated;
 
-public interface ShipOrBuilder
-    extends
+public interface ShipOrBuilder extends
     // @@protoc_insertion_point(interface_extends:io.battlefun.Ship)
     com.google.protobuf.MessageOrBuilder {
 
-  /** <code>string type = 1;</code> */
+  /**
+   * <code>string type = 1;</code>
+   */
   java.lang.String getType();
-  /** <code>string type = 1;</code> */
-  com.google.protobuf.ByteString getTypeBytes();
+  /**
+   * <code>string type = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getTypeBytes();
 
-  /** <code>repeated int64 cells = 2;</code> */
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
   java.util.List<java.lang.Long> getCellsList();
-  /** <code>repeated int64 cells = 2;</code> */
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
   int getCellsCount();
-  /** <code>repeated int64 cells = 2;</code> */
+  /**
+   * <code>repeated int64 cells = 2;</code>
+   */
   long getCells(int index);
 }

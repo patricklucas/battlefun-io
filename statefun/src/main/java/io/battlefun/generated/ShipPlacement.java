@@ -3,42 +3,27 @@
 
 package io.battlefun.generated;
 
-/** Protobuf type {@code io.battlefun.ShipPlacement} */
-public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
-    implements
+/**
+ * Protobuf type {@code io.battlefun.ShipPlacement}
+ */
+public  final class ShipPlacement extends
+    com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:io.battlefun.ShipPlacement)
     ShipPlacementOrBuilder {
-  public static final int SHIPS_FIELD_NUMBER = 1;
-  private static final long serialVersionUID = 0L;
-  // @@protoc_insertion_point(class_scope:io.battlefun.ShipPlacement)
-  private static final io.battlefun.generated.ShipPlacement DEFAULT_INSTANCE;
-  private static final com.google.protobuf.Parser<ShipPlacement> PARSER =
-      new com.google.protobuf.AbstractParser<ShipPlacement>() {
-        @java.lang.Override
-        public ShipPlacement parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ShipPlacement(input, extensionRegistry);
-        }
-      };
-
-  static {
-    DEFAULT_INSTANCE = new io.battlefun.generated.ShipPlacement();
-  }
-
-  private java.util.List<io.battlefun.generated.Ship> ships_;
-  private byte memoizedIsInitialized = -1;
-
+private static final long serialVersionUID = 0L;
   // Use ShipPlacement.newBuilder() to construct.
   private ShipPlacement(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-
   private ShipPlacement() {
     ships_ = java.util.Collections.emptyList();
   }
 
+  @java.lang.Override
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
+  }
   private ShipPlacement(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -58,169 +43,86 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
           case 0:
             done = true;
             break;
-          case 10:
-            {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                ships_ = new java.util.ArrayList<io.battlefun.generated.Ship>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              ships_.add(
-                  input.readMessage(io.battlefun.generated.Ship.parser(), extensionRegistry));
-              break;
+          case 10: {
+            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              ships_ = new java.util.ArrayList<io.battlefun.generated.Ship>();
+              mutable_bitField0_ |= 0x00000001;
             }
-          default:
-            {
-              if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
+            ships_.add(
+                input.readMessage(io.battlefun.generated.Ship.parser(), extensionRegistry));
+            break;
+          }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
             }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new com.google.protobuf.InvalidProtocolBufferException(e).setUnfinishedMessage(this);
+      throw new com.google.protobuf.InvalidProtocolBufferException(
+          e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
         ships_ = java.util.Collections.unmodifiableList(ships_);
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
   }
-
-  public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
+  public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
     return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      java.nio.ByteBuffer data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.ByteString data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      byte[] data, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(
-      java.io.InputStream input, com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseDelimitedWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.CodedInputStream input) throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(PARSER, input);
-  }
-
-  public static io.battlefun.generated.ShipPlacement parseFrom(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3.parseWithIOException(
-        PARSER, input, extensionRegistry);
-  }
-
-  public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-  public static Builder newBuilder(io.battlefun.generated.ShipPlacement prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
-
-  public static io.battlefun.generated.ShipPlacement getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
-
-  public static com.google.protobuf.Parser<ShipPlacement> parser() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet getUnknownFields() {
-    return this.unknownFields;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return io.battlefun.generated.Battlefunio
-        .internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
+    return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            io.battlefun.generated.ShipPlacement.class,
-            io.battlefun.generated.ShipPlacement.Builder.class);
+            io.battlefun.generated.ShipPlacement.class, io.battlefun.generated.ShipPlacement.Builder.class);
   }
 
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  public static final int SHIPS_FIELD_NUMBER = 1;
+  private java.util.List<io.battlefun.generated.Ship> ships_;
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
   public java.util.List<io.battlefun.generated.Ship> getShipsList() {
     return ships_;
   }
-
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-  public java.util.List<? extends io.battlefun.generated.ShipOrBuilder> getShipsOrBuilderList() {
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
+  public java.util.List<? extends io.battlefun.generated.ShipOrBuilder> 
+      getShipsOrBuilderList() {
     return ships_;
   }
-
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
   public int getShipsCount() {
     return ships_.size();
   }
-
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
   public io.battlefun.generated.Ship getShips(int index) {
     return ships_.get(index);
   }
-
-  /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-  public io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(int index) {
+  /**
+   * <code>repeated .io.battlefun.Ship ships = 1;</code>
+   */
+  public io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(
+      int index) {
     return ships_.get(index);
   }
 
+  private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -232,7 +134,8 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
   }
 
   @java.lang.Override
-  public void writeTo(com.google.protobuf.CodedOutputStream output) throws java.io.IOException {
+  public void writeTo(com.google.protobuf.CodedOutputStream output)
+                      throws java.io.IOException {
     for (int i = 0; i < ships_.size(); i++) {
       output.writeMessage(1, ships_.get(i));
     }
@@ -246,7 +149,8 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
 
     size = 0;
     for (int i = 0; i < ships_.size(); i++) {
-      size += com.google.protobuf.CodedOutputStream.computeMessageSize(1, ships_.get(i));
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, ships_.get(i));
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -256,16 +160,18 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
   @java.lang.Override
   public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
-      return true;
+     return true;
     }
     if (!(obj instanceof io.battlefun.generated.ShipPlacement)) {
       return super.equals(obj);
     }
     io.battlefun.generated.ShipPlacement other = (io.battlefun.generated.ShipPlacement) obj;
 
-    if (!getShipsList().equals(other.getShipsList())) return false;
-    if (!unknownFields.equals(other.unknownFields)) return false;
-    return true;
+    boolean result = true;
+    result = result && getShipsList()
+        .equals(other.getShipsList());
+    result = result && unknownFields.equals(other.unknownFields);
+    return result;
   }
 
   @java.lang.Override
@@ -284,76 +190,132 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
     return hash;
   }
 
-  @java.lang.Override
-  public Builder newBuilderForType() {
-    return newBuilder();
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      java.nio.ByteBuffer data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.ByteString data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.ByteString data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(byte[] data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      byte[] data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.ShipPlacement parseDelimitedFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.CodedInputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static io.battlefun.generated.ShipPlacement parseFrom(
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
+  public Builder newBuilderForType() { return newBuilder(); }
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+  public static Builder newBuilder(io.battlefun.generated.ShipPlacement prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
   @java.lang.Override
   public Builder toBuilder() {
-    return this == DEFAULT_INSTANCE ? new Builder() : new Builder().mergeFrom(this);
+    return this == DEFAULT_INSTANCE
+        ? new Builder() : new Builder().mergeFrom(this);
   }
 
   @java.lang.Override
-  protected Builder newBuilderForType(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+  protected Builder newBuilderForType(
+      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
-
-  @java.lang.Override
-  public com.google.protobuf.Parser<ShipPlacement> getParserForType() {
-    return PARSER;
-  }
-
-  @java.lang.Override
-  public io.battlefun.generated.ShipPlacement getDefaultInstanceForType() {
-    return DEFAULT_INSTANCE;
-  }
-
-  /** Protobuf type {@code io.battlefun.ShipPlacement} */
-  public static final class Builder extends com.google.protobuf.GeneratedMessageV3.Builder<Builder>
-      implements
+  /**
+   * Protobuf type {@code io.battlefun.ShipPlacement}
+   */
+  public static final class Builder extends
+      com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:io.battlefun.ShipPlacement)
       io.battlefun.generated.ShipPlacementOrBuilder {
-    private int bitField0_;
-    private java.util.List<io.battlefun.generated.Ship> ships_ = java.util.Collections.emptyList();
-    private com.google.protobuf.RepeatedFieldBuilderV3<
-            io.battlefun.generated.Ship,
-            io.battlefun.generated.Ship.Builder,
-            io.battlefun.generated.ShipOrBuilder>
-        shipsBuilder_;
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              io.battlefun.generated.ShipPlacement.class, io.battlefun.generated.ShipPlacement.Builder.class);
+    }
 
     // Construct using io.battlefun.generated.ShipPlacement.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
 
-    private Builder(com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+    private Builder(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
       maybeForceBuilderInitialization();
     }
-
-    public static final com.google.protobuf.Descriptors.Descriptor getDescriptor() {
-      return io.battlefun.generated.Battlefunio
-          .internal_static_io_battlefun_ShipPlacement_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return io.battlefun.generated.Battlefunio
-          .internal_static_io_battlefun_ShipPlacement_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              io.battlefun.generated.ShipPlacement.class,
-              io.battlefun.generated.ShipPlacement.Builder.class);
-    }
-
     private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders) {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
         getShipsFieldBuilder();
       }
     }
-
     @java.lang.Override
     public Builder clear() {
       super.clear();
@@ -367,9 +329,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
     }
 
     @java.lang.Override
-    public com.google.protobuf.Descriptors.Descriptor getDescriptorForType() {
-      return io.battlefun.generated.Battlefunio
-          .internal_static_io_battlefun_ShipPlacement_descriptor;
+    public com.google.protobuf.Descriptors.Descriptor
+        getDescriptorForType() {
+      return io.battlefun.generated.Battlefunio.internal_static_io_battlefun_ShipPlacement_descriptor;
     }
 
     @java.lang.Override
@@ -391,7 +353,7 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       io.battlefun.generated.ShipPlacement result = new io.battlefun.generated.ShipPlacement(this);
       int from_bitField0_ = bitField0_;
       if (shipsBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
           ships_ = java.util.Collections.unmodifiableList(ships_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
@@ -405,41 +367,40 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
 
     @java.lang.Override
     public Builder clone() {
-      return super.clone();
+      return (Builder) super.clone();
     }
-
     @java.lang.Override
     public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
-      return super.setField(field, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
     }
-
     @java.lang.Override
-    public Builder clearField(com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return super.clearField(field);
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
     }
-
     @java.lang.Override
-    public Builder clearOneof(com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return super.clearOneof(oneof);
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
     }
-
     @java.lang.Override
     public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
     }
-
     @java.lang.Override
     public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field, java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
     }
-
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.battlefun.generated.ShipPlacement) {
-        return mergeFrom((io.battlefun.generated.ShipPlacement) other);
+        return mergeFrom((io.battlefun.generated.ShipPlacement)other);
       } else {
         super.mergeFrom(other);
         return this;
@@ -466,10 +427,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
             shipsBuilder_ = null;
             ships_ = other.ships_;
             bitField0_ = (bitField0_ & ~0x00000001);
-            shipsBuilder_ =
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders
-                    ? getShipsFieldBuilder()
-                    : null;
+            shipsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getShipsFieldBuilder() : null;
           } else {
             shipsBuilder_.addAllMessages(other.ships_);
           }
@@ -503,15 +463,23 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
+    private int bitField0_;
 
+    private java.util.List<io.battlefun.generated.Ship> ships_ =
+      java.util.Collections.emptyList();
     private void ensureShipsIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
         ships_ = new java.util.ArrayList<io.battlefun.generated.Ship>(ships_);
         bitField0_ |= 0x00000001;
-      }
+       }
     }
 
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        io.battlefun.generated.Ship, io.battlefun.generated.Ship.Builder, io.battlefun.generated.ShipOrBuilder> shipsBuilder_;
+
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public java.util.List<io.battlefun.generated.Ship> getShipsList() {
       if (shipsBuilder_ == null) {
         return java.util.Collections.unmodifiableList(ships_);
@@ -519,7 +487,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
         return shipsBuilder_.getMessageList();
       }
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public int getShipsCount() {
       if (shipsBuilder_ == null) {
         return ships_.size();
@@ -527,7 +497,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
         return shipsBuilder_.getCount();
       }
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public io.battlefun.generated.Ship getShips(int index) {
       if (shipsBuilder_ == null) {
         return ships_.get(index);
@@ -535,8 +507,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
         return shipsBuilder_.getMessage(index);
       }
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder setShips(int index, io.battlefun.generated.Ship value) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder setShips(
+        int index, io.battlefun.generated.Ship value) {
       if (shipsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -549,8 +524,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder setShips(int index, io.battlefun.generated.Ship.Builder builderForValue) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder setShips(
+        int index, io.battlefun.generated.Ship.Builder builderForValue) {
       if (shipsBuilder_ == null) {
         ensureShipsIsMutable();
         ships_.set(index, builderForValue.build());
@@ -560,7 +538,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public Builder addShips(io.battlefun.generated.Ship value) {
       if (shipsBuilder_ == null) {
         if (value == null) {
@@ -574,8 +554,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder addShips(int index, io.battlefun.generated.Ship value) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder addShips(
+        int index, io.battlefun.generated.Ship value) {
       if (shipsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -588,8 +571,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder addShips(io.battlefun.generated.Ship.Builder builderForValue) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder addShips(
+        io.battlefun.generated.Ship.Builder builderForValue) {
       if (shipsBuilder_ == null) {
         ensureShipsIsMutable();
         ships_.add(builderForValue.build());
@@ -599,8 +585,11 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder addShips(int index, io.battlefun.generated.Ship.Builder builderForValue) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder addShips(
+        int index, io.battlefun.generated.Ship.Builder builderForValue) {
       if (shipsBuilder_ == null) {
         ensureShipsIsMutable();
         ships_.add(index, builderForValue.build());
@@ -610,18 +599,24 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public Builder addAllShips(java.lang.Iterable<? extends io.battlefun.generated.Ship> values) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public Builder addAllShips(
+        java.lang.Iterable<? extends io.battlefun.generated.Ship> values) {
       if (shipsBuilder_ == null) {
         ensureShipsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(values, ships_);
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, ships_);
         onChanged();
       } else {
         shipsBuilder_.addAllMessages(values);
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public Builder clearShips() {
       if (shipsBuilder_ == null) {
         ships_ = java.util.Collections.emptyList();
@@ -632,7 +627,9 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public Builder removeShips(int index) {
       if (shipsBuilder_ == null) {
         ensureShipsIsMutable();
@@ -643,60 +640,74 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       }
       return this;
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public io.battlefun.generated.Ship.Builder getShipsBuilder(int index) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public io.battlefun.generated.Ship.Builder getShipsBuilder(
+        int index) {
       return getShipsFieldBuilder().getBuilder(index);
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(int index) {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public io.battlefun.generated.ShipOrBuilder getShipsOrBuilder(
+        int index) {
       if (shipsBuilder_ == null) {
-        return ships_.get(index);
-      } else {
+        return ships_.get(index);  } else {
         return shipsBuilder_.getMessageOrBuilder(index);
       }
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public java.util.List<? extends io.battlefun.generated.ShipOrBuilder> getShipsOrBuilderList() {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public java.util.List<? extends io.battlefun.generated.ShipOrBuilder> 
+         getShipsOrBuilderList() {
       if (shipsBuilder_ != null) {
         return shipsBuilder_.getMessageOrBuilderList();
       } else {
         return java.util.Collections.unmodifiableList(ships_);
       }
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
     public io.battlefun.generated.Ship.Builder addShipsBuilder() {
-      return getShipsFieldBuilder().addBuilder(io.battlefun.generated.Ship.getDefaultInstance());
+      return getShipsFieldBuilder().addBuilder(
+          io.battlefun.generated.Ship.getDefaultInstance());
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public io.battlefun.generated.Ship.Builder addShipsBuilder(int index) {
-      return getShipsFieldBuilder()
-          .addBuilder(index, io.battlefun.generated.Ship.getDefaultInstance());
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public io.battlefun.generated.Ship.Builder addShipsBuilder(
+        int index) {
+      return getShipsFieldBuilder().addBuilder(
+          index, io.battlefun.generated.Ship.getDefaultInstance());
     }
-    /** <code>repeated .io.battlefun.Ship ships = 1;</code> */
-    public java.util.List<io.battlefun.generated.Ship.Builder> getShipsBuilderList() {
+    /**
+     * <code>repeated .io.battlefun.Ship ships = 1;</code>
+     */
+    public java.util.List<io.battlefun.generated.Ship.Builder> 
+         getShipsBuilderList() {
       return getShipsFieldBuilder().getBuilderList();
     }
-
     private com.google.protobuf.RepeatedFieldBuilderV3<
-            io.battlefun.generated.Ship,
-            io.battlefun.generated.Ship.Builder,
-            io.battlefun.generated.ShipOrBuilder>
+        io.battlefun.generated.Ship, io.battlefun.generated.Ship.Builder, io.battlefun.generated.ShipOrBuilder> 
         getShipsFieldBuilder() {
       if (shipsBuilder_ == null) {
-        shipsBuilder_ =
-            new com.google.protobuf.RepeatedFieldBuilderV3<
-                io.battlefun.generated.Ship,
-                io.battlefun.generated.Ship.Builder,
-                io.battlefun.generated.ShipOrBuilder>(
-                ships_, ((bitField0_ & 0x00000001) != 0), getParentForChildren(), isClean());
+        shipsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            io.battlefun.generated.Ship, io.battlefun.generated.Ship.Builder, io.battlefun.generated.ShipOrBuilder>(
+                ships_,
+                ((bitField0_ & 0x00000001) == 0x00000001),
+                getParentForChildren(),
+                isClean());
         ships_ = null;
       }
       return shipsBuilder_;
     }
-
     @java.lang.Override
-    public final Builder setUnknownFields(final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFields(unknownFields);
+    public final Builder setUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.setUnknownFieldsProto3(unknownFields);
     }
 
     @java.lang.Override
@@ -705,6 +716,44 @@ public final class ShipPlacement extends com.google.protobuf.GeneratedMessageV3
       return super.mergeUnknownFields(unknownFields);
     }
 
+
     // @@protoc_insertion_point(builder_scope:io.battlefun.ShipPlacement)
   }
+
+  // @@protoc_insertion_point(class_scope:io.battlefun.ShipPlacement)
+  private static final io.battlefun.generated.ShipPlacement DEFAULT_INSTANCE;
+  static {
+    DEFAULT_INSTANCE = new io.battlefun.generated.ShipPlacement();
+  }
+
+  public static io.battlefun.generated.ShipPlacement getDefaultInstance() {
+    return DEFAULT_INSTANCE;
+  }
+
+  private static final com.google.protobuf.Parser<ShipPlacement>
+      PARSER = new com.google.protobuf.AbstractParser<ShipPlacement>() {
+    @java.lang.Override
+    public ShipPlacement parsePartialFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return new ShipPlacement(input, extensionRegistry);
+    }
+  };
+
+  public static com.google.protobuf.Parser<ShipPlacement> parser() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public com.google.protobuf.Parser<ShipPlacement> getParserForType() {
+    return PARSER;
+  }
+
+  @java.lang.Override
+  public io.battlefun.generated.ShipPlacement getDefaultInstanceForType() {
+    return DEFAULT_INSTANCE;
+  }
+
 }
+
