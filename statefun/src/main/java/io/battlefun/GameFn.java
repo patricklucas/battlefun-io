@@ -62,24 +62,24 @@ public final class GameFn implements StatefulFunction {
     context.send(Constants.OUTPUT, out.build());
   }
 
-  private void handleCreateGame(Builder builder, CreateGame createGame) {
+  private void handleCreateGame(Builder resultBuilder, CreateGame createGame) {
     GameUpdate newGame = GameLogic.create(createGame);
 
     // remember the game
     game.set(newGame);
 
-    builder.setGameUpdate(newGame);
-    builder.setGameId(createGame.getGameId());
+    resultBuilder.setGameUpdate(newGame);
+    resultBuilder.setGameId(createGame.getGameId());
   }
 
-  private void handleGetGameStatus(Builder builder, GetGameStatus getGameStatus) {
+  private void handleGetGameStatus(Builder resultBuilder, GetGameStatus getGameStatus) {
     GameUpdate game = this.game.get();
-    builder.setGameId(getGameStatus.getGameId());
+    resultBuilder.setGameId(getGameStatus.getGameId());
 
     if (game != null) {
-      builder.setGameUpdate(game);
+      resultBuilder.setGameUpdate(game);
     } else {
-      builder.setFailure(
+      resultBuilder.setFailure(
           Failure.newBuilder()
               .setCode(FailureCodes.UNKNOWN_GAME)
               .setFailureDescription("Unknown game")
@@ -87,12 +87,12 @@ public final class GameFn implements StatefulFunction {
     }
   }
 
-  private void handleTurn(Builder builder, Turn turn) {
+  private void handleTurn(Builder resultBuilder, Turn turn) {
     GameUpdate game = this.game.get();
-    builder.setGameId(turn.getGameId());
+    resultBuilder.setGameId(turn.getGameId());
 
     if (game == null) {
-      builder.setFailure(
+      resultBuilder.setFailure(
           Failure.newBuilder()
               .setCode(FailureCodes.UNKNOWN_GAME)
               .setFailureDescription("Unknown game")
@@ -102,18 +102,18 @@ public final class GameFn implements StatefulFunction {
     Either<GameUpdate, Failure> either = GameLogic.apply(game, turn);
     if (either.isLeft()) {
       this.game.set(game);
-      builder.setGameUpdate(either.left);
+      resultBuilder.setGameUpdate(either.left);
     } else {
-      builder.setFailure(either.right);
+      resultBuilder.setFailure(either.right);
     }
   }
 
-  private void handleResign(Builder builder, Resign resign) {
+  private void handleResign(Builder resultBuilder, Resign resign) {
     GameUpdate game = this.game.get();
-    builder.setGameId(resign.getGameId());
+    resultBuilder.setGameId(resign.getGameId());
 
     if (game == null) {
-      builder.setFailure(
+      resultBuilder.setFailure(
           Failure.newBuilder()
               .setCode(FailureCodes.UNKNOWN_GAME)
               .setFailureDescription("Unknown game")
@@ -129,6 +129,6 @@ public final class GameFn implements StatefulFunction {
       game = game.toBuilder().setStatus(GameStatus.PLAYER1_WIN).build();
     }
     this.game.set(game);
-    builder.setGameUpdate(game);
+    resultBuilder.setGameUpdate(game);
   }
 }
