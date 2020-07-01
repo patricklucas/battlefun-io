@@ -51,7 +51,7 @@ impl GameMaster {
             .expect("uh-oh");
     }
 
-    pub fn turn(
+    pub async fn turn(
         &mut self,
         game_id: GameId,
         player_id: PlayerId,
@@ -70,6 +70,13 @@ impl GameMaster {
             "Game {}: player {} took a shot @ {}",
             game_id, player_id, cell
         );
+
+        self.statefun_kafka_client
+            .write()
+            .await
+            .send_turn(game_id, player_id, cell)
+            .await
+            .expect("uh-oh");
 
         Ok(())
     }
