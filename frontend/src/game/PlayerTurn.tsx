@@ -19,6 +19,16 @@ const ships: {
 
 const CallOut = styled(EuiCallOut)`
   margin-bottom: 16px;
+
+  .euiText:empty {
+    margin: 0;
+  }
+`;
+
+const Badges = styled.div`
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
 `;
 
 export function PlayerTurn(props: Props): JSX.Element | null {
@@ -38,21 +48,20 @@ export function PlayerTurn(props: Props): JSX.Element | null {
     </>
   );
 
+  const badges = Object.entries(ships).map(([ship, name]) => (
+    <EuiBadge
+      key={ship}
+      style={{ marginLeft: 4, marginBottom: 4 }}
+      isDisabled={props.gameState?.destroyed_opponent_ships.includes(ship)}
+      color="danger"
+    >
+      {name}
+    </EuiBadge>
+  ));
+
   return (
     <CallOut color={color} title={title}>
-      <div style={{ margin: "0 -4px" }}>
-        {!your_turn &&
-          Object.entries(ships).map(([ship, name]) => (
-            <EuiBadge
-              key={ship}
-              style={{ marginLeft: 4, marginBottom: 4 }}
-              isDisabled={props.gameState?.destroyed_opponent_ships.includes(ship)}
-              color="danger"
-            >
-              {name}
-            </EuiBadge>
-          ))}
-      </div>
+      {your_turn && <Badges>Enemy Ships: {badges}</Badges>}
     </CallOut>
   );
 }

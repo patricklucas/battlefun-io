@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useCallback } from "react";
 import ReactDOM from "react-dom";
 import useLocalStorage from "react-use-localstorage";
+import { getApiHost } from "./utils/getApiHost";
 
 interface User {
   name: string;
@@ -36,7 +37,7 @@ export const UserProvider: FC = (props) => {
     (event: FormEvent) => {
       event.preventDefault();
       const makeRequest = async () => {
-        const response = await fetch("http://localhost:8000/api/register", {
+        const response = await fetch(`${getApiHost()}/api/register`, {
           method: "POST",
           body: makeBody({ name, token, player_id }),
           headers: { "Content-Type": "application/json" },

@@ -4,6 +4,7 @@ import { SendMessage } from "react-use-websocket";
 import { YLabels, Label, Grid, Board, Cell, XLabels, GridContainer, Icon } from "./Grid.styled";
 import { GameState } from "./game/Game";
 import { Ships } from "./Ships";
+import { getApiHost } from "./utils/getApiHost";
 
 const board = {
   cells: [...new Array(100)],
@@ -16,6 +17,7 @@ interface Props {
   gameState: GameState | null;
   showYourBoard: boolean;
   showEnemyBoard: boolean;
+  takeShot: (cell: number) => (e: MouseEvent) => void;
 }
 
 const stopClick = (e: MouseEvent) => {
@@ -30,7 +32,7 @@ export function GridComponent(props: Props) {
 
   const sendCellClick = useCallback(
     (index: number) => async () => {
-      await fetch("http://localhost:8000/api/publish", {
+      await fetch(`${getApiHost()}/api/publish`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -76,7 +78,7 @@ export function GridComponent(props: Props) {
                 key={index}
                 onMouseEnter={() => setHoveredCell(index)}
                 onMouseLeave={() => setHoveredCell(-1)}
-                onClick={sendCellClick(index)}
+                onClick={props.takeShot(index)}
               ></Cell>
             );
           })}

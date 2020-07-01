@@ -64,7 +64,7 @@ const status: {
   [ReadyState.CONNECTING]: "connecting",
   [ReadyState.OPEN]: "connected",
   [ReadyState.CLOSING]: "disconnecting",
-  [ReadyState.CLOSED]: "disconnected",
+  [ReadyState.CLOSED]: "closed",
   [ReadyState.UNINSTANTIATED]: "disconnected",
 };
 
@@ -76,6 +76,12 @@ function App() {
       setConnection(ReadyState.UNINSTANTIATED);
     }
   }, [player_id, connection]);
+
+  useEffect(() => {
+    if (connection === ReadyState.CLOSED) {
+      logout();
+    }
+  }, [connection]);
 
   return (
     <Container>
@@ -104,7 +110,7 @@ function App() {
       <Content>{!token || !player_id ? <Welcome /> : <Game setConnection={setConnection} />}</Content>
       <Footer>
         <HeaderMaxWidth>
-          <EuiHeaderSection grow={false}>
+          <EuiHeaderSection>
             <EuiHeaderSectionItem>
               <EuiButton onClick={logout}>Logout</EuiButton>
             </EuiHeaderSectionItem>
