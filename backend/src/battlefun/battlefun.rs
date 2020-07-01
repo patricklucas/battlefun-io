@@ -9,7 +9,7 @@ use super::gamemaster::GameMaster;
 use super::kafka::StatefunKafkaClient;
 use super::matchmaking::Matchmaker;
 use super::{
-    proto::{ShipPlacement, Shot},
+    proto::{GameStatus, ShipPlacement, Shot},
     FromBattleFunProto, GameId, Player, PlayerGameState, PlayerId, PlayerToken,
 };
 
@@ -56,7 +56,7 @@ impl BattleFun {
             game_id,
             opponent_id: player2_id,
             current_state: status,
-            your_turn: true,
+            your_turn: status == 1,
             your_shots: player1_shots.iter().map(|s| s.from_proto()).collect(),
             opponent_shots: player2_shots.iter().map(|s| s.from_proto()).collect(),
             destroyed_opponent_ships: get_destroyed_ships(&player2_placement, &player1_shots),
@@ -67,7 +67,7 @@ impl BattleFun {
             game_id,
             opponent_id: player1_id,
             current_state: status,
-            your_turn: true,
+            your_turn: status == 2,
             your_shots: player2_shots.iter().map(|s| s.from_proto()).collect(),
             opponent_shots: player1_shots.iter().map(|s| s.from_proto()).collect(),
             destroyed_opponent_ships: get_destroyed_ships(&player1_placement, &player2_shots),

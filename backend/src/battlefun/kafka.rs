@@ -2,7 +2,10 @@ use prost::Message;
 use rdkafka::config::ClientConfig;
 use rdkafka::producer::{DeliveryFuture, FutureProducer, FutureRecord};
 
-use super::proto::{ToGameFn, to_game_fn::{Msg, CreateGame, Turn}};
+use super::proto::{
+    to_game_fn::{CreateGame, Msg, Turn},
+    ToGameFn,
+};
 use super::{CellIndex, GameId, PlayerId, ShipPlacement, ToBattleFunProto};
 use crate::error::Error;
 
