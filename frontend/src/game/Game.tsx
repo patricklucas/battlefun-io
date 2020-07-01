@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState, useContext, useEffect, MouseEvent } from "react";
+import React, { useRef, useMemo, useState, useContext, useEffect, MouseEvent, useCallback } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { GridComponent } from "../Grid";
 import { User } from "../UserProvider";
@@ -100,6 +100,7 @@ export function Game(props: Props) {
         break;
       case "game_state":
         const newState = mergeDeep<GameState>({}, gameState, data.game_state);
+
         setGameState(newState);
         break;
       default:
@@ -115,6 +116,21 @@ export function Game(props: Props) {
     return prev;
   }, [] as GameState["destroyed_opponent_ships"]);
 
+  // Debug
+  const { your_turn } = gameState ?? {};
+  const changeTurn = useCallback(() => {
+    fetch("http://localhost:8000/api/publish", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: JSON.stringify({
+          type: "game_state",
+          game_state: { your_turn: !your_turn },
+        }),
+      }),
+    }).then();
+  }, [your_turn]);
+
   return (
     <>
       <PlayerTurn gameState={gameState} />
@@ -127,7 +143,8 @@ export function Game(props: Props) {
         />
       </EuiPanel>
       <br />
-      <div style={{ margin: "0 -4px" }}>
+      <div style={{ display: "flex", alignItems: "baseline" }}>
+        Your Ships:{" "}
         {Object.entries(ships).map(([ship, name]) => (
           <EuiBadge
             key={ship}
@@ -145,6 +162,8 @@ export function Game(props: Props) {
           <br />
           <ButtonGroup>
             <EuiButton
+              onTouchStart={() => setShowYourBoard(true)}
+              onTouchEnd={() => setShowYourBoard(false)}
               onMouseDown={() => setShowYourBoard(true)}
               onMouseUp={() => setShowYourBoard(false)}
               isDisabled={gameState.your_turn}
@@ -152,6 +171,8 @@ export function Game(props: Props) {
               Show Your Attacks
             </EuiButton>
             <EuiButton
+              onTouchStart={() => setShowEnemyBoard(true)}
+              onTouchEnd={() => setShowEnemyBoard(false)}
               onMouseDown={() => setShowEnemyBoard(true)}
               onMouseUp={() => setShowEnemyBoard(false)}
               isDisabled={!gameState.your_turn}
@@ -161,6 +182,16 @@ export function Game(props: Props) {
           </ButtonGroup>
         </>
       )}
+
+      <div
+        style={{
+          padding: 8,
+          border: "1px lightpink dashed",
+          marginTop: 16,
+        }}
+      >
+        <EuiButton onClick={changeTurn}>Change Turn</EuiButton>
+      </div>
     </>
   );
 }

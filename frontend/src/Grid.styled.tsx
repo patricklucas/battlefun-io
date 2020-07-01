@@ -5,8 +5,12 @@ const appearDuration = 250;
 const transitionName = `example`;
 
 export const GridContainer = styled.section`
+  flex: 0;
   position: relative;
-  padding-bottom: 100%;
+  padding-bottom: min(100%, 50vh);
+  width: 100%;
+  max-width: 50vh;
+  margin: 0 auto;
 `;
 
 export const Grid = styled.div`
@@ -51,6 +55,7 @@ export const Label = styled.div`
   justify-content: center;
   text-transform: uppercase;
   background-color: antiquewhite;
+  font-size: clamp(12px, 4vw, 26px);
 `;
 
 export const YLabels = styled.div`

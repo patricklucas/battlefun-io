@@ -104,7 +104,7 @@ function App() {
       <Content>{!token || !player_id ? <Welcome /> : <Game setConnection={setConnection} />}</Content>
       <Footer>
         <HeaderMaxWidth>
-          <EuiHeaderSection grow={false}>
+          <EuiHeaderSection>
             <EuiHeaderSectionItem>
               <EuiButton onClick={logout}>Logout</EuiButton>
             </EuiHeaderSectionItem>
