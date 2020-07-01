@@ -28,7 +28,7 @@ enum GameStatus {
 
 message Shot {
   int64 cell_id = 1;
-  bool shot = 2;
+  bool hit = 2;
 }
 
 
