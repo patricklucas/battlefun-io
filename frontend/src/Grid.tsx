@@ -2,28 +2,8 @@ import React, { useState, useCallback, MouseEvent } from "react";
 import rangeInclusive from "range-inclusive";
 import { SendMessage } from "react-use-websocket";
 import { YLabels, Label, Grid, Board, Cell, XLabels, GridContainer, Icon } from "./Grid.styled";
-import { GameState } from "./Game";
+import { GameState } from "./game/Game";
 import { Ships } from "./Ships";
-
-export const game_state: GameState = {
-  opponent_id: "some-guid",
-  current_state: "IN_PROGRESS",
-  your_turn: true, // only if IN_PROGRESS
-  your_shots: [
-    { cell: 13, hit: false },
-    { cell: 77, hit: true },
-    { cell: 99, hit: false },
-  ],
-  opponent_shots: [0, 12, 34], // ^ same as above
-  destroyed_opponent_ships: ["carrier"],
-  your_ships: {
-    carrier: [0, 1, 2, 3, 4],
-    battleship: [12, 13, 14, 15],
-    destroyer: [23, 33, 43],
-    submarine: [77, 78, 79],
-    patrol_boat: [55, 65],
-  },
-};
 
 const board = {
   cells: [...new Array(100)],
@@ -34,6 +14,8 @@ const board = {
 interface Props {
   sendMessage: SendMessage;
   gameState: GameState | null;
+  showYourBoard: boolean;
+  showEnemyBoard: boolean;
 }
 
 const stopClick = (e: MouseEvent) => {
@@ -42,7 +24,7 @@ const stopClick = (e: MouseEvent) => {
 };
 
 export function GridComponent(props: Props) {
-  const { your_shots = [] } = props.gameState ?? {};
+  const { your_shots = [], opponent_shots = [], your_ships = {} } = props.gameState ?? {};
 
   const [hoveredCell, setHoveredCell] = useState(-1);
 
@@ -90,7 +72,7 @@ export function GridComponent(props: Props) {
 
             return (
               <Cell
-                highlight={highlight}
+                highlight={!!props.gameState?.your_turn && highlight}
                 key={index}
                 onMouseEnter={() => setHoveredCell(index)}
                 onMouseLeave={() => setHoveredCell(-1)}
@@ -101,28 +83,54 @@ export function GridComponent(props: Props) {
 
           {props.gameState && (
             <>
-              {props.gameState.your_turn ? (
-                your_shots.map(({ cell, hit }) => {
-                  const style = hit
-                    ? ({
-                        "--fa-primary-color": "red",
-                        "--fa-secondary-color": "red",
-                      } as React.CSSProperties)
-                    : ({
-                        "--fa-primary-color": "blue",
-                        "--fa-secondary-color": "blue",
-                      } as React.CSSProperties);
+              {(props.gameState.your_turn || props.showYourBoard) && !props.showEnemyBoard && (
+                <>
+                  {props.gameState.your_shots.map(({ cell, hit }) => {
+                    const style = hit
+                      ? ({
+                          "--fa-primary-color": "crimson",
+                          "--fa-secondary-color": "red",
+                        } as React.CSSProperties)
+                      : ({
+                          "--fa-primary-color": "dodgerblue",
+                          "--fa-secondary-color": "dodgerblue",
+                        } as React.CSSProperties);
 
-                  const iconName = hit ? "fa-crosshairs" : "fa-water";
+                    const iconName = hit ? "fa-crosshairs" : "fa-water";
 
-                  return (
-                    <Icon {...getGridProperties([cell])} onClick={stopClick}>
-                      <i className={`fad ${iconName} fa-2x`} style={style}></i>
-                    </Icon>
-                  );
-                })
-              ) : (
-                <Ships ships={game_state.your_ships} />
+                    return (
+                      <Icon key={cell} {...getGridProperties([cell])} onClick={stopClick}>
+                        <i className={`fad ${iconName} fa-2x`} style={style}></i>
+                      </Icon>
+                    );
+                  })}
+                </>
+              )}
+
+              {(!props.gameState.your_turn || props.showEnemyBoard) && !props.showYourBoard && (
+                <>
+                  {opponent_shots.map((cell) => {
+                    const hit = Object.values(your_ships).flat().includes(cell);
+                    const style = hit
+                      ? ({
+                          "--fa-primary-color": "crimson",
+                          "--fa-secondary-color": "red",
+                        } as React.CSSProperties)
+                      : ({
+                          "--fa-primary-color": "dodgerblue",
+                          "--fa-secondary-color": "dodgerblue",
+                        } as React.CSSProperties);
+
+                    const iconName = hit ? "fa-crosshairs" : "fa-water";
+
+                    return (
+                      <Icon key={cell} {...getGridProperties([cell])} onClick={stopClick}>
+                        <i className={`fad ${iconName} fa-2x`} style={style}></i>
+                      </Icon>
+                    );
+                  })}
+                  <Ships ships={props.gameState.your_ships} />
+                </>
               )}
             </>
           )}

@@ -1,0 +1,25 @@
+FROM rust:buster as build
+WORKDIR /build
+
+# Prepare a dummy build to download and compile dependencies
+RUN set -e; \
+  mkdir -p backend/src; \
+  echo "fn main() {println!(\"if you see this, the build broke\")}" > backend/src/main.rs
+COPY backend/Cargo.toml backend/Cargo.lock backend/
+
+# Do the dummy build then clean up the bogus artifacts
+RUN set -e; \
+  cd backend; \
+  cargo build --release; \
+  rm -f target/release/deps/battlefun_io-*
+
+# Add the sources and do the real build
+COPY . .
+RUN set -e; \
+  cd backend; \
+  cargo build --release; \
+  cargo install --path .
+
+FROM debian:buster-slim
+COPY --from=build /usr/local/cargo/bin/battlefun_io /usr/local/bin/battlefun_io
+CMD ["battlefun_io"]

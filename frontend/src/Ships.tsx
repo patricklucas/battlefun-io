@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { GameState } from "./Game";
+import { GameState } from "./game/Game";
 import { Carrier, Battleship, Destroyer, Submarine, PatrolBoat } from "./Ships.styled";
 
 interface Props {

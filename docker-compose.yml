@@ -1,7 +1,9 @@
 version: '3'
 services:
   backend:
-    build: backend/
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
     image: plucas/battlefun-io
     ports:
     - 8000:8000

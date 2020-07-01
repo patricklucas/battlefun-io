@@ -12,8 +12,8 @@ pub mod matchmaking;
 pub type GameId = Uuid;
 pub type PlayerId = Uuid;
 pub type PlayerToken = Uuid;
-pub type ShipPlacement = HashMap<String, Vec<u8>>;
-pub type Shots = Vec<u8>;
+pub type ShipPlacement = HashMap<String, Vec<CellIndex>>;
+pub type CellIndex = u8;
 
 #[derive(Debug, Clone)]
 pub struct Player {

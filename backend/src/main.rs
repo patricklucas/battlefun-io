@@ -9,7 +9,7 @@ mod handler;
 mod ws;
 
 mod battlefun;
-use battlefun::{BattleFun, PlayerToken};
+use battlefun::{BattleFun, GameId, PlayerToken};
 
 mod proto {
     include!(concat!(env!("OUT_DIR"), "/io.battlefun.rs"));
@@ -43,6 +43,13 @@ async fn main() {
         .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(game_handler::new_game_handler);
 
+    let turn_route = warp::path!("api" / "game" / GameId)
+        .and(warp::post())
+        .and(warp::body::json())
+        .and(with_token())
+        .and(with_battlefun_instance(battlefun_instance.clone()))
+        .and_then(game_handler::turn_handler);
+
     let publish = warp::path!("api" / "publish")
         .and(warp::body::json())
         .and(with_battlefun_instance(battlefun_instance.clone()))
@@ -63,6 +70,7 @@ async fn main() {
         .or(register_route)
         .or(deregister_route)
         .or(new_game_route)
+        .or(turn_route)
         .or(ws_route)
         .or(publish)
         .with(cors)

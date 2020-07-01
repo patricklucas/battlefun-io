@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Welcome } from "./Welcome";
-import { Game } from "./Game";
+import { Game } from "./game";
 import { User } from "./UserProvider";
 import { EuiHeader, EuiHeaderSection, EuiHeaderSectionItem, EuiHeaderLogo, EuiButton, EuiPanel } from "@elastic/eui";
 import { ReadyState } from "react-use-websocket";
@@ -44,6 +44,8 @@ const Footer = styled(EuiHeader)`
   border-top: 1px solid #cdd3df;
   border-bottom: 0;
   box-shadow: none;
+  padding: 8px 0 16px;
+  height: auto;
 `;
 
 const icons: {
