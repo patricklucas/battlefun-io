@@ -95,7 +95,7 @@ impl FromBattleFunProto<Shot> for proto::Shot {
     fn from_proto(&self) -> Shot {
         Shot {
             cell: self.cell_id as u8,
-            hit: self.shot,
+            hit: self.hit,
         }
     }
 }
