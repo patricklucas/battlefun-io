@@ -129,6 +129,8 @@ async fn authenticate(id: &PlayerId, token: PlayerToken, battlefun_instance: &Ba
                     let json = serde_json::to_string(&AuthenticationResponse::success()).unwrap();
                     let _ = sender.send(Ok(Message::text(json)));
                 }
+
+                battlefun.player_authenticated(id).await;
             } else {
                 if let Some(sender) = &p.connection.sender {
                     let json = serde_json::to_string(&AuthenticationResponse::failure()).unwrap();

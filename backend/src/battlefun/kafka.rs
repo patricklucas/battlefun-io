@@ -3,7 +3,7 @@ use rdkafka::config::ClientConfig;
 use rdkafka::producer::{DeliveryFuture, FutureProducer, FutureRecord};
 
 use super::proto::{
-    to_game_fn::{CreateGame, Msg, Turn},
+    to_game_fn::{CreateGame, GetGameStatus, Msg, Turn},
     ToGameFn,
 };
 use super::{CellIndex, GameId, PlayerId, ShipPlacement, ToBattleFunProto};
@@ -80,6 +80,33 @@ impl StatefunKafkaClient {
         let message = ToGameFn {
             game_id: game_id.to_string(),
             msg: Some(Msg::Turn(turn_msg)),
+        };
+
+        let mut buf = vec![];
+        if let Err(error) = message.encode(&mut buf) {
+            return Err(Error::ProtobufEncodeError(error.into()));
+        }
+
+        let key = game_id.to_string();
+        let delivery_state = self.producer.send_result(
+            FutureRecord::to(&self.to_statefun_topic)
+                .payload(&buf)
+                .key(&key),
+        );
+        match delivery_state {
+            Ok(f) => Ok(f),
+            Err((error, _)) => Err(Error::KafkaError(error.into())),
+        }
+    }
+
+    pub async fn send_get_game_status(&self, game_id: &GameId) -> Result<DeliveryFuture, Error> {
+        let get_game_status_msg = GetGameStatus {
+            game_id: game_id.to_string(),
+        };
+
+        let message = ToGameFn {
+            game_id: game_id.to_string(),
+            msg: Some(Msg::GetGameStatus(get_game_status_msg)),
         };
 
         let mut buf = vec![];

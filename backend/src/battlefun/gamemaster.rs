@@ -9,7 +9,7 @@ use crate::error::Error;
 
 pub struct GameMaster {
     statefun_kafka_client: Arc<RwLock<StatefunKafkaClient>>,
-    games: HashMap<GameId, GameInfo>,
+    pub games: HashMap<GameId, GameInfo>,
 }
 
 impl GameMaster {
@@ -83,9 +83,9 @@ impl GameMaster {
 }
 
 #[derive(Debug, Clone)]
-struct GameInfo {
-    player1_id: PlayerId,
-    player2_id: PlayerId,
+pub struct GameInfo {
+    pub player1_id: PlayerId,
+    pub player2_id: PlayerId,
 }
 
 impl GameInfo {

@@ -38,6 +38,22 @@ impl BattleFun {
         }
     }
 
+    pub async fn player_authenticated(&self, player_id: &PlayerId) {
+        let games = &self.gamemaster.read().await.games;
+        let matching_game = games.iter().find(|(_, game_info)| {
+            return *player_id == game_info.player1_id || *player_id == game_info.player2_id;
+        });
+
+        if let Some((game_id, _)) = matching_game {
+            self.statefun_kafka_client
+                .write()
+                .await
+                .send_get_game_status(game_id)
+                .await
+                .expect("uh-oh");
+        }
+    }
+
     pub fn handle_game_update(
         &self,
         game_id: GameId,
