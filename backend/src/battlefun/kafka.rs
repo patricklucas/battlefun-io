@@ -2,7 +2,7 @@ use prost::Message;
 use rdkafka::config::ClientConfig;
 use rdkafka::producer::{DeliveryFuture, FutureProducer, FutureRecord};
 
-use super::proto::to_game_fn::{CreateGame, Turn};
+use super::proto::{ToGameFn, to_game_fn::{Msg, CreateGame, Turn}};
 use super::{CellIndex, GameId, PlayerId, ShipPlacement, ToBattleFunProto};
 use crate::error::Error;
 
@@ -40,8 +40,13 @@ impl StatefunKafkaClient {
             player2_placement: Some(player2_ships.to_proto()),
         };
 
+        let message = ToGameFn {
+            game_id: game_id.to_string(),
+            msg: Some(Msg::CreateGame(create_game_msg)),
+        };
+
         let mut buf = vec![];
-        if let Err(error) = create_game_msg.encode(&mut buf) {
+        if let Err(error) = message.encode(&mut buf) {
             return Err(Error::ProtobufEncodeError(error.into()));
         }
 
@@ -69,8 +74,13 @@ impl StatefunKafkaClient {
             shot: cell as i64,
         };
 
+        let message = ToGameFn {
+            game_id: game_id.to_string(),
+            msg: Some(Msg::Turn(turn_msg)),
+        };
+
         let mut buf = vec![];
-        if let Err(error) = turn_msg.encode(&mut buf) {
+        if let Err(error) = message.encode(&mut buf) {
             return Err(Error::ProtobufEncodeError(error.into()));
         }
 
