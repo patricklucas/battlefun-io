@@ -107,7 +107,17 @@ final class GameLogic {
         (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
     Map<String, Set<Integer>> remainingShips = reamingShips(opponentPlacement, shotHistory);
     if (remainingShips.isEmpty()) {
+      // TODO: clear the state at some point.
       setWinner(player, next);
+      return Either.left(next.build());
+    }
+    //
+    // 5. alternate turns
+    //
+    if (player == 0) {
+      next.setStatus(GameStatus.PLAYER2_TURN);
+    } else {
+      next.setStatus(GameStatus.PLAYER1_TURN);
     }
     return Either.left(next.build());
   }
