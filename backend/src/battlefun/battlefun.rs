@@ -9,7 +9,7 @@ use super::gamemaster::GameMaster;
 use super::kafka::StatefunKafkaClient;
 use super::matchmaking::Matchmaker;
 use super::{
-    proto::{ShipPlacement, Shot},
+    proto::{GameStatus, ShipPlacement, Shot},
     FromBattleFunProto, GameId, Player, PlayerGameState, PlayerId, PlayerToken,
 };
 
@@ -67,12 +67,13 @@ impl BattleFun {
     ) {
         let player1 = self.players.get(&player1_id).expect("unknown player1");
         let player2 = self.players.get(&player2_id).expect("unknown player2");
+        let real_status = GameStatus::from_i32(status).unwrap();
 
         let player1_state = PlayerGameState {
             game_id,
             opponent_id: player2_id,
             current_state: status,
-            your_turn: status == 1,
+            your_turn: real_status == GameStatus::Player1Turn,
             your_shots: player1_shots.iter().map(|s| s.from_proto()).collect(),
             opponent_shots: player2_shots.iter().map(|s| s.from_proto()).collect(),
             destroyed_opponent_ships: get_destroyed_ships(&player2_placement, &player1_shots),
@@ -83,7 +84,7 @@ impl BattleFun {
             game_id,
             opponent_id: player1_id,
             current_state: status,
-            your_turn: status == 2,
+            your_turn: real_status == GameStatus::Player2Turn,
             your_shots: player2_shots.iter().map(|s| s.from_proto()).collect(),
             opponent_shots: player1_shots.iter().map(|s| s.from_proto()).collect(),
             destroyed_opponent_ships: get_destroyed_ships(&player1_placement, &player2_shots),
