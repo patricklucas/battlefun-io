@@ -60,6 +60,7 @@ pub async fn turn_handler(
         .write()
         .await
         .turn(game_id, player_id, request.cell)
+        .await
         .map_err(reject::custom)?;
 
     Ok(json(&GenericResponse::success()))
