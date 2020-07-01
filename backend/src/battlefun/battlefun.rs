@@ -9,7 +9,7 @@ use super::gamemaster::GameMaster;
 use super::kafka::StatefunKafkaClient;
 use super::matchmaking::Matchmaker;
 use super::{
-    proto::{GameStatus, ShipPlacement, Shot},
+    proto::{ShipPlacement, Shot},
     FromBattleFunProto, GameId, Player, PlayerGameState, PlayerId, PlayerToken,
 };
 
