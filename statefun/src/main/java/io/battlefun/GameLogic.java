@@ -55,10 +55,7 @@ final class GameLogic {
   static Either<GameUpdate, Failure> apply(GameUpdate current, Turn turn) {
     final int player = Objects.equals(turn.getPlayerId(), current.getPlayer1Id()) ? 0 : 1;
     final int guessCell = (int) turn.getShot();
-    final Builder next = current.toBuilder();
-    //
-    // 1. validate that the game is still in progress
-    //
+
     if (isGameOver(current)) {
       return Either.right(
           Failure.newBuilder()
@@ -66,9 +63,6 @@ final class GameLogic {
               .setFailureDescription("The game is already finished")
               .build());
     }
-    //
-    // 2. validate that the correct player is placing the turn.
-    //
     if (!isPlayersTurn(current, player)) {
       return Either.right(
           Failure.newBuilder()
@@ -76,47 +70,55 @@ final class GameLogic {
               .setFailureDescription("It is not the turn of player " + turn.getPlayerId())
               .build());
     }
-    //
-    // 3. validate that @guessCell wasn't tried before
-    //
-    List<Shot> shots =
-        (player == 0) ? current.getPlayer1ShotsList() : current.getPlayer2ShotsList();
-    BitSet shotHistory = shotsTaken(shots);
-
-    if (shotHistory.get(guessCell)) {
+    BitSet shotHistory = shotHistory(current, player);
+    if (wasShotPreviouslyTaken(guessCell, shotHistory)) {
       return Either.right(
           Failure.newBuilder()
               .setCode(FailureCodes.SHOT_WAS_ALREADY_MADE)
               .setFailureDescription("The shot was already made")
               .build());
     }
-    //
-    // 4. remember that shot
-    //
     shotHistory.set(guessCell);
-    if (player == 0) {
-      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).build());
-    } else {
-      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).build());
-    }
-    //
-    // 4. check for hit/miss
-    // NOTE: that we need the placement of the other player.
-    ShipPlacement opponentPlacement =
-        (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
+
+    // compute the next state of the game
+    final Builder next = current.toBuilder();
+    addGuessToShotHistory(next, player, guessCell);
+    ShipPlacement opponentPlacement = getOpponentShipPlacement(current, player);
     if (!hasReamingShips(opponentPlacement, shotHistory)) {
-      // TODO: clear the state at some point.
       setWinner(player, next);
-      return Either.left(next.build());
+    } else {
+      alternateTurns(player, next);
     }
-    //
-    // 5. alternate turns
-    //
+    return Either.left(next.build());
+  }
+
+  private static boolean wasShotPreviouslyTaken(int guessCell, BitSet shotHistory) {
+    return shotHistory.get(guessCell);
+  }
+
+  private static void alternateTurns(int player, Builder next) {
     if (player == 0) {
       next.setStatus(GameStatus.PLAYER2_TURN);
     } else {
       next.setStatus(GameStatus.PLAYER1_TURN);
     }
-    return Either.left(next.build());
+  }
+
+  private static ShipPlacement getOpponentShipPlacement(GameUpdate current, int player) {
+    return (player == 0) ? current.getPlayer2Placement() : current.getPlayer1Placement();
+  }
+
+  private static void addGuessToShotHistory(Builder next, int player, int guessCell) {
+    if (player == 0) {
+      next.addPlayer1Shots(Shot.newBuilder().setCellId(guessCell).build());
+    } else {
+      next.addPlayer2Shots(Shot.newBuilder().setCellId(guessCell).build());
+    }
+  }
+
+  private static BitSet shotHistory(GameUpdate current, int player) {
+    List<Shot> shots =
+        (player == 0) ? current.getPlayer1ShotsList() : current.getPlayer2ShotsList();
+    return shotsTaken(shots);
   }
 }
