@@ -8,7 +8,7 @@ interface Props {
 
 const getOffsets = ([cell, next]: number[]) => ({
   rowStart: cell > -1 ? Math.max(Math.ceil(cell / 10), 1) : -1,
-  columnStart: cell > -1 ? Math.max(Math.min((cell % 10) + 1, 9), 1) : -1,
+  columnStart: cell > -1 ? Math.max(Math.min((cell % 10) + 1, 10), 1) : -1,
   vertical: next - cell !== 1,
 });
 

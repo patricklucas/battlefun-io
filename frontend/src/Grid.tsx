@@ -1,6 +1,5 @@
 import React, { useState, useCallback, MouseEvent } from "react";
 import rangeInclusive from "range-inclusive";
-import { SendMessage } from "react-use-websocket";
 import { YLabels, Label, Grid, Board, Cell, XLabels, GridContainer, Icon } from "./Grid.styled";
 import { GameState } from "./game/Game";
 import { Ships } from "./Ships";
@@ -13,8 +12,8 @@ const board = {
 };
 
 interface Props {
-  sendMessage: SendMessage;
   gameState: GameState | null;
+  shipPlacements: GameState["your_ships"] | null;
   showYourBoard: boolean;
   showEnemyBoard: boolean;
   takeShot: (cell: number) => (e: MouseEvent) => void;
@@ -50,7 +49,7 @@ export function GridComponent(props: Props) {
 
   const getGridProperties = ([cell, next]: number[]) => ({
     rowStart: cell > -1 ? Math.max(Math.ceil(cell / 10), 1) : -1,
-    columnStart: cell > -1 ? Math.max(Math.min((cell % 10) + 1, 9), 1) : -1,
+    columnStart: cell > -1 ? Math.max(Math.min((cell % 10) + 1, 10), 1) : -1,
     vertical: next - cell !== 1,
   });
 
@@ -136,6 +135,7 @@ export function GridComponent(props: Props) {
               )}
             </>
           )}
+          {props.shipPlacements && !props.gameState && <Ships ships={props.shipPlacements} />}
         </Board>
       </Grid>
     </GridContainer>

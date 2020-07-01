@@ -63,7 +63,6 @@ export const UserProvider: FC = (props) => {
 
   const logout = useCallback(() => {
     ReactDOM.unstable_batchedUpdates(() => {
-      setName(defaultState.name);
       setToken(defaultState.token);
       setPlayerId(defaultState.player_id);
     });
