@@ -24,7 +24,7 @@ pub struct BattleFun {
 impl BattleFun {
     pub fn new() -> Self {
         let statefun_kafka_client = Arc::new(RwLock::new(StatefunKafkaClient::new(
-            "localhost:9092",
+            "kafka-broker:9092",
             "to-statefun".to_owned(),
         )));
         let gamemaster = Arc::new(RwLock::new(GameMaster::new(statefun_kafka_client.clone())));
