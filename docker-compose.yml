@@ -60,8 +60,8 @@ services:
   hack:
     build: hack/
     depends_on:
-      - kafka-broker
-      - backend
+    - kafka-broker
+    - backend
     links:
-      - kafka-broker:kafka-broker
-      - backend:backend
+    - kafka-broker:kafka-broker
+    - backend:backend
