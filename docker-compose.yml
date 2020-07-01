@@ -71,3 +71,4 @@ services:
     links:
     - kafka-broker:kafka-broker
     - backend:backend
+    restart: unless-stopped
