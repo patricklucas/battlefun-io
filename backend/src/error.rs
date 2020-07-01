@@ -13,10 +13,16 @@ pub enum Error {
     InvalidArgument(String),
 
     #[error("protobuf serialization error: {0}")]
-    ProtobufError(#[from] prost::EncodeError),
+    ProtobufEncodeError(#[from] prost::EncodeError),
+
+    #[error("protobuf deserialization error: {0}")]
+    ProtobufDecodeError(#[from] prost::DecodeError),
 
     #[error("kafka communication error: {0}")]
     KafkaError(#[from] rdkafka::error::KafkaError),
+
+    #[error("error from statefun: {0}")]
+    ErrorFromStatefun(String),
 
     #[error("unknown error")]
     #[allow(dead_code)]

@@ -5,6 +5,7 @@ authors = ["Patrick Lucas <me@patricklucas.com>"]
 edition = "2018"
 
 [dependencies]
+bytes = "0.5"
 futures = { version = "0.3", default-features = false }
 prost = "0.6"
 rdkafka = { version = "0.23", features = ["cmake-build"] }

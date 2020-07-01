@@ -16,7 +16,8 @@ type BattleFunInstance = Arc<RwLock<BattleFun>>;
 
 #[tokio::main]
 async fn main() {
-    let battlefun_instance: BattleFunInstance = Arc::new(RwLock::new(BattleFun::new()));
+    let battlefun = BattleFun::new();
+    let battlefun_instance: BattleFunInstance = Arc::new(RwLock::new(battlefun));
 
     let health_route = warp::path!("api" / "health").and_then(handler::health_handler);
 
@@ -51,6 +52,11 @@ async fn main() {
         .and(with_battlefun_instance(battlefun_instance.clone()))
         .and_then(handler::publish_handler);
 
+    let incoming_kafka_message = warp::path!("api" / "hack")
+        .and(warp::body::bytes())
+        .and(with_battlefun_instance(battlefun_instance.clone()))
+        .and_then(game_handler::incoming_kafka_message_handler);
+
     let ws_route = warp::path("ws")
         .and(warp::ws())
         .and(warp::path::param())
@@ -67,6 +73,7 @@ async fn main() {
         .or(deregister_route)
         .or(new_game_route)
         .or(turn_route)
+        .or(incoming_kafka_message)
         .or(ws_route)
         .or(publish)
         .with(cors)
