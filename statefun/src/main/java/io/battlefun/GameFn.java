@@ -101,7 +101,7 @@ public final class GameFn implements StatefulFunction {
     }
     Either<GameUpdate, Failure> either = GameLogic.apply(game, turn);
     if (either.isLeft()) {
-      this.game.set(game);
+      this.game.set(either.left);
       resultBuilder.setGameUpdate(either.left);
     } else {
       resultBuilder.setFailure(either.right);
