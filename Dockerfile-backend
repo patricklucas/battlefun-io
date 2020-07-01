@@ -1,4 +1,11 @@
 FROM rust:buster as build
+
+# Install build dependencies
+RUN set -e; \
+  apt-get update; \
+  apt-get install -y --no-install-recommends cmake; \
+  rm -rf /var/lib/apt/lists/*
+
 WORKDIR /build
 
 # Prepare a dummy build to download and compile dependencies

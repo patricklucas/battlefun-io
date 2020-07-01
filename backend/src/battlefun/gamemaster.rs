@@ -1,20 +1,26 @@
+use std::collections::HashMap;
+use std::sync::Arc;
+
+use tokio::sync::RwLock;
+
+use super::kafka::StatefunKafkaClient;
 use super::{CellIndex, GameId, PlayerId, ShipPlacement};
 use crate::error::Error;
-use std::collections::HashMap;
 
-#[derive(Debug, Clone)]
 pub struct GameMaster {
+    statefun_kafka_client: Arc<RwLock<StatefunKafkaClient>>,
     games: HashMap<GameId, GameInfo>,
 }
 
 impl GameMaster {
-    pub fn new() -> Self {
+    pub fn new(statefun_kafka_client: Arc<RwLock<StatefunKafkaClient>>) -> Self {
         Self {
+            statefun_kafka_client,
             games: HashMap::new(),
         }
     }
 
-    pub fn start_game(
+    pub async fn start_game(
         &mut self,
         player1_id: PlayerId,
         player1_ships: ShipPlacement,
@@ -30,6 +36,19 @@ impl GameMaster {
 
         self.games
             .insert(game_id, GameInfo::new(player1_id, player2_id));
+
+        self.statefun_kafka_client
+            .write()
+            .await
+            .send_create_game(
+                game_id,
+                player1_id,
+                player1_ships,
+                player2_id,
+                player2_ships,
+            )
+            .await
+            .expect("uh-oh");
     }
 
     pub fn turn(

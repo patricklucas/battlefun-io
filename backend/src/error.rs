@@ -12,6 +12,12 @@ pub enum Error {
     #[error("invalid argument: {0}")]
     InvalidArgument(String),
 
+    #[error("protobuf serialization error: {0}")]
+    ProtobufError(#[from] prost::EncodeError),
+
+    #[error("kafka communication error: {0}")]
+    KafkaError(#[from] rdkafka::error::KafkaError),
+
     #[error("unknown error")]
     #[allow(dead_code)]
     Other,

@@ -11,10 +11,6 @@ mod ws;
 mod battlefun;
 use battlefun::{BattleFun, GameId, PlayerToken};
 
-mod proto {
-    include!(concat!(env!("OUT_DIR"), "/io.battlefun.rs"));
-}
-
 type Result<T> = std::result::Result<T, Rejection>;
 type BattleFunInstance = Arc<RwLock<BattleFun>>;
 
