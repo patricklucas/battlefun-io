@@ -70,7 +70,7 @@ final class GameLogic {
     //
     // 2. validate that the correct player is placing the turn.
     //
-    if (isPlayersTurn(current, player)) {
+    if (!isPlayersTurn(current, player)) {
       return Either.right(
           Failure.newBuilder()
               .setCode(101)
