@@ -28,6 +28,7 @@ const CallOut = styled(EuiCallOut)`
 const Badges = styled.div`
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
 `;
 
 export function PlayerTurn(props: Props): JSX.Element | null {

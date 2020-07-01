@@ -7,6 +7,7 @@ export function Welcome() {
   return (
     <>
       <div>Welcome</div>
+
       <form onSubmit={user.registerUser}>
         <label>username</label>
         <input name="name" value={user.name} onChange={(e) => user.setName(e.target.value)} />

@@ -6,6 +6,8 @@ import { mergeDeep } from "../utils/mergeDeep";
 import { EuiPanel, EuiBadge, EuiCallOut, EuiButton } from "@elastic/eui";
 import styled from "styled-components";
 import { PlayerTurn } from "./";
+import { PlaceShips } from "./PlaceShips";
+import { getApiHost } from "../utils/getApiHost";
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -33,6 +35,7 @@ const ships: {
 };
 
 export const game_state: GameState = {
+  game_id: "some-other-guid",
   opponent_id: "some-guid",
   current_state: "IN_PROGRESS",
   your_turn: true, // only if IN_PROGRESS
@@ -57,6 +60,7 @@ export const game_state: GameState = {
 };
 
 export interface GameState {
+  game_id: string;
   current_state: "IN_PROGRESS" | "WIN" | "LOSS";
   destroyed_opponent_ships: string[];
   opponent_id: string;
@@ -75,14 +79,29 @@ interface Props {
 
 export function Game(props: Props) {
   const { setConnection } = props;
-  const { player_id, token } = useContext(User);
-  const { sendMessage, lastMessage, readyState } = useWebSocket(`ws://localhost:8000/ws/${player_id}`);
+  const { player_id, token, logout } = useContext(User);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(`${getApiHost("ws")}/ws/${player_id}`);
   const [authenticated, setAuthenticated] = useState(false);
   const [gameState, setGameState] = useState<GameState | null>(game_state);
   const [showYourBoard, setShowYourBoard] = useState<boolean>(false);
   const [showEnemyBoard, setShowEnemyBoard] = useState<boolean>(false);
-  const messageHistory = useRef<MessageEvent[]>([]);
-  messageHistory.current = useMemo(() => messageHistory.current.concat(lastMessage), [lastMessage]);
+
+  // const messageHistory = useRef<MessageEvent[]>([]);
+  // messageHistory.current = useMemo(() => messageHistory.current.concat(lastMessage), [lastMessage]);
+
+  const takeShot = useCallback(
+    (cell) => async (e: MouseEvent) => {
+      fetch(`${getApiHost()}/api/game/5363db8b-1bee-488c-bd7c-acaa590c6a8f`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cell }),
+      });
+    },
+    []
+  );
 
   useEffect(() => {
     if (readyState === 1 && !authenticated) {
@@ -97,10 +116,12 @@ export function Game(props: Props) {
     switch (data.type) {
       case "authentication_response":
         setAuthenticated(data.success);
+        if (!data.success) {
+          logout();
+        }
         break;
       case "game_state":
         const newState = mergeDeep<GameState>({}, gameState, data.game_state);
-
         setGameState(newState);
         break;
       default:
@@ -119,9 +140,9 @@ export function Game(props: Props) {
   // Debug
   const { your_turn } = gameState ?? {};
   const changeTurn = useCallback(() => {
-    fetch("http://localhost:8000/api/publish", {
+    fetch(`${getApiHost()}/api/publish`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({
         message: JSON.stringify({
           type: "game_state",
@@ -133,6 +154,7 @@ export function Game(props: Props) {
 
   return (
     <>
+      {!gameState && <PlaceShips />}
       <PlayerTurn gameState={gameState} />
       <EuiPanel paddingSize="l">
         <GridComponent
@@ -140,10 +162,11 @@ export function Game(props: Props) {
           gameState={gameState}
           showYourBoard={showYourBoard}
           showEnemyBoard={showEnemyBoard}
+          takeShot={takeShot}
         />
       </EuiPanel>
       <br />
-      <div style={{ display: "flex", alignItems: "baseline" }}>
+      <div style={{ display: "flex", alignItems: "baseline", flexWrap: "wrap" }}>
         Your Ships:{" "}
         {Object.entries(ships).map(([ship, name]) => (
           <EuiBadge
